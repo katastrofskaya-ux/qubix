@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "qubix": {
+      "type": "http",
+      "url": "https://dash.qubix.capital/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${QUBIX_API_TOKEN}"
+      }
+    }
+  }
+}
