@@ -6,6 +6,13 @@
       "headers": {
         "Authorization": "Bearer ${QUBIX_API_TOKEN}"
       }
+    },
+    "masha": {
+      "type": "http",
+      "url": "https://masha.qubix.pro/",
+      "headers": {
+        "Authorization": "Bearer ${MASHA_API_TOKEN}"
+      }
     }
   }
 }
