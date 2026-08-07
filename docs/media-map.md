@@ -94,6 +94,35 @@ PWA-реклама; хорошая витрина для мониторинга 
 Не маркетинговая задача, но не тянуть — см. `CLAUDE.md` раздел «Известные
 открытые риски».
 
+## Фактические размещения (MARKETING-63, сводка на 29.07.2026)
+
+Launch, Фаза 1, июль 2026. Итого потрачено **$4 172**, ≈**46.2K просмотров**.
+Просмотры — снимок на 29.07.2026 с публичных `t.me/...?embed=1`.
+
+| Дата | Тикет | Канал | Пост | Промокод | Оплачено | Просмотры |
+|---|---|---|---|---|---|---|
+| 03.07 | MARKETING-34 | CPAGRAM @cpagram (пакет +7) | t.me/cpagram/14735 | ⚠️ без метки | $280 | 5.5K |
+| 03.07 | MARKETING-32 | Pacan @pacan (пакет +2) | t.me/pacan/3952 | PACAN | $500 | 16.4K |
+| 04.07 | MARKETING-62 | Zombie Traffic @zombietrafficc | t.me/zombietrafficc/1427 | ZOMBIE | $280 | 1.17K |
+| 07.07 | MARKETING-28 | .Aff Inside @AFF_inside (закрытый канал) | t.me/c/1871527706/3125 | AFFINSIDE | $1 222 | 3.73K |
+| 08.07 | MARKETING-22 | adhunt @adhunt | t.me/adhunt/726 | ADHUNT | $500 | 2.31K |
+| 09.07 | MARKETING-23 | iGaming News @igaming_news | t.me/igaming_news/10526 | IGAMINGNEWS | $900 | 3.44K |
+| 10.07 | MARKETING-20 | FB-killa @fb_killa | t.me/fb_killa/10071 | FBKILLA | $490 | 13.6K |
+
+Пакетные строки (Pacan, CPAGRAM) — просмотры это сумма по основному каналу
++ бонусным каналам того же пакета:
+- **Pacan $500** → pacan/3952 (10.5K), slovopacana/8057 (4.52K),
+  Fuck_Voice/3733 (1.38K). Σ ≈16.4K.
+- **CPAGRAM $280** → cpagram/14735 (934), cpascam/2815 (1.11K),
+  soctrash/3205 (783), aggregatorcpa/4083 (764), HRCPAgram/2185 (652),
+  cpagramcase/1237 (649), partnerochkin/4055 (436), cpamozgi/163 (184).
+  Σ ≈5.5K.
+
+⚠️ **CPAGRAM вышел с голым `qubix.pro` без реф-метки** — переходы и
+регистрации по нему не атрибутируются, в отчёте по CAC его вклад не
+посчитать. .Aff Inside — закрытый канал, просмотры сняты вручную из
+Telegram (не через `?embed=1`).
+
 ## Первая волна закупки — приоритетный список
 
 По CPM-логике (цена / медиана просмотров × 1000): cparip — лучшая экономика

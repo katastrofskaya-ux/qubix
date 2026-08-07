@@ -273,9 +273,13 @@
       SBC News, EGR, Gambling Insider, CasinoBeats; для CIS — vc.ru, Cossa).
 - [ ] Передать выбранному копирайтеру `docs/tone-of-voice.md` как бриф на
       тон голоса.
-- [ ] Закупить первые размещения T1 (см. `docs/media-map.md`): cparip,
-      igaming_news, .Aff Inside, adhunt, MoneyBeatsEvil — назначить реф-коды
-      под каждое.
+- [~] Закупить первые размещения T1 (см. `docs/media-map.md`): **исправление
+      07.08.2026 — часть уже сделана**, просто не была раньше внесена в
+      репозиторий (нашлась в MARKETING-63). Сделано: igaming_news ($900),
+      .Aff Inside ($1222), adhunt ($500) — все с реф-кодом. Плюс вне
+      исходного T1-списка: Pacan ($500), CPAGRAM ($280, **без реф-метки —
+      атрибуция потеряна**), Zombie Traffic ($280), FB-killa ($490). Не
+      сделано из исходного T1: cparip, MoneyBeatsEvil.
 - [ ] Договориться о присутствии/посевах в gamblingaff (единственный живой
       чат для органики).
 
