@@ -227,8 +227,15 @@
       T1 из `media-map.md` (cparip, igaming_news, .Aff Inside, adhunt,
       MoneyBeatsEvil), уже согласованные запуски (Карпач — готов, AdsPower —
       ждёт финализации условий).
+- [x] Подготовлена `docs/copywriter-brand-frame.md` — сокращённая выжимка
+      `docs/brand-frame-canon.md` для копирайтера (одна фраза, характер,
+      категория, голос, стоп-лист, рамка задания). Полный канон ей не
+      выдаём — там внутренние заметки (путаница «кто есть кто»
+      Борис/Владимир, незакрытые споры, история согласований).
+      `copywriter-brief-tz.md` обновлён — ссылается на новый файл.
 - [ ] Передать копирайтеру при выходе: `tone-of-voice.md`,
-      `positioning-and-icp.md`, `copywriter-brief-tz.md`.
+      `positioning-and-icp.md`, `docs/copywriter-brand-frame.md`,
+      `copywriter-brief-tz.md`.
 - [x] **Процесс реф-коды/UTM/креативы/апрув уточнён с Анастасией (05.08.2026)**
       — зафиксирован в `docs/copywriter-brief-tz.md` (раздел «Процесс сдачи
       текста и креативов»): Женя присылает список площадок → Анастасия
