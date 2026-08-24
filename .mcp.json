@@ -13,6 +13,13 @@
       "headers": {
         "Authorization": "Bearer ${MASHA_API_TOKEN}"
       }
+    },
+    "youtrack": {
+      "type": "http",
+      "url": "https://team.qubix.capital/mcp",
+      "headers": {
+        "Authorization": "Bearer ${YOUTRACK_API_TOKEN}"
+      }
     }
   }
 }
