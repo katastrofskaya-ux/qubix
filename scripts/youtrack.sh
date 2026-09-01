@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Чтение задач YouTrack (team.qubix.capital) через REST API.
-# Требует переменную окружения YOUTRACK_TOKEN (permanent token, права на чтение
+# Требует переменную окружения YOUTRACK_API_TOKEN (permanent token, права на чтение
 # проектов MARKETING / CONTENT / SALES). Токен в репозиторий не кладём.
 #
 #   scripts/youtrack.sh issue MARKETING-83     — одна задача с комментариями
@@ -9,12 +9,12 @@
 set -euo pipefail
 
 BASE="${YOUTRACK_URL:-https://team.qubix.capital}"
-: "${YOUTRACK_TOKEN:?нужна переменная окружения YOUTRACK_TOKEN — добавь её в секреты окружения}"
+: "${YOUTRACK_API_TOKEN:?нужна переменная окружения YOUTRACK_API_TOKEN — добавь её в секреты окружения}"
 
 ISSUE_FIELDS='idReadable,summary,description,created,updated,project(shortName),reporter(login,fullName),customFields(name,value(name,login,fullName,presentation))'
 COMMENT_FIELDS='text,created,author(login,fullName)'
 
-api() { curl -sS --fail-with-body -H "Authorization: Bearer $YOUTRACK_TOKEN" -H 'Accept: application/json' "$@"; }
+api() { curl -sS --fail-with-body -H "Authorization: Bearer $YOUTRACK_API_TOKEN" -H 'Accept: application/json' "$@"; }
 
 case "${1:-}" in
   issue)
