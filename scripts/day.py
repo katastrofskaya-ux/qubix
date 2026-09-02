@@ -13,6 +13,7 @@ import argparse, datetime, json, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLAN = os.path.join(ROOT, "PLAN.md")
+BUDGET = os.path.join(ROOT, "BUDGET.md")
 YT = os.path.join(ROOT, "scripts", "youtrack.sh")
 ME = "Anastasia"
 
@@ -83,6 +84,68 @@ def yt_changes():
         (mine if proj in ("MARKETING", "CONTENT", "OP", "SUPPORT") else other).append(rec)
     mine.sort(key=lambda r: r[3], reverse=True)
     return mine[:15]
+
+
+
+
+def parse_budget():
+    """Возвращает {месяц: {"limit": N, "paid": N, "approved": N, "rows": [...]}}"""
+    months, cur = {}, None
+    if not os.path.exists(BUDGET):
+        return months
+    for raw in open(BUDGET, encoding="utf-8"):
+        line = raw.strip()
+        m = re.match(r"## (\S+ \d{4}) · бюджет (\d+)", line)
+        if m:
+            cur = m.group(1)
+            months[cur] = {"limit": int(m.group(2)), "paid": 0, "approved": 0, "rows": []}
+            continue
+        if line.startswith("## "):
+            cur = None
+            continue
+        m = re.match(r"- (\d+) · (\S+) · ([^·]+)·(.*)", line)
+        if m and cur:
+            amt, st, what, rest = int(m.group(1)), m.group(2), m.group(3).strip(), m.group(4)
+            months[cur]["rows"].append((amt, st, what))
+            if st == "оплачено":
+                months[cur]["paid"] += amt
+            elif st == "одобрено":
+                months[cur]["approved"] += amt
+    return months
+
+
+def yt_stalled(days=3):
+    """Наши задачи без движения дольше N дней и не закрытые."""
+    raw = yt("search", "project: MARKETING or project: CONTENT or project: SUPPORT", "150")
+    try:
+        arr = json.loads(raw)
+    except Exception:
+        return []
+    closed = {"Done", "Verified", "Rejected", "Duplicate", "Fixed", "Merged", "Obsolete"}
+    cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=days)
+    out = []
+    for i in arr:
+        st = ""
+        for c in i.get("customFields", []):
+            v = c.get("value")
+            if v and c["name"] == "State":
+                st = v.get("name", "")
+        if st in closed:
+            continue
+        upd = datetime.datetime.utcfromtimestamp(i["updated"] / 1000)
+        if upd < cutoff:
+            out.append(((datetime.datetime.utcnow() - upd).days, i["idReadable"], st, i["summary"][:64]))
+    out.sort(reverse=True)
+    return out[:10]
+
+
+def leads_summary(hours=24):
+    try:
+        r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "leads.py"),
+                            "--hours", str(hours)], capture_output=True, text=True, timeout=90)
+        return r.stdout.strip()
+    except Exception:
+        return ""
 
 
 def hdr(t):
@@ -181,6 +244,29 @@ def main():
             hdr("Изменилось в задачах за сутки")
             for idr, st, summ, t in ch:
                 print(f"  {t.strftime('%d.%m %H:%M')}  {idr:<13} {st:<18} {summ}")
+
+    if not a.quiet:
+        ls = leads_summary(24)
+        if ls:
+            hdr("Лиды и обращения за сутки")
+            for l in ls.splitlines():
+                if l.strip():
+                    print("  " + l)
+
+        st = yt_stalled(3)
+        if st:
+            hdr(f"Зависло без движения дольше 3 дней — {len(st)}")
+            for d, idr, state, summ in st:
+                print(f"  {d:>2} дн.  {idr:<13} {state:<18} {summ}")
+
+    bud = parse_budget()
+    if bud:
+        hdr("Бюджет")
+        for month, b in bud.items():
+            free = b["limit"] - b["paid"] - b["approved"]
+            print(f"  {month}: занято {b['paid'] + b['approved']:,} из {b['limit']:,} "
+                  f"(оплачено {b['paid']:,}, одобрено {b['approved']:,}) · свободно {free:,}"
+                  .replace(",", " "))
 
     hdr("Дальше")
     print("  Правьте PLAN.md руками — это ваш план, не мой.")
