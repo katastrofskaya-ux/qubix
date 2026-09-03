@@ -51,7 +51,10 @@ def call(sql: str):
     if "error" in body:
         raise RuntimeError(body["error"])
     content = body["result"]["content"][0]["text"]
-    return json.loads(content)
+    # На пустом результате сервер дописывает суффикс: «[] (ничего не найдено)» —
+    # парсим первое JSON-значение и игнорируем хвост.
+    value, _ = json.JSONDecoder().raw_decode(content.strip())
+    return value
 
 
 def main():
