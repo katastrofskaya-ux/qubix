@@ -133,7 +133,10 @@ def check(text, author_voice=False, table=False):
                 continue
             if exempt == "table" and table:
                 continue
-            m = re.search(pat, line, re.I)
+            # правило написания категории регистрозависимое: верное «SuperApp»
+            # не должно ловиться на неверном «Superapp»
+            flags = 0 if pat == r"\bSuperapp\b" else re.I
+            m = re.search(pat, line, flags)
             if m:
                 findings.append((level, n, m.group(0), what, fix, src, raw.strip()))
         for w in YO_CHECK:
