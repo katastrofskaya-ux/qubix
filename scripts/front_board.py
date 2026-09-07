@@ -125,6 +125,23 @@ def sales_items():
         if e:
             by_mail.setdefault(e.group(0).lower(), card["url"])
 
+    import urllib.parse
+    KASANIE = ("Привет! Я Анастасия из Qubix. {date} у вашего инстанса заканчивается "
+               "бесплатный месяц со всеми возможностями. Пишу заранее, чтобы вы успели "
+               "забрать из него максимум.\n\n"
+               "Расскажите, что успели попробовать и что зашло? Если где-то застряли — "
+               "напишите прямо здесь, помогу разобраться лично.\n\n"
+               "И на всякий случай: после окончания периода сервер и данные остаются "
+               "вашими — доступ переходит в режим чтения, всё сохраняется. Захотите "
+               "продолжить — подскажу самый простой путь.")
+
+    def mailto(email, pu):
+        date = pu.strftime("%d.%m") if pu else "скоро"
+        body = KASANIE.format(date=date)
+        return ("mailto:" + email + "?" + urllib.parse.urlencode(
+            {"subject": "Ваш инстанс Qubix — бесплатный месяц заканчивается " + date,
+             "body": body}, quote_via=urllib.parse.quote))
+
     items = []
     for r in real:
         pu, cr = front.d(r.get("paid_until")), front.d(r.get("created_at"))
@@ -135,11 +152,11 @@ def sales_items():
         if days is not None and -7 <= days < 0:
             items.append((0, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
                           "url": url, "tag": f"истекла {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
-                          "updated": "", "hot": True}))
+                          "updated": "", "hot": True, "mailto": mailto(email, pu)}))
         elif days is not None and 0 <= days <= 2:
             items.append((1, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
                           "url": url, "tag": f"истекает {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
-                          "updated": "", "hot": True}))
+                          "updated": "", "hot": True, "mailto": mailto(email, pu)}))
         elif cr and (TODAY - cr).days <= 3 and not r.get("license_state"):
             items.append((2, 0, {"id": f"c-{r['id']}", "text": f"{email} · рег. {cr.strftime('%d.%m')}",
                           "url": url, "tag": "без лицензии", "who": f"#{r.get('number', '')}",
