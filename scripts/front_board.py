@@ -114,23 +114,35 @@ def sales_items():
             seen.add(r["id"]); rows.append(r)
     tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com)$|\.test$")
     real = [r for r in rows if not tech.search((r.get("email") or "").lower())]
+
+    # карточки SALES: «Лид #228 — …» → ссылка по номеру клиента или почте
+    by_num, by_mail = {}, {}
+    for card in yt_issues("project: SALES", 400) or []:
+        m = re.search(r"#(\d+)", card["text"])
+        if m:
+            by_num.setdefault(m.group(1), card["url"])
+        e = re.search(r"[\w.+-]+@[\w.-]+", card["text"])
+        if e:
+            by_mail.setdefault(e.group(0).lower(), card["url"])
+
     items = []
     for r in real:
         pu, cr = front.d(r.get("paid_until")), front.d(r.get("created_at"))
         days = (pu - TODAY).days if pu else None
         email = r.get("email") or f"#{r['id']}"
         plan = r.get("plan_code") or ""
+        url = by_num.get(str(r.get("number") or "")) or by_mail.get(email.lower()) or ""
         if days is not None and -7 <= days < 0:
             items.append((0, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
-                          "url": "", "tag": f"истекла {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
+                          "url": url, "tag": f"истекла {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
                           "updated": "", "hot": True}))
         elif days is not None and 0 <= days <= 2:
             items.append((1, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
-                          "url": "", "tag": f"истекает {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
+                          "url": url, "tag": f"истекает {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
                           "updated": "", "hot": True}))
         elif cr and (TODAY - cr).days <= 3 and not r.get("license_state"):
             items.append((2, 0, {"id": f"c-{r['id']}", "text": f"{email} · рег. {cr.strftime('%d.%m')}",
-                          "url": "", "tag": "без лицензии", "who": f"#{r.get('number', '')}",
+                          "url": url, "tag": "без лицензии", "who": f"#{r.get('number', '')}",
                           "updated": "", "hot": False}))
     items.sort(key=lambda x: (x[0], x[1]))
     return [it for _, _, it in items]
@@ -140,7 +152,12 @@ def build():
     blocks = []
 
     l, _, lines = front.block_sales()
-    blocks.append(block("sales", 1, l, "Продажи", lines, sales_items()))
+    si = sales_items()
+    no_card = sum(1 for i in si if not i["url"])
+    if no_card:
+        lines = lines + [f"⚠ у {no_card} из {len(si)} в списке нет карточки в SALES — "
+                         "ссылка ведёт в никуда, работать из админки (дырка DEV-2625)"]
+    blocks.append(block("sales", 1, l, "Продажи", lines, si))
 
     l, _, lines = front.block_leads()
     leads = yt_issues("project: SALES #Unresolved State: New", 200) or []
