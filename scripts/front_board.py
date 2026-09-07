@@ -148,7 +148,9 @@ def sales_items():
         days = (pu - TODAY).days if pu else None
         email = r.get("email") or f"#{r['id']}"
         plan = r.get("plan_code") or ""
-        url = by_num.get(str(r.get("number") or "")) or by_mail.get(email.lower()) or ""
+        # карточки нет — ведём в список клиентов админки (поиск по номеру/почте)
+        url = (by_num.get(str(r.get("number") or "")) or by_mail.get(email.lower())
+               or "https://admin.qubix.pro/customers")
         if days is not None and -7 <= days < 0:
             items.append((0, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
                           "url": url, "tag": f"истекла {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
