@@ -101,6 +101,42 @@ def block_channel():
     if age > 3: lines.append("канал молчит - трафик из посевов приходит в тишину")
     return (light, "Наш канал", lines)
 
+# ---------- Трафик по каналам (админка) ----------
+def block_traffic():
+    cookie = os.environ.get("ADMIN_QUBIX_COOKIE")
+    if not cookie:
+        return (N, "Трафик по каналам", ["нет данных: ADMIN_QUBIX_COOKIE не задана"])
+    rows, seen = [], set()
+    for off in (0, 100, 200, 300):
+        out = curl(f"https://admin.qubix.pro/api/admin/v1/customers?limit=100&offset={off}",
+                   headers=["accept: application/json"], cookie=cookie)
+        try: batch = json.loads(out).get("rows", [])
+        except Exception: return (N, "Трафик по каналам", ["админка не ответила"])
+        new = [r for r in batch if r["id"] not in seen]
+        if not new: break
+        for r in new: seen.add(r["id"]); rows.append(r)
+    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com)$|\.test$")
+    week = [r for r in rows
+            if not tech.search((r.get("email") or "").lower())
+            and d(r.get("created_at")) and (TODAY - d(r["created_at"])).days <= 7]
+    if not week:
+        return (Y, "Трафик по каналам", ["регистраций за 7 дней: 0 - при живых размещениях это тревога"])
+    codes = {}
+    for r in week:
+        c = r.get("referred_by_code") or "без кода"
+        codes.setdefault(c, [0, 0])
+        codes[c][0] += 1
+        if r.get("license_state"): codes[c][1] += 1
+    nocode = codes.get("без кода", [0, 0])[0]
+    share = nocode / len(week)
+    light = R if share > 0.4 else (Y if share > 0.2 else G)
+    per = " · ".join(f"{c}: {n}({lic} лиц.)" for c, (n, lic) in
+                     sorted(codes.items(), key=lambda x: -x[1][0]))
+    lines = [f"регистраций за 7 дней: {len(week)}, без кода: {nocode} ({share:.0%})", per]
+    if share > 0.2:
+        lines.append("канал теряется: часть - DEV-2508 (код не пишется), часть - выходы без ссылок с кодом")
+    return (light, "Трафик по каналам", lines)
+
 # ---------- Закупка и бюджет (BUDGET.md) ----------
 def block_budget():
     p = ROOT / "BUDGET.md"
@@ -148,7 +184,7 @@ def manual_blocks():
 def main():
     print(f"КАРТА ФРОНТА · {TODAY.strftime('%d.%m.%Y')}")
     print("=" * 64)
-    blocks = [block_sales(), block_leads(), block_channel(), block_budget(), block_fin()] + manual_blocks()
+    blocks = [block_sales(), block_leads(), block_traffic(), block_channel(), block_budget(), block_fin()] + manual_blocks()
     reds = [t for l, t, _ in blocks if l == R]
     for light, title, lines in blocks:
         print(f"\n{light} {title}")
