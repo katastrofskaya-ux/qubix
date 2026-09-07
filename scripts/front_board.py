@@ -93,11 +93,54 @@ def source_down(doc):
     return doc["light"] == "gray" and ("нет данных" in m or "не ответила" in m or "недоступен" in m)
 
 
+def sales_items():
+    """Поимённый список: истёкшие → истекающие → застрявшие без лицензии.
+    Почты клиентов уходят только в приватную базу доски, в репозиторий — нет."""
+    cookie = os.environ.get("ADMIN_QUBIX_COOKIE")
+    if not cookie:
+        return []
+    rows, seen = [], set()
+    for off in (0, 100, 200, 300):
+        out = front.curl(f"https://admin.qubix.pro/api/admin/v1/customers?limit=100&offset={off}",
+                         headers=["accept: application/json"], cookie=cookie)
+        try:
+            batch = json.loads(out).get("rows", [])
+        except Exception:
+            return []
+        new = [r for r in batch if r["id"] not in seen]
+        if not new:
+            break
+        for r in new:
+            seen.add(r["id"]); rows.append(r)
+    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com)$|\.test$")
+    real = [r for r in rows if not tech.search((r.get("email") or "").lower())]
+    items = []
+    for r in real:
+        pu, cr = front.d(r.get("paid_until")), front.d(r.get("created_at"))
+        days = (pu - TODAY).days if pu else None
+        email = r.get("email") or f"#{r['id']}"
+        plan = r.get("plan_code") or ""
+        if days is not None and -7 <= days < 0:
+            items.append((0, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
+                          "url": "", "tag": f"истекла {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
+                          "updated": "", "hot": True}))
+        elif days is not None and 0 <= days <= 2:
+            items.append((1, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
+                          "url": "", "tag": f"истекает {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
+                          "updated": "", "hot": True}))
+        elif cr and (TODAY - cr).days <= 3 and not r.get("license_state"):
+            items.append((2, 0, {"id": f"c-{r['id']}", "text": f"{email} · рег. {cr.strftime('%d.%m')}",
+                          "url": "", "tag": "без лицензии", "who": f"#{r.get('number', '')}",
+                          "updated": "", "hot": False}))
+    items.sort(key=lambda x: (x[0], x[1]))
+    return [it for _, _, it in items]
+
+
 def build():
     blocks = []
 
     l, _, lines = front.block_sales()
-    blocks.append(block("sales", 1, l, "Продажи", lines))
+    blocks.append(block("sales", 1, l, "Продажи", lines, sales_items()))
 
     l, _, lines = front.block_leads()
     leads = yt_issues("project: SALES #Unresolved State: New", 200) or []
