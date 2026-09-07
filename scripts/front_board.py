@@ -27,6 +27,10 @@ LIGHTS = {front.R: "red", front.Y: "yellow", front.G: "green", front.N: "gray"}
 # DEV-задачи, от которых зависит коммерция (правится руками по мере появления)
 DEV_TRACKED = ["DEV-2508", "DEV-2621", "DEV-2622", "DEV-2625"]
 
+# Партнёрства и события — курируемый список (правится руками)
+PARTNER_IDS = {"MARKETING-81", "MARKETING-66", "MARKETING-65", "MARKETING-73",
+               "MARKETING-78", "MARKETING-13"}
+
 # CONTENT-задачи нашего TG-канала — остальное CONTENT уходит в закупку/контент
 TG_CHANNEL_IDS = {"CONTENT-41", "CONTENT-44", "CONTENT-43", "CONTENT-42", "CONTENT-8"}
 
@@ -125,6 +129,17 @@ def sales_items():
         if e:
             by_mail.setdefault(e.group(0).lower(), card["url"])
 
+    def last_touch(card_url):
+        """Дата последнего человеческого коммента в карточке (не бот) —
+        чтобы доска не предлагала писать тому, кого уже касались."""
+        iid = card_url.rsplit("/", 1)[-1]
+        cs = front.yt(f"/issues/{iid}/comments?fields=created,author(fullName)") or []
+        human = [c["created"] for c in cs
+                 if (c.get("author") or {}).get("fullName", "") not in ("Qubix Support", "")]
+        if not human:
+            return ""
+        return datetime.date.fromtimestamp(max(human) / 1000).strftime("%d.%m")
+
     import urllib.parse
     KASANIE = ("Привет! Я Анастасия из Qubix. {date} у вашего инстанса заканчивается "
                "бесплатный месяц со всеми возможностями. Пишу заранее, чтобы вы успели "
@@ -149,15 +164,16 @@ def sales_items():
         email = r.get("email") or f"#{r['id']}"
         plan = r.get("plan_code") or ""
         # карточки нет — ведём в список клиентов админки (поиск по номеру/почте)
-        url = (by_num.get(str(r.get("number") or "")) or by_mail.get(email.lower())
-               or "https://admin.qubix.pro/customers")
+        card = by_num.get(str(r.get("number") or "")) or by_mail.get(email.lower())
+        url = card or "https://admin.qubix.pro/customers"
+        touch = last_touch(card) if card else ""
         if days is not None and -7 <= days < 0:
             items.append((0, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
-                          "url": url, "tag": f"истекла {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
+                          "url": url, "tag": f"истекла {pu.strftime('%d.%m')}" + (f" · касание {touch}" if touch else ""), "who": f"#{r.get('number', '')}",
                           "updated": "", "hot": True, "mailto": mailto(email, pu)}))
         elif days is not None and 0 <= days <= 2:
             items.append((1, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
-                          "url": url, "tag": f"истекает {pu.strftime('%d.%m')}", "who": f"#{r.get('number', '')}",
+                          "url": url, "tag": f"истекает {pu.strftime('%d.%m')}" + (f" · касание {touch}" if touch else ""), "who": f"#{r.get('number', '')}",
                           "updated": "", "hot": True, "mailto": mailto(email, pu)}))
         elif cr and (TODAY - cr).days <= 3 and not r.get("license_state"):
             items.append((2, 0, {"id": f"c-{r['id']}", "text": f"{email} · рег. {cr.strftime('%d.%m')}",
@@ -203,9 +219,18 @@ def build():
     mk = yt_issues("project: MARKETING #Unresolved", 100) or []
     op = yt_issues("project: OP #Unresolved", 50) or []
     hr = yt_issues("project: HR #Unresolved", 50) or []
-    blocks.append(block("mk", 7, front.Y, "Маркетинг и операционка",
-                        [f"открыто: MARKETING {len(mk)} · OP {len(op)} · HR {len(hr)}"],
-                        mk + op + hr))
+    partner = [i for i in mk if i["id"] in PARTNER_IDS] + \
+              [i for i in fin if i["id"] == "FIN-6"]
+    mk_rest = [i for i in mk if i["id"] not in PARTNER_IDS]
+    blocks.append(block("mk", 7, front.Y if mk_rest else front.G, "Маркетинг",
+                        [f"открытых задач: {len(mk_rest)} (свежие сверху)"], mk_rest))
+    blocks.append(block("partner", 8, front.Y if partner else front.G,
+                        "Партнёрства и события",
+                        ["AffBuddha, AdsPower, VK WS, Hetzner, Broconf, Лиссабон"], partner))
+    blocks.append(block("op", 9, front.Y if op else front.G, "Операционка и отчётность",
+                        [f"открытых задач: {len(op)} · месячный отчёт по договору — до 5-го числа"], op))
+    blocks.append(block("hr", 10, front.Y if hr else front.G, "Найм и команда",
+                        [f"открытых задач: {len(hr)}"], hr))
 
     for i, sec in enumerate(("Подрядчики", "Согласования", "Риски")):
         items = manual_items(sec)
@@ -214,7 +239,7 @@ def build():
         worst = max((TODAY - datetime.date.fromisoformat(it["updated"])).days for it in items)
         l = front.R if worst >= 7 else (front.Y if worst >= 3 else front.G)
         titles = {"Подрядчики": "Подрядчики", "Согласования": "Согласования у шефа", "Риски": "Риски"}
-        blocks.append(block(f"man{i}", 8 + i, l, titles[sec],
+        blocks.append(block(f"man{i}", 11 + i, l, titles[sec],
                             [f"пунктов: {len(items)}, самому старому {worst} дн."], items))
 
     return blocks
