@@ -38,7 +38,7 @@ def block_sales():
         new = [r for r in batch if r["id"] not in seen]
         if not new: break
         for r in new: seen.add(r["id"]); rows.append(r)
-    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com)$|\.test$")
+    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com|x\.com)$|\.test$|^pentest")
     real = [r for r in rows if not tech.search((r.get("email") or "").lower())]
     exp_soon = [r for r in real if d(r.get("paid_until")) and 0 <= (d(r["paid_until"]) - TODAY).days <= 2]
     exp_past = [r for r in real if d(r.get("paid_until")) and -7 <= (d(r["paid_until"]) - TODAY).days < 0]
@@ -115,7 +115,7 @@ def block_traffic():
         new = [r for r in batch if r["id"] not in seen]
         if not new: break
         for r in new: seen.add(r["id"]); rows.append(r)
-    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com)$|\.test$")
+    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com|x\.com)$|\.test$|^pentest")
     week = [r for r in rows
             if not tech.search((r.get("email") or "").lower())
             and d(r.get("created_at")) and (TODAY - d(r["created_at"])).days <= 7]

@@ -116,7 +116,7 @@ def sales_items():
             break
         for r in new:
             seen.add(r["id"]); rows.append(r)
-    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com)$|\.test$")
+    tech = re.compile(r"@(qubix\.pro|qubix\.capital|qubix\.dev|example\.com|ex\.com|test\.com|x\.com)$|\.test$|^pentest")
     real = [r for r in rows if not tech.search((r.get("email") or "").lower())]
 
     # карточки SALES: «Лид #228 — …» → ссылка по номеру клиента или почте
@@ -165,7 +165,7 @@ def sales_items():
         plan = r.get("plan_code") or ""
         # карточки нет — ведём в список клиентов админки (поиск по номеру/почте)
         card = by_num.get(str(r.get("number") or "")) or by_mail.get(email.lower())
-        url = card or "https://admin.qubix.pro/customers"
+        url = card or f"https://admin.qubix.pro/customers/{r['id']}"
         touch = last_touch(card) if card else ""
         if days is not None and -7 <= days < 0:
             items.append((0, days, {"id": f"c-{r['id']}", "text": f"{email} · {plan}",
