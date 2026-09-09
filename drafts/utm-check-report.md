@@ -1,3 +1,108 @@
+# Проверка UTM-меток на лендинге qubix.pro — отчёт, прогон 2
+
+**Дата замера:** 09.09.2026, ~15:57–16:02 UTC.
+**Контур:** облачная сессия Claude Code, egress-прокси; сетевая политика обновлена (qubix.pro и www доступны). Все факты — класс «замер» из этой сессии, кроме двух цитат кода лендинга (класс «документ», файл `https://qubix.pro/assets/js/qubix.js` на дату замера).
+
+## Вывод одним абзацем
+
+**Метки теряет сам сайт, на серверном языковом редиректе.** Любой вход — `http://qubix.pro/?...` (как в постах), `https://qubix.pro/?...`, `https://www.qubix.pro/?...` — сводится к одной цепочке: (1) переход на https/apex сохраняет query полностью; (2) edge отдаёт 302, забирает `r=UTMCHECK` в куку `qubix_ref` и оставляет все utm_* в Location; (3) следующий 302 `/` → `/en/` отдаёт `location: /en/` **без query вообще** — все utm_* умирают здесь, до загрузки страницы. Браузер подтверждает: `page.url()` после load и через 5 секунд — `https://qubix.pro/en/`, чистый; клиентский код ничего не подчищает (его `replaceState` убирает только служебный `cookies=1`). GA4-тег на лендинге есть (грузится динамически из `qubix.js`, ID `GT-TQKZHCKN`), но к моменту его загрузки адрес уже без меток — вот и «direct» в GA. Это вариант, близкий к (в), но фикс нужен не странице, а серверу: **языковой редирект `/` → `/en/` должен переносить query string**. Контрольный замер: прямой вход на `https://qubix.pro/en/?utm...` — 200 без редиректов, метки живут в адресе и после load, и через 5 секунд, и уезжают в собственную аналитику (`campaign_visit`). Не проверено одно: сам хит GA `/g/collect` — тег ходит на `www.googletagmanager.com` и `region1.google-analytics.com`, а политика окружения пускает только домены без этих поддоменов (`connect_rejected` на оба); впрочем, на вывод это не влияет — page_location тег берёт из адреса, который уже чист.
+
+## 1. Редиректы (curl)
+
+### 1.1. `https://qubix.pro/?r=UTMCHECK&utm_source=UTMCHECK&utm_medium=telegram&utm_campaign=test`
+
+Шаг 1 — edge забирает `r` в куку, utm_* сохраняет:
+
+```
+HTTP/2 302
+location: /?utm_campaign=test&utm_source=UTMCHECK&utm_medium=telegram
+set-cookie: qubix_ref=UTMCHECK; Domain=.qubix.pro; Max-Age=2592000
+set-cookie: piuid=...; qubix_geo=US
+server: cloudflare
+```
+
+Шаг 2 — **точка потери**. Языковой редирект отбрасывает query целиком:
+
+```
+GET /?utm_campaign=test&utm_source=UTMCHECK&utm_medium=telegram
+HTTP/2 302
+location: /en/          ← query исчез полностью
+```
+
+Итог цепочки: `curl -L -w` → `200 https://qubix.pro/en/ redirects=2`. Меток в финальном адресе нет.
+
+### 1.2. `http://qubix.pro/?...` (как в постах)
+
+```
+HTTP/1.1 301
+location: https://qubix.pro/?r=UTMCHECK&utm_source=UTMCHECK&utm_medium=telegram&utm_campaign=test
+```
+
+http→https сохраняет query посимвольно, дальше — та же цепочка, что в 1.1. Итог: `200 https://qubix.pro/en/ redirects=3`.
+
+### 1.3. `https://www.qubix.pro/?...`
+
+```
+HTTP/2 301
+location: https://qubix.pro/?r=UTMCHECK&utm_source=UTMCHECK&utm_medium=telegram&utm_campaign=test
+```
+
+www→apex сохраняет query (подтверждает прогон 1), дальше та же цепочка. Итог: `200 https://qubix.pro/en/ redirects=3`.
+
+### 1.4. Контроль: `https://qubix.pro/en/?utm_source=UTMCHECK&utm_medium=telegram&utm_campaign=test`
+
+`HTTP/2 200`, `redirects=0` — при входе сразу на языковую страницу метки не трогаются.
+
+## 2. HTML и JS лендинга
+
+В самом HTML (~311 КБ) GA/GTM-тега **нет**: ноль совпадений по `googletagmanager.com`, `gtag(`, `G-…`, `GTM-…`, `replaceState(`, `pushState(`, `location.replace(`, `location.href=`. Внешних счётчиков нет вообще — только локальные скрипты (`/assets/js/app.js`, `qubix.js`, слайдеры).
+
+Но счётчик есть — он живёт в `/assets/js/qubix.js` и вставляет тег динамически:
+
+```js
+var GA4_TAG_ID = 'GT-TQKZHCKN';
+...
+s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_TAG_ID;
+...
+window.gtag('config', GA4_TAG_ID);
+window.gtag('config', GADS_TAG_ID, { linker: { domains: GADS_LINKER_DOMAINS } });
+```
+
+Там же Google Ads-тег `AW-18327723739` и собственная аналитика `campaign_visit` (шлёт `location.href` на `/pwa-api/event`). Единственный `replaceState` в коде вычищает **только** параметр `cookies=1` (открытие центра настроек cookie) — utm_* он не трогает. Для не-EEA гео (кука `qubix_geo`) трекеры стартуют сразу на load, согласия не ждут.
+
+## 3. Браузер (Playwright, Chromium)
+
+Вход: `https://qubix.pro/?r=UTMCHECK&utm_source=UTMCHECK&utm_medium=telegram&utm_campaign=test`.
+
+- `page.url()` после `load`: `https://qubix.pro/en/` — **метки исчезли ещё до первого выполненного скрипта** (их убил редирект из п. 1.1, не клиентский код).
+- `page.url()` через 5 секунд: `https://qubix.pro/en/` — без изменений.
+- Перехват запросов: ушёл `GET https://www.googletagmanager.com/gtag/js?id=GT-TQKZHCKN` (тег реально пытается грузиться) и `POST /pwa-api/event` + серия `/pwa-api/event-stream` (session replay).
+- Тело beacon'а собственной аналитики при этом входе: `{"event":"campaign_visit","url":"https://qubix.pro/en/",...}` — **и своя атрибуция получает адрес уже без меток**. При контрольном входе на `/en/?utm...` тот же beacon несёт полный URL с метками.
+- `r=UTMCHECK` при этом не пропадает: он снят edge'ем в куку `qubix_ref` (Max-Age 30 дней) на первом же ответе — реферальная привязка через куку живёт, теряются именно utm_*.
+
+**Что срезала сеть окружения:** загрузка тега упала — `ERR_TUNNEL_CONNECTION_FAILED` на `www.googletagmanager.com` (политика пускает `googletagmanager.com` и `google-analytics.com`, но не поддомены `www.` и `region1.` — оба дают `connect_rejected`). Поэтому хит `/g/collect` с параметрами `dl`/`en` из этой сессии пронаблюдать нельзя. На вывод не влияет: `page_location` тег берёт из адреса страницы, а адрес к этому моменту уже `https://qubix.pro/en/` без меток.
+
+## 4. Что делать
+
+Фикс серверный, не страницы: языковой редирект `/` → `/en/` (и, видимо, прочие локали) должен **переносить query string** в Location. После фикса — повторить этот же замер: финальный `page.url()` обязан быть `/en/?utm_source=...`, и тогда и GA, и собственный `campaign_visit` увидят источник. Задача для dev-команды (вне зоны Анастасии), в тикет достаточно пп. 1.1 и 3 этого отчёта. Для полного добивания проверки хитом `/g/collect` — добавить в network policy окружения `www.googletagmanager.com` и `region1.google-analytics.com` (именно с поддоменами), либо глянуть DebugView GA с обычной машины при входе на `/en/?utm...`.
+
+## Сводка
+
+| Шаг | Статус | Результат |
+|---|---|---|
+| http→https, сохранность query | ✅ | сохраняется полностью |
+| 301 www→apex, сохранность query | ✅ | сохраняется полностью |
+| 302 edge (снятие `r` в куку `qubix_ref`) | ✅ | utm_* сохраняются, `r` уходит в куку |
+| 302 `/` → `/en/` | ✅ **точка потери** | query отбрасывается целиком |
+| Тег GA/GTM | ✅ | есть, `GT-TQKZHCKN` + `AW-18327723739`, динамически из `qubix.js` |
+| Подчистка URL клиентским кодом | ✅ | нет (replaceState — только `cookies=1`) |
+| `page.url()` после load / +5с | ✅ | `https://qubix.pro/en/`, меток нет с самого начала |
+| Хит `/g/collect` (dl, en) | ❌ | `www.googletagmanager.com` и `region1.google-analytics.com` — `connect_rejected` (поддомены не в политике) |
+
+---
+
+# Архив прогона 1
+
 # Проверка UTM-меток на лендинге qubix.pro — отчёт
 
 **Дата замера:** 09.09.2026, ~15:38–15:45 UTC.
