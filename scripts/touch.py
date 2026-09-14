@@ -114,6 +114,84 @@ def show(title, note, rows):
               + ", ".join(f"#{r['номер']}" for r in no_tg))
 
 
+LETTER_EXPIRING = """Здравствуйте! Ваш месяц на Qubix заканчивается {date} — пишу заранее, чтобы вы успели решить спокойно.
+
+Расскажите, что получилось посмотреть за это время: развернули на своём сервере, дошли до первой связки? Если какой-то шаг остался мутным — разберём вместе. Поддержка на связи круглосуточно, живой человек — с 9:00 до 21:00 МСК.
+
+Если продукт подошёл, помогу перевести аккаунт на постоянный тариф: всё останется на вашем сервере ровно так, как настроено сейчас."""
+
+LETTER_EXPIRED = """Здравствуйте! Ваш доступ к Qubix закончился {days} назад — пишу узнать, как прошёл месяц.
+
+Вы продукт до своего сервера довели, значит до сути добрались. Скажите честно: чего не хватило? Ответ полезен в любом случае, даже если вывод — «пока мимо».
+
+Захотите вернуться — ваши данные и настройки на вашем сервере в целости, доступ возвращается одним шагом. Помогу пройти его, поддержка отвечает круглосуточно."""
+
+
+def plural_days(n):
+    """«1 день», «2 дня», «7 дней» — чтобы письмо не выглядело машинным."""
+    if 11 <= n % 100 <= 14:
+        return f"{n} дней"
+    last = n % 10
+    if last == 1:
+        return f"{n} день"
+    if last in (2, 3, 4):
+        return f"{n} дня"
+    return f"{n} дней"
+
+
+def sales_card(email):
+    """Карточка лида в YouTrack по почте — чтобы отметиться в правильной."""
+    yt = os.path.join(os.path.dirname(os.path.abspath(__file__)), "youtrack.sh")
+    try:
+        out = subprocess.run([yt, "search", email], capture_output=True,
+                             text=True, timeout=60).stdout
+        found = [i["idReadable"] for i in json.loads(out)
+                 if i["idReadable"].startswith("SALES-")]
+        # Карточек на одну почту бывает несколько: берём самую полную (с описанием).
+        return found[0] if found else None
+    except Exception:
+        return None
+
+
+def letters(customers, expiring_days, expired_days):
+    """Готовые касания: кому, куда, каким текстом и где отметиться."""
+    plan = []
+    for c in customers:
+        left = days(c.get("paid_until"))
+        if left is None or not c.get("last_license_at"):
+            continue
+        if 0 <= left <= expiring_days:
+            when = dt(c["paid_until"]).astimezone().strftime("%d.%m")
+            plan.append((c, "ИСТЕКАЕТ", LETTER_EXPIRING.format(date=when), left))
+        elif -expired_days <= left < 0:
+            plan.append((c, "ИСТЕКЛА",
+                         LETTER_EXPIRED.format(days=plural_days(-left)), left))
+    plan.sort(key=lambda t: -t[3])
+
+    print(f"\n{'='*70}\nГОТОВЫЕ КАСАНИЯ: {len(plan)} чел. "
+          f"Отправили — отметьтесь в карточке.\n{'='*70}")
+    for n, (c, kind, text, left) in enumerate(plan, 1):
+        card = sales_card(c["email"])
+        if c["_tg"]:
+            channel = f"Telegram: tg://user?id={c['telegram_chat_id']}"
+        else:
+            channel = f"почта: {c['email']} (Telegram не привязан)"
+        when = ("осталось %d дн." % left) if left >= 0 else ("прошло %d дн." % -left)
+        print(f"\n[{n}/{len(plan)}] #{c['number']} · {kind} · {when}")
+        print(f"  Кому:     {c['email']}")
+        print(f"  Куда:     {channel}")
+        print(f"  Карточка: " + (f"https://team.qubix.capital/issue/{card}" if card
+                                 else "в SALES не нашлась — завести новую"))
+        print(f"  Клиент:   https://admin.qubix.pro/customers/{c['id']}")
+        print("  ---- текст ----")
+        for line in text.split("\n"):
+            print(f"  {line}" if line else "")
+        print("  ---- отметка в карточке ----")
+        print(f"  Касание по истечению подписки отправлено {NOW.astimezone():%d.%m.%Y}. "
+              f"Текст — вариант «{kind.lower()}». Ответ ждём до "
+              f"{(NOW + datetime.timedelta(days=3)).astimezone():%d.%m}.")
+
+
 def main():
     p = argparse.ArgumentParser(description="Списки клиентов для касания")
     p.add_argument("--stuck", action="store_true", help="только застрявшие без лицензии")
@@ -122,6 +200,8 @@ def main():
     p.add_argument("--csv", metavar="ФАЙЛ", help="выгрузить показанное в CSV")
     p.add_argument("--all", action="store_true",
                    help="не отсеивать тестовые и внутренние аккаунты")
+    p.add_argument("--letters", action="store_true",
+                   help="готовые тексты касаний со ссылками на карточки")
     args = p.parse_args()
     only_stuck = args.stuck
 
@@ -161,6 +241,9 @@ def main():
              "Продукт ставили — значит доходили до сути. Самый тёплый возврат.",
              expired_rows)
         shown += expiring_rows + expired_rows
+
+    if args.letters:
+        letters(customers, args.expiring, args.expired)
 
     if args.csv:
         with open(args.csv, "w", newline="", encoding="utf-8-sig") as f:
