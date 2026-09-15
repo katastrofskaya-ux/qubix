@@ -88,6 +88,26 @@ def yt_changes():
 
 
 
+def vedomost_check():
+    """Сверка ведомости: оплата в трекере есть, а строки в BUDGET.md нет.
+
+    Живёт отдельным скриптом (scripts/vedomost.py), здесь только вызов — чтобы
+    пропущенная оплата всплывала сама на утреннем разборе, а не тогда, когда
+    за ведомость спросят. Ходит в YouTrack, поэтому под --quiet не зовётся.
+    """
+    try:
+        r = subprocess.run([sys.executable,
+                            os.path.join(ROOT, "scripts", "vedomost.py"), "--quiet"],
+                           capture_output=True, text=True, timeout=180)
+    except Exception:
+        return
+    out = (r.stdout or "").strip()
+    if out:
+        print()
+        for line in out.split("\n"):
+            print("  " + line if line.strip() else line)
+
+
 def parse_budget():
     """Возвращает {месяц: {"limit": N, "paid": N, "approved": N, "rows": [...]}}"""
     months, cur = {}, None
@@ -271,6 +291,8 @@ def main():
             print(f"  {month}: занято {b['paid'] + b['approved']:,} из {b['limit']:,} "
                   f"(оплачено {b['paid']:,}, одобрено {b['approved']:,}) · свободно {free:,}"
                   .replace(",", " "))
+        if not a.quiet:
+            vedomost_check()
 
     hdr("Дальше")
     print("  Правьте PLAN.md руками — это ваш план, не мой.")
