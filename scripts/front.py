@@ -145,8 +145,9 @@ def block_budget():
     names = {"09": "Сентябрь", "10": "Октябрь", "11": "Ноябрь"}
     sec = re.split(r"^## ", p.read_text(encoding="utf-8"), flags=re.M)
     cur = next((s for s in sec if s.startswith(names.get(TODAY.strftime('%m'), '???'))), "")
-    paid = sum(int(m) for m in re.findall(r"^- (\d+) · оплачено", cur, re.M))
-    appr = sum(int(m) for m in re.findall(r"^- (\d+) · одобрено", cur, re.M))
+    # Дата оплаты в начале строки необязательна — старый формат тоже читается.
+    paid = sum(int(m) for m in re.findall(r"^- (?:\S+ · )?(\d+) · оплачено", cur, re.M))
+    appr = sum(int(m) for m in re.findall(r"^- (?:\S+ · )?(\d+) · одобрено", cur, re.M))
     frame = 30000
     window = (datetime.date(2026, 9, 26) - TODAY).days
     light = Y if appr > 0 else G

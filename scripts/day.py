@@ -103,10 +103,14 @@ def parse_budget():
         if line.startswith("## "):
             cur = None
             continue
-        m = re.match(r"- (\d+) · (\S+) · ([^·]+)·(.*)", line)
+        # Строка ведомости: «- дата · сумма · статус · что · задача».
+        # Дата необязательна — строки старого формата («- сумма · статус · …»)
+        # читаются по-прежнему; у неоплаченных дата пишется как «—».
+        m = re.match(r"- (?:(\S+) · )?(\d+) · (\S+) · ([^·]+)·(.*)", line)
         if m and cur:
-            amt, st, what, rest = int(m.group(1)), m.group(2), m.group(3).strip(), m.group(4)
-            months[cur]["rows"].append((amt, st, what))
+            when = m.group(1) or ""
+            amt, st, what, rest = int(m.group(2)), m.group(3), m.group(4).strip(), m.group(5)
+            months[cur]["rows"].append((amt, st, what, when))
             if st == "оплачено":
                 months[cur]["paid"] += amt
             elif st == "одобрено":
