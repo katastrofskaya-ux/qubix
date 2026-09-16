@@ -27,6 +27,7 @@ import imaplib
 import json
 import os
 import re
+import socket
 import ssl
 import sys
 from email.header import decode_header, make_header
@@ -43,16 +44,55 @@ STATE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SENT_CANDIDATES = ["Sent", "INBOX.Sent", "Отправленные", "Sent Items", "Sent Messages"]
 
 
+def _tunnel(host, port, timeout=30):
+    """Открыть TCP через HTTP-прокси окружения: прямой выход на 993 закрыт.
+
+    Наружу из окружения пропускаются только 80 и 443, всё остальное молча
+    съедается. Единственный путь для IMAP — метод CONNECT у прокси: он
+    протоколу внутри туннеля безразличен, но хост обязан стоять в списке
+    разрешённых сетевой политики окружения.
+    """
+    px = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+    if not px:
+        return socket.create_connection((host, port), timeout=timeout)
+    ph, _, pp = re.sub(r"^https?://", "", px).rstrip("/").partition(":")
+    sock = socket.create_connection((ph, int(pp or 443)), timeout=timeout)
+    sock.sendall(f"CONNECT {host}:{port} HTTP/1.1\r\nHost: {host}:{port}\r\n\r\n".encode())
+    head = b""
+    while b"\r\n\r\n" not in head:
+        chunk = sock.recv(1)
+        if not chunk:
+            raise OSError("прокси закрыл соединение, не ответив на CONNECT")
+        head += chunk
+    line = head.split(b"\r\n")[0].decode(errors="replace")
+    if " 200 " not in line:
+        raise OSError(f"прокси отказал на CONNECT: {line}")
+    return sock
+
+
+class ProxyIMAP4_SSL(imaplib.IMAP4_SSL):
+    """IMAP поверх туннеля прокси вместо прямого сокета."""
+
+    def _create_socket(self, timeout=None):
+        raw = _tunnel(self.host, self.port, timeout or 30)
+        return self.ssl_context.wrap_socket(raw, server_hostname=self.host)
+
+
 def connect():
     password = os.environ.get("QUBIX_MAIL_PASSWORD")
     if not password:
         sys.exit("нужна переменная окружения QUBIX_MAIL_PASSWORD — пароль ящика")
     try:
-        conn = imaplib.IMAP4_SSL(HOST, 993, ssl_context=ssl.create_default_context(),
-                                 timeout=30)
+        conn = ProxyIMAP4_SSL(HOST, 993,
+                              ssl_context=ssl.create_default_context(), timeout=30)
     except OSError as e:
-        sys.exit(f"{HOST}:993 не отвечает ({type(e).__name__}). "
-                 "Похоже, сервер ещё не пускает подключения — вопрос к Нику.")
+        msg = str(e)
+        if "host_not_allowed" in msg or "403" in msg or "отказал на CONNECT" in msg:
+            sys.exit(f"{HOST} закрыт сетевой политикой окружения ({msg}). "
+                     "Добавь хост в список разрешённых в настройках окружения — "
+                     "там же, где добавлялся admin.qubix.pro.")
+        sys.exit(f"{HOST}:993 не отвечает ({type(e).__name__}: {msg}). "
+                 "Проверь, пускает ли сервер IMAP снаружи — вопрос к Нику.")
     try:
         conn.login(USER, password)
     except imaplib.IMAP4.error as e:
