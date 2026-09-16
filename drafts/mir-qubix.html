@@ -198,240 +198,143 @@
   <section>
     <div class="head">
       <div class="eyebrow">Заказ прямо сейчас</div>
-      <h2>Раскадровка: ролик-визитка, 18 секунд</h2>
-      <p class="note">Один ролик на все размещения, меняется только промокод в финале. Без показа отдельных функций — знакомство. Кадры нарисованы в вертикали 9:16, как пойдёт в Telegram; пунктир — безопасное поле, титр за него не заходит.</p>
+      <h2>Тизер, 15 секунд</h2>
+      <p class="note">Ракета уходит с Земли и на орбите раскрывается в станцию. Экранов продукта в тизере нет — поэтому он заказывается сегодня, не дожидаясь съёмки интерфейса. Полная версия на 18 секунд собирается позже из этой же сцены: внутрь добавляется рубка с мониторами. Кадры в вертикали 9:16, пунктир — безопасное поле.</p>
     </div>
 
     <div class="timeline">
-      <div class="seg a"><span class="t">0:00–0:03</span><span class="l">Хаос вкладок</span></div>
-      <div class="seg b"><span class="t">0:03–0:06</span><span class="l">Схлопывание в куб</span></div>
-      <div class="seg c"><span class="t">0:06–0:14</span><span class="l">Четыре настоящих экрана, по 2 с</span></div>
-      <div class="seg d"><span class="t">0:14–0:18</span><span class="l">Уход в космос и финал</span></div>
+      <div class="seg a"><span class="t">0:00–0:03</span><span class="l">Старт с Земли</span></div>
+      <div class="seg b"><span class="t">0:03–0:06</span><span class="l">Раскрытие в станцию</span></div>
+      <div class="seg c"><span class="t">0:06–0:10</span><span class="l">Облёт корпуса</span></div>
+      <div class="seg d"><span class="t">0:10–0:15</span><span class="l">Отъезд и формула</span></div>
     </div>
 
     <div class="board">
 
       <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 1: десяток открытых окон внахлёст, курсор мечется между ними">
+        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 1: ночная Земля внизу кадра, ракета уходит вверх со шлейфом">
           <defs>
-            <linearGradient id="f1bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9EBF6"/></linearGradient>
-            <linearGradient id="f1w" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E4E8F2"/></linearGradient>
-            <filter id="f1s" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.6"/></filter>
+            <radialGradient id="t1bg" cx="50%" cy="85%" r="70%"><stop offset="0" stop-color="#0E2145"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <linearGradient id="t1e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+            <linearGradient id="t1tr" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#84AEF3" stop-opacity="0"/><stop offset="1" stop-color="#84AEF3" stop-opacity=".85"/></linearGradient>
+            <filter id="t1b" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="2.6"/></filter>
           </defs>
-          <rect width="90" height="160" fill="url(#f1bg)"/>
-          <g filter="url(#f1s)" opacity=".28">
-            <rect x="10" y="30" width="44" height="28" rx="4" fill="#5E6267"/>
-            <rect x="16" y="54" width="52" height="32" rx="4" fill="#5E6267"/>
-            <rect x="30" y="96" width="48" height="32" rx="4" fill="#5E6267"/>
+          <rect width="90" height="160" fill="url(#t1bg)"/>
+          <g fill="#E9EBF6"><circle cx="18" cy="26" r=".6" opacity=".7"/><circle cx="72" cy="34" r=".5" opacity=".6"/><circle cx="58" cy="18" r=".45" opacity=".5"/><circle cx="30" cy="46" r=".5" opacity=".55"/></g>
+          <ellipse cx="45" cy="196" rx="86" ry="66" fill="#84AEF3" opacity=".35" filter="url(#t1b)"/>
+          <ellipse cx="45" cy="200" rx="80" ry="62" fill="url(#t1e)"/>
+          <ellipse cx="45" cy="200" rx="80" ry="62" fill="#020404" opacity=".45"/>
+          <rect x="43" y="88" width="4" height="46" fill="url(#t1tr)" filter="url(#t1b)"/>
+          <g>
+            <path d="M45 58 C48.4 62 49.6 68 49.6 74 L49.6 82 C49.6 84 48 85.4 45 85.4 C42 85.4 40.4 84 40.4 82 L40.4 74 C40.4 68 41.6 62 45 58 Z" fill="#E9EBF6"/>
+            <path d="M45 58 C47 60.4 48.2 63.6 49 67 L41 67 C41.8 63.6 43 60.4 45 58 Z" fill="#84AEF3"/>
+            <ellipse cx="45" cy="86" rx="4.6" ry="2.6" fill="#84AEF3"/>
           </g>
-          <g stroke="#DCE6F5" stroke-width=".7">
-            <rect x="8" y="26" width="44" height="28" rx="4.5" fill="url(#f1w)"/>
-            <rect x="28" y="17" width="48" height="30" rx="4.5" fill="url(#f1w)"/>
-            <rect x="14" y="50" width="52" height="32" rx="4.5" fill="url(#f1w)"/>
-            <rect x="34" y="62" width="46" height="30" rx="4.5" fill="url(#f1w)"/>
-            <rect x="6" y="78" width="48" height="30" rx="4.5" fill="url(#f1w)"/>
-            <rect x="28" y="92" width="50" height="32" rx="4.5" fill="url(#f1w)"/>
-            <rect x="10" y="110" width="44" height="28" rx="4.5" fill="url(#f1w)"/>
-          </g>
-          <g stroke="#BAC0CA" stroke-width="1.6" stroke-linecap="round">
-            <line x1="34" y1="26" x2="64" y2="26"/><line x1="20" y1="58" x2="52" y2="58"/>
-            <line x1="34" y1="102" x2="66" y2="102"/><line x1="16" y1="118" x2="42" y2="118"/>
-          </g>
-          <path d="M58 46 L58 59 L61.4 55.6 L64.6 61 L66.6 59.8 L63.6 54.6 L68 54 Z" fill="#5E6267"/>
         </svg>
-        <div class="cap"><span class="tc">1 · 0:00–0:03</span><span class="nm">Хаос</span><span class="ds">Окна дёргаются, курсор мечется. Титра нет.</span></div>
+        <div class="cap"><span class="tc">1 · 0:00–0:03</span><span class="nm">Старт</span><span class="ds">Ночная Земля дугой внизу, ракета уходит вверх. Камера идёт следом. Титра нет.</span></div>
       </div>
 
       <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 2: окна затягивает к центру, из них собирается куб">
+        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 2: ракета раскрывается в станцию-куб, титр Qubix — Affiliate SuperApp">
           <defs>
-            <linearGradient id="f2bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EEF1F8"/></linearGradient>
-            <radialGradient id="f2g" cx="50%" cy="44%" r="42%"><stop offset="0" stop-color="#84AEF3" stop-opacity=".5"/><stop offset="1" stop-color="#84AEF3" stop-opacity="0"/></radialGradient>
-            <linearGradient id="f2t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84AEF3"/><stop offset="1" stop-color="#1E5BD1"/></linearGradient>
-            <linearGradient id="f2l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+            <radialGradient id="t2bg" cx="50%" cy="38%" r="62%"><stop offset="0" stop-color="#10274F"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <radialGradient id="t2g" cx="50%" cy="36%" r="30%"><stop offset="0" stop-color="#84AEF3" stop-opacity=".5"/><stop offset="1" stop-color="#84AEF3" stop-opacity="0"/></radialGradient>
+            <linearGradient id="t2t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBD3FA"/><stop offset="1" stop-color="#84AEF3"/></linearGradient>
+            <linearGradient id="t2l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
           </defs>
-          <rect width="90" height="160" fill="url(#f2bg)"/>
-          <rect width="90" height="160" fill="url(#f2g)"/>
-          <g fill="#FFFFFF" stroke="#DCE6F5" stroke-width=".6" opacity=".9">
-            <rect x="9" y="38" width="20" height="13" rx="3"/><rect x="61" y="42" width="19" height="12" rx="3"/>
-            <rect x="8" y="104" width="19" height="12" rx="3"/><rect x="62" y="106" width="19" height="12" rx="3"/>
-          </g>
-          <g stroke="#84AEF3" stroke-width=".8" stroke-linecap="round" opacity=".8">
-            <line x1="30" y1="48" x2="38" y2="60"/><line x1="60" y1="51" x2="52" y2="61"/>
-            <line x1="29" y1="104" x2="38" y2="92"/><line x1="61" y1="105" x2="52" y2="92"/>
-          </g>
-          <g stroke-linejoin="round">
-            <polygon points="45,54 57,61 45,68 33,61" fill="url(#f2t)"/>
-            <polygon points="33,61 45,68 45,82 33,75" fill="url(#f2l)"/>
-            <polygon points="57,61 45,68 45,82 57,75" fill="#16419A"/>
-          </g>
-        </svg>
-        <div class="cap"><span class="tc">2 · 0:03–0:04</span><span class="nm">Схлопывание</span><span class="ds">Всё затягивает к центру. Камера стоит — движение делают окна.</span></div>
-      </div>
-
-      <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 3: чистый кадр, объёмный куб по центру, титр Qubix — Affiliate SuperApp">
-          <defs>
-            <linearGradient id="f3bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAEEF7"/></linearGradient>
-            <radialGradient id="f3g" cx="50%" cy="40%" r="40%"><stop offset="0" stop-color="#84AEF3" stop-opacity=".45"/><stop offset="1" stop-color="#84AEF3" stop-opacity="0"/></radialGradient>
-            <linearGradient id="f3t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9CBCF7"/><stop offset="1" stop-color="#1E5BD1"/></linearGradient>
-            <linearGradient id="f3l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
-            <filter id="f3s" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4"/></filter>
-          </defs>
-          <rect width="90" height="160" fill="url(#f3bg)"/>
-          <rect width="90" height="160" fill="url(#f3g)"/>
-          <rect x="7" y="10" width="76" height="140" rx="4" fill="none" stroke="#BAC0CA" stroke-width=".5" stroke-dasharray="3 3"/>
-          <polygon points="45,36 68,49 68,75 45,88 22,75 22,49" fill="none" stroke="#DCE6F5" stroke-width="1.4" stroke-linejoin="round"/>
-          <ellipse cx="45" cy="86" rx="16" ry="4" fill="#1E5BD1" opacity=".22" filter="url(#f3s)"/>
-          <g stroke-linejoin="round">
-            <polygon points="45,46 61,55 45,64 29,55" fill="url(#f3t)"/>
-            <polygon points="29,55 45,64 45,82 29,73" fill="url(#f3l)"/>
-            <polygon points="61,55 45,64 45,82 61,73" fill="#16419A"/>
-          </g>
-          <text x="45" y="110" text-anchor="middle" fill="#020404" font-size="6.6" font-family="Golos Text, sans-serif" font-weight="600">Qubix — Affiliate</text>
-          <text x="45" y="119" text-anchor="middle" fill="#020404" font-size="6.6" font-family="Golos Text, sans-serif" font-weight="600">SuperApp</text>
-        </svg>
-        <div class="cap"><span class="tc">3 · 0:04–0:06</span><span class="nm">Чистый кадр</span><span class="ds">Куб и контур гексагона. Больше в кадре ничего.</span></div>
-      </div>
-
-      <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 4: запись экрана трекера внутри гексагонального окна">
-          <defs>
-            <linearGradient id="f4bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAEEF7"/></linearGradient>
-            <linearGradient id="f4h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1724"/><stop offset="1" stop-color="#020404"/></linearGradient>
-            <linearGradient id="f4e" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84AEF3"/><stop offset="1" stop-color="#16419A"/></linearGradient>
-            <filter id="f4s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.6"/></filter>
-          </defs>
-          <rect width="90" height="160" fill="url(#f4bg)"/>
-          <rect x="7" y="10" width="76" height="140" rx="4" fill="none" stroke="#BAC0CA" stroke-width=".5" stroke-dasharray="3 3"/>
-          <text x="45" y="24" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">Весь офис арбитражной</text>
-          <text x="45" y="32" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">команды на вашем сервере</text>
-          <polygon points="45,46 72,62 72,94 45,110 18,94 18,62" fill="#1E5BD1" opacity=".3" filter="url(#f4s)"/>
-          <polygon points="45,48 71,63 71,93 45,108 19,93 19,63" fill="url(#f4h)" stroke="url(#f4e)" stroke-width="1.4" stroke-linejoin="round"/>
-          <g stroke="#5E6267" stroke-width="1.4" stroke-linecap="round">
-            <line x1="31" y1="66" x2="59" y2="66"/><line x1="31" y1="72" x2="59" y2="72"/><line x1="31" y1="78" x2="52" y2="78"/>
-          </g>
-          <g fill="url(#f4e)">
-            <rect x="31" y="86" width="4" height="10" rx="1.6"/><rect x="38" y="90" width="4" height="6" rx="1.6"/>
-            <rect x="45" y="83" width="4" height="13" rx="1.6"/><rect x="52" y="88" width="4" height="8" rx="1.6"/>
-          </g>
-          <text x="45" y="126" text-anchor="middle" fill="#6E7687" font-size="5" font-family="JetBrains Mono, monospace">трекер</text>
-        </svg>
-        <div class="cap"><span class="tc">4 · 0:06–0:08</span><span class="nm">Трекер</span><span class="ds">Настоящая запись в гексагоне-иллюминаторе. Подписи в кадре нет.</span></div>
-      </div>
-
-      <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 5: запись экрана конструктора витрин PWA">
-          <defs>
-            <linearGradient id="f5bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAEEF7"/></linearGradient>
-            <linearGradient id="f5h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1724"/><stop offset="1" stop-color="#020404"/></linearGradient>
-            <linearGradient id="f5e" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84AEF3"/><stop offset="1" stop-color="#16419A"/></linearGradient>
-            <filter id="f5s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.6"/></filter>
-          </defs>
-          <rect width="90" height="160" fill="url(#f5bg)"/>
-          <rect x="7" y="10" width="76" height="140" rx="4" fill="none" stroke="#BAC0CA" stroke-width=".5" stroke-dasharray="3 3"/>
-          <text x="45" y="24" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">Весь офис арбитражной</text>
-          <text x="45" y="32" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">команды на вашем сервере</text>
-          <polygon points="45,46 72,62 72,94 45,110 18,94 18,62" fill="#1E5BD1" opacity=".3" filter="url(#f5s)"/>
-          <polygon points="45,48 71,63 71,93 45,108 19,93 19,63" fill="url(#f5h)" stroke="url(#f5e)" stroke-width="1.4" stroke-linejoin="round"/>
-          <rect x="36" y="60" width="18" height="30" rx="4" fill="none" stroke="#84AEF3" stroke-width="1.1"/>
-          <rect x="40" y="64" width="10" height="10" rx="3" fill="url(#f5e)"/>
-          <line x1="40" y1="78" x2="50" y2="78" stroke="#5E6267" stroke-width="1.2" stroke-linecap="round"/>
-          <rect x="39" y="81" width="12" height="4" rx="2" fill="#84AEF3"/>
-          <text x="45" y="126" text-anchor="middle" fill="#6E7687" font-size="5" font-family="JetBrains Mono, monospace">витрина PWA</text>
-        </svg>
-        <div class="cap"><span class="tc">5 · 0:08–0:10</span><span class="nm">Витрина PWA</span><span class="ds">Тот же гексагон приезжает сдвигом вбок, не склейкой встык.</span></div>
-      </div>
-
-      <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 6: запись экрана ассистента, переписка в кабинете">
-          <defs>
-            <linearGradient id="f6bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAEEF7"/></linearGradient>
-            <linearGradient id="f6h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1724"/><stop offset="1" stop-color="#020404"/></linearGradient>
-            <linearGradient id="f6e" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84AEF3"/><stop offset="1" stop-color="#16419A"/></linearGradient>
-            <filter id="f6s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.6"/></filter>
-          </defs>
-          <rect width="90" height="160" fill="url(#f6bg)"/>
-          <rect x="7" y="10" width="76" height="140" rx="4" fill="none" stroke="#BAC0CA" stroke-width=".5" stroke-dasharray="3 3"/>
-          <text x="45" y="24" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">Весь офис арбитражной</text>
-          <text x="45" y="32" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">команды на вашем сервере</text>
-          <polygon points="45,46 72,62 72,94 45,110 18,94 18,62" fill="#1E5BD1" opacity=".3" filter="url(#f6s)"/>
-          <polygon points="45,48 71,63 71,93 45,108 19,93 19,63" fill="url(#f6h)" stroke="url(#f6e)" stroke-width="1.4" stroke-linejoin="round"/>
-          <rect x="27" y="62" width="26" height="9" rx="4.5" fill="#5E6267"/>
-          <rect x="37" y="74" width="26" height="9" rx="4.5" fill="url(#f6e)"/>
-          <rect x="27" y="86" width="21" height="9" rx="4.5" fill="#5E6267"/>
-          <g fill="#84AEF3"><circle cx="53" cy="91" r="1.7"/><circle cx="58" cy="91" r="1.7"/><circle cx="63" cy="91" r="1.7"/></g>
-          <text x="45" y="126" text-anchor="middle" fill="#6E7687" font-size="5" font-family="JetBrains Mono, monospace">ассистент</text>
-        </svg>
-        <div class="cap"><span class="tc">6 · 0:10–0:12</span><span class="nm">Ассистент</span><span class="ds">Медленный наезд внутри записи, чтобы экран читался живым.</span></div>
-      </div>
-
-      <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 7: запись экрана документов команды">
-          <defs>
-            <linearGradient id="f7bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAEEF7"/></linearGradient>
-            <linearGradient id="f7h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1724"/><stop offset="1" stop-color="#020404"/></linearGradient>
-            <linearGradient id="f7e" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84AEF3"/><stop offset="1" stop-color="#16419A"/></linearGradient>
-            <filter id="f7s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.6"/></filter>
-          </defs>
-          <rect width="90" height="160" fill="url(#f7bg)"/>
-          <rect x="7" y="10" width="76" height="140" rx="4" fill="none" stroke="#BAC0CA" stroke-width=".5" stroke-dasharray="3 3"/>
-          <text x="45" y="24" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">Весь офис арбитражной</text>
-          <text x="45" y="32" text-anchor="middle" fill="#020404" font-size="5.4" font-family="Golos Text, sans-serif" font-weight="600">команды на вашем сервере</text>
-          <polygon points="45,46 72,62 72,94 45,110 18,94 18,62" fill="#1E5BD1" opacity=".3" filter="url(#f7s)"/>
-          <polygon points="45,48 71,63 71,93 45,108 19,93 19,63" fill="url(#f7h)" stroke="url(#f7e)" stroke-width="1.4" stroke-linejoin="round"/>
-          <rect x="27" y="60" width="15" height="19" rx="2.5" fill="none" stroke="#84AEF3" stroke-width="1"/>
-          <g stroke="#5E6267" stroke-width="1.1" stroke-linecap="round">
-            <line x1="30" y1="65" x2="39" y2="65"/><line x1="30" y1="69" x2="39" y2="69"/><line x1="30" y1="73" x2="35" y2="73"/>
-          </g>
-          <rect x="47" y="60" width="17" height="19" rx="2.5" fill="none" stroke="#5E6267" stroke-width="1"/>
-          <g stroke="#5E6267" stroke-width=".8"><line x1="47" y1="66" x2="64" y2="66"/><line x1="47" y1="72" x2="64" y2="72"/><line x1="55.5" y1="60" x2="55.5" y2="79"/></g>
-          <rect x="33" y="85" width="24" height="9" rx="3" fill="url(#f7e)" opacity=".75"/>
-          <text x="45" y="126" text-anchor="middle" fill="#6E7687" font-size="5" font-family="JetBrains Mono, monospace">документы команды</text>
-        </svg>
-        <div class="cap"><span class="tc">7 · 0:12–0:14</span><span class="nm">Документы</span><span class="ds">Титр держится весь блок целиком и не мигает по кадрам.</span></div>
-      </div>
-
-      <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 8: гексагон с экраном становится гранью куба, фон уходит из светлого в тёмный">
-          <defs>
-            <linearGradient id="f8bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#C9D6EE"/><stop offset="1" stop-color="#020404"/></linearGradient>
-            <linearGradient id="f8t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9CBCF7"/><stop offset="1" stop-color="#1E5BD1"/></linearGradient>
-            <linearGradient id="f8l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
-            <filter id="f8s" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="3.2"/></filter>
-          </defs>
-          <rect width="90" height="160" fill="url(#f8bg)"/>
-          <polygon points="45,52 58,59 58,75 45,82 32,75 32,59" fill="none" stroke="#1E5BD1" stroke-width="1.1" stroke-linejoin="round" opacity=".75"/>
-          <ellipse cx="45" cy="104" rx="20" ry="7" fill="#84AEF3" opacity=".4" filter="url(#f8s)"/>
-          <g stroke-linejoin="round">
-            <polygon points="45,88 60,96 45,104 30,96" fill="url(#f8t)"/>
-            <polygon points="30,96 45,104 45,122 30,114" fill="url(#f8l)"/>
-            <polygon points="60,96 45,104 45,122 60,114" fill="#16419A"/>
-          </g>
-          <line x1="45" y1="82" x2="45" y2="88" stroke="#84AEF3" stroke-width=".9" stroke-dasharray="2 2"/>
-        </svg>
-        <div class="cap"><span class="tc">8 · 0:14–0:16</span><span class="nm">Отъезд</span><span class="ds">Экран становится гранью куба, фон уходит из светлого в тёмный. Титра нет.</span></div>
-      </div>
-
-      <div class="cell">
-        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 9: финал, куб с огнями уходит в космос, формула бренда и промокод">
-          <defs>
-            <radialGradient id="f9bg" cx="50%" cy="28%" r="62%"><stop offset="0" stop-color="#0C1B33"/><stop offset="1" stop-color="#020404"/></radialGradient>
-            <radialGradient id="f9g" cx="50%" cy="28%" r="26%"><stop offset="0" stop-color="#84AEF3" stop-opacity=".55"/><stop offset="1" stop-color="#84AEF3" stop-opacity="0"/></radialGradient>
-            <linearGradient id="f9t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBD3FA"/><stop offset="1" stop-color="#84AEF3"/></linearGradient>
-            <linearGradient id="f9l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
-            <filter id="f9s" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.2"/></filter>
-          </defs>
-          <rect width="90" height="160" fill="url(#f9bg)"/>
-          <rect width="90" height="160" fill="url(#f9g)"/>
+          <rect width="90" height="160" fill="url(#t2bg)"/>
+          <rect width="90" height="160" fill="url(#t2g)"/>
           <rect x="7" y="10" width="76" height="140" rx="4" fill="none" stroke="#5E6267" stroke-width=".5" stroke-dasharray="3 3"/>
-          <g fill="#E9EBF6"><circle cx="19" cy="28" r=".7" opacity=".8"/><circle cx="71" cy="22" r=".6" opacity=".7"/><circle cx="64" cy="46" r=".5" opacity=".6"/><circle cx="24" cy="52" r=".6" opacity=".7"/><circle cx="34" cy="20" r=".45" opacity=".5"/></g>
-          <ellipse cx="45" cy="58" rx="16" ry="6" fill="#84AEF3" opacity=".45" filter="url(#f9s)"/>
-          <g stroke-linejoin="round">
-            <polygon points="45,28 58,35 45,42 32,35" fill="url(#f9t)"/>
-            <polygon points="32,35 45,42 45,58 32,51" fill="url(#f9l)"/>
-            <polygon points="58,35 45,42 45,58 58,51" fill="#16419A"/>
+          <g stroke="#84AEF3" stroke-width="1" stroke-linecap="round" opacity=".7">
+            <line x1="30" y1="48" x2="22" y2="42"/><line x1="60" y1="48" x2="68" y2="42"/>
+            <line x1="30" y1="74" x2="22" y2="80"/><line x1="60" y1="74" x2="68" y2="80"/>
           </g>
+          <g fill="#0E1724" stroke="#84AEF3" stroke-width=".8">
+            <rect x="12" y="36" width="12" height="7" rx="2.5"/><rect x="66" y="36" width="12" height="7" rx="2.5"/>
+            <rect x="12" y="79" width="12" height="7" rx="2.5"/><rect x="66" y="79" width="12" height="7" rx="2.5"/>
+          </g>
+          <g stroke-linejoin="round">
+            <polygon points="45,44 60,52 45,60 30,52" fill="url(#t2t)"/>
+            <polygon points="30,52 45,60 45,78 30,70" fill="url(#t2l)"/>
+            <polygon points="60,52 45,60 45,78 60,70" fill="#16419A"/>
+          </g>
+          <text x="45" y="106" text-anchor="middle" fill="#E9EBF6" font-size="6.6" font-family="Golos Text, sans-serif" font-weight="600">Qubix — Affiliate</text>
+          <text x="45" y="115" text-anchor="middle" fill="#E9EBF6" font-size="6.6" font-family="Golos Text, sans-serif" font-weight="600">SuperApp</text>
+        </svg>
+        <div class="cap"><span class="tc">2 · 0:03–0:06</span><span class="nm">Раскрытие</span><span class="ds">Куб — центральная часть, от него разворачиваются панели и платформы.</span></div>
+      </div>
+
+      <div class="cell">
+        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 3: облёт вдоль корпуса, светящаяся полоса окон рубки">
+          <defs>
+            <radialGradient id="t3bg" cx="50%" cy="45%" r="65%"><stop offset="0" stop-color="#0C1E3D"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <linearGradient id="t3t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBD3FA"/><stop offset="1" stop-color="#84AEF3"/></linearGradient>
+            <linearGradient id="t3l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+            <filter id="t3b" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="1.8"/></filter>
+          </defs>
+          <rect width="90" height="160" fill="url(#t3bg)"/>
+          <g stroke-linejoin="round">
+            <polygon points="45,34 70,48 45,62 20,48" fill="url(#t3t)"/>
+            <polygon points="20,48 45,62 45,98 20,84" fill="url(#t3l)"/>
+            <polygon points="70,48 45,62 45,98 70,84" fill="#16419A"/>
+          </g>
+          <rect x="24" y="66" width="17" height="4" rx="2" fill="#E9EBF6" opacity=".95" filter="url(#t3b)"/>
+          <rect x="24" y="66" width="17" height="3" rx="1.5" fill="#FFFFFF"/>
+          <g fill="#84AEF3"><circle cx="50" cy="72" r="1.1"/><circle cx="56" cy="76" r="1.1"/><circle cx="62" cy="80" r="1.1"/></g>
+          <g fill="#0E1724" stroke="#84AEF3" stroke-width=".7">
+            <rect x="6" y="52" width="13" height="7" rx="2.5"/><rect x="71" y="56" width="13" height="7" rx="2.5"/>
+          </g>
+          <text x="45" y="124" text-anchor="middle" fill="#6E7687" font-size="5" font-family="JetBrains Mono, monospace">окна рубки</text>
+        </svg>
+        <div class="cap"><span class="tc">3 · 0:06–0:08</span><span class="nm">Облёт</span><span class="ds">Камера идёт вдоль корпуса. Полоса окон светится, огни по обшивке.</span></div>
+      </div>
+
+      <div class="cell">
+        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 4: сквозь прозрачное ядро видно свет и силуэты внутри">
+          <defs>
+            <radialGradient id="t4bg" cx="50%" cy="45%" r="65%"><stop offset="0" stop-color="#0C1E3D"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <linearGradient id="t4gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84AEF3" stop-opacity=".38"/><stop offset="1" stop-color="#16419A" stop-opacity=".55"/></linearGradient>
+            <filter id="t4b" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="2.2"/></filter>
+          </defs>
+          <rect width="90" height="160" fill="url(#t4bg)"/>
+          <ellipse cx="45" cy="70" rx="30" ry="30" fill="#84AEF3" opacity=".28" filter="url(#t4b)"/>
+          <g stroke-linejoin="round" stroke="#84AEF3" stroke-width="1.2">
+            <polygon points="45,36 68,49 45,62 22,49" fill="url(#t4gl)"/>
+            <polygon points="22,49 45,62 45,96 22,83" fill="url(#t4gl)"/>
+            <polygon points="68,49 45,62 45,96 68,83" fill="url(#t4gl)"/>
+          </g>
+          <g fill="#E9EBF6" opacity=".9">
+            <rect x="28" y="62" width="10" height="3" rx="1.5"/>
+            <rect x="28" y="70" width="7" height="3" rx="1.5"/>
+            <rect x="52" y="66" width="11" height="3" rx="1.5"/>
+            <rect x="52" y="74" width="8" height="3" rx="1.5"/>
+          </g>
+          <g fill="#BAC0CA" opacity=".8"><circle cx="34" cy="80" r="2"/><circle cx="57" cy="84" r="2"/></g>
+          <text x="45" y="124" text-anchor="middle" fill="#6E7687" font-size="5" font-family="JetBrains Mono, monospace">внутри горит свет</text>
+        </svg>
+        <div class="cap"><span class="tc">4 · 0:08–0:10</span><span class="nm">Прозрачное ядро</span><span class="ds">Сквозь стекло видно жизнь внутри — силуэтами, без деталей.</span></div>
+      </div>
+
+      <div class="cell">
+        <svg viewBox="0 0 90 160" role="img" aria-label="Кадр 5: финал, станция уходит вглубь, формула бренда и промокод">
+          <defs>
+            <radialGradient id="t5bg" cx="50%" cy="26%" r="62%"><stop offset="0" stop-color="#0C1B33"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <radialGradient id="t5g" cx="50%" cy="26%" r="24%"><stop offset="0" stop-color="#84AEF3" stop-opacity=".5"/><stop offset="1" stop-color="#84AEF3" stop-opacity="0"/></radialGradient>
+            <linearGradient id="t5t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBD3FA"/><stop offset="1" stop-color="#84AEF3"/></linearGradient>
+            <linearGradient id="t5l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+            <filter id="t5b" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2"/></filter>
+          </defs>
+          <rect width="90" height="160" fill="url(#t5bg)"/>
+          <rect width="90" height="160" fill="url(#t5g)"/>
+          <rect x="7" y="10" width="76" height="140" rx="4" fill="none" stroke="#5E6267" stroke-width=".5" stroke-dasharray="3 3"/>
+          <g fill="#E9EBF6"><circle cx="19" cy="28" r=".7" opacity=".8"/><circle cx="71" cy="22" r=".6" opacity=".7"/><circle cx="64" cy="46" r=".5" opacity=".6"/><circle cx="24" cy="50" r=".6" opacity=".7"/></g>
+          <ellipse cx="45" cy="56" rx="14" ry="5" fill="#84AEF3" opacity=".4" filter="url(#t5b)"/>
+          <g stroke-linejoin="round">
+            <polygon points="45,30 57,37 45,44 33,37" fill="url(#t5t)"/>
+            <polygon points="33,37 45,44 45,58 33,51" fill="url(#t5l)"/>
+            <polygon points="57,37 45,44 45,58 57,51" fill="#16419A"/>
+          </g>
+          <g fill="#0E1724" stroke="#84AEF3" stroke-width=".6"><rect x="22" y="40" width="9" height="5" rx="2"/><rect x="59" y="40" width="9" height="5" rx="2"/></g>
           <text x="45" y="82" text-anchor="middle" fill="#E9EBF6" font-size="6.4" font-family="Golos Text, sans-serif" font-weight="600">Qubix:</text>
           <text x="45" y="92" text-anchor="middle" fill="#E9EBF6" font-size="6.4" font-family="Golos Text, sans-serif" font-weight="600">Свой сервер —</text>
           <text x="45" y="101" text-anchor="middle" fill="#E9EBF6" font-size="6.4" font-family="Golos Text, sans-serif" font-weight="600">своя ракета! 🚀</text>
@@ -439,22 +342,22 @@
           <text x="45" y="119" text-anchor="middle" fill="#E9EBF6" font-size="6.4" font-family="Golos Text, sans-serif" font-weight="600">до офисного пакета.</text>
           <text x="45" y="133" text-anchor="middle" fill="#84AEF3" font-size="5.2" font-family="JetBrains Mono, monospace">промокод канала</text>
         </svg>
-        <div class="cap"><span class="tc">9 · 0:16–0:18</span><span class="nm">Финал</span><span class="ds">Единственный кадр, который пересобирается под каждый канал — меняется строка промокода.</span></div>
+        <div class="cap"><span class="tc">5 · 0:10–0:15</span><span class="nm">Финал</span><span class="ds">Единственный кадр, который пересобирается под каждый канал — меняется строка промокода.</span></div>
       </div>
 
     </div>
 
     <div class="cols" style="margin-top:26px;">
       <div class="stop">
-        <h3 style="margin-bottom:4px;">Звук</h3>
-        <div class="item"><span class="bar"></span><span>От плотного к пустому: нарастающий шелест и щелчки в первом кадре → один низкий удар на схлопывании → тишина → ровный гул под экранами с мягким акцентом на каждой смене → чистый тон на уход.</span></div>
-        <div class="item"><span class="bar"></span><span>В Telegram ролик стартует без звука. Всё, что нужно понять, несут титры; звук только усиливает.</span></div>
+        <h3 style="margin-bottom:4px;">Полная версия, 18 секунд — позже</h3>
+        <div class="item"><span class="bar"></span><span>Та же сцена. Между облётом и финалом камера входит через полосу окон рубки: три монитора с настоящими записями продукта — трекер, витрина PWA, документы команды, по две секунды на каждый.</span></div>
+        <div class="item"><span class="bar"></span><span>Титр на весь блок: «Весь офис арбитражной команды на вашем сервере». Заказывается, когда появятся записи интерфейса; цену второго монтажа фиксируем в договоре сразу.</span></div>
       </div>
       <div class="stop">
-        <h3 style="margin-bottom:4px;">Чего в этом ролике не делаем</h3>
-        <div class="item"><span class="bar"></span><span>Интерфейс не перекрашиваем и фальшивых экранов не рисуем: перекрашенный интерфейс перестаёт быть доказательством.</span></div>
-        <div class="item"><span class="bar"></span><span>В первом кадре окна нейтральные — без логотипов и узнаваемых чужих сервисов.</span></div>
-        <div class="item"><span class="bar"></span><span>Мир станции целиком здесь не строим: планет, дронов и портов в этом ролике нет. Только куб, панели и свет.</span></div>
+        <h3 style="margin-bottom:4px;">Чего в тизере не делаем</h3>
+        <div class="item"><span class="bar"></span><span>Мир целиком не строим: планет, дронов, портов и патрулей здесь нет — только ракета, станция и свет.</span></div>
+        <div class="item"><span class="bar"></span><span>Космос нейтральный, без исторических отсылок и без крипто-эстетики.</span></div>
+        <div class="item"><span class="bar"></span><span>Людей от бренда в кадре нет. Слова мира в титры не идут — там формула.</span></div>
       </div>
     </div>
 
@@ -465,19 +368,17 @@
         <table>
           <thead><tr><th>Слой</th><th>Как делаем</th></tr></thead>
           <tbody>
-            <tr><td><strong>Форма</strong></td><td class="dim">Скруглённые рёбра и мягкая фаска у куба, никаких острых углов. Обтекаемость — в радиусах и в том, как свет по ним скользит.</td></tr>
-            <tr><td><strong>Материал куба</strong></td><td class="dim">Матовое стекло с внутренним свечением: глубина видна, содержимое — нет. Хром и зеркало не берём, они читаются дёшево и ловят чужое окружение.</td></tr>
-            <tr><td><strong>Окна первого кадра</strong></td><td class="dim">Парящие стеклянные панели в пространстве на разной глубине, с мягкими тенями и параллаксом при движении камеры. Не вкладки браузера на плоскости.</td></tr>
-            <tr><td><strong>Экраны продукта</strong></td><td class="dim">Записи натянуты на слегка изогнутые панели, парящие перед камерой, с лёгким отражением по краю. Кривизна минимальная: интерфейс должен оставаться читаемым, это доказательство.</td></tr>
-            <tr><td><strong>Свет</strong></td><td class="dim">Мягкий студийный: ключевой сверху-сбоку, заполняющий холодный, контровой по кромкам. В финале ключевой уходит за куб — остаётся свечение по рёбрам.</td></tr>
-            <tr><td><strong>Камера</strong></td><td class="dim">Медленные проезды и лёгкий наезд, малая глубина резкости, боке на дальних точках. Ничего не мигает и не дёргается — тон «уверенный хозяин» живёт в скорости камеры.</td></tr>
-            <tr><td><strong>Движение</strong></td><td class="dim">Плавные входы и выходы, лёгкая инерция. Схлопывание в куб — морфом с деформацией панелей, а не подменой кадра.</td></tr>
-            <tr><td><strong>Цвет</strong></td><td class="dim">Только утверждённые значения: светлая часть на белом и E9EBF6, финал на 020404, акцент градиентом 1E5BD1→16419A и 84AEF3→16419A по кромкам и в свечении.</td></tr>
-            <tr><td><strong>Титры</strong></td><td class="dim">Набираются в пространстве вместе с кадром, а не накладываются плашкой сверху. Остаются плоскими и контрастными — читаемость важнее эффекта.</td></tr>
+            <tr><td><strong>Форма</strong></td><td class="dim">Скруглённые рёбра и мягкая фаска, острых углов нет. Обтекаемость живёт в радиусах и в том, как по ним скользит свет.</td></tr>
+            <tr><td><strong>Станция</strong></td><td class="dim">Куб — центральная часть, от него ответвления: панели, платформы, ангары. Бóльшая часть ядра прозрачная: сквозь стекло видна жизнь внутри.</td></tr>
+            <tr><td><strong>Материал</strong></td><td class="dim">Матовое стекло с внутренним свечением. Хром и зеркало не берём: читаются дёшево и ловят чужое окружение.</td></tr>
+            <tr><td><strong>Свет</strong></td><td class="dim">Мягкий студийный: ключевой сверху-сбоку, холодный заполняющий, контровой по кромкам. В финале ключевой уходит за станцию — остаётся свечение по рёбрам.</td></tr>
+            <tr><td><strong>Камера</strong></td><td class="dim">Медленные проезды и лёгкий наезд, малая глубина резкости, боке на дальних точках. Тон «уверенный хозяин» живёт в скорости камеры.</td></tr>
+            <tr><td><strong>Цвет</strong></td><td class="dim">Утверждённые значения и только они: космос на 020404, акцент градиентом 1E5BD1→16419A и 84AEF3→16419A — по кромкам, в соплах и в свечении. Линии 5E6267.</td></tr>
+            <tr><td><strong>Титры</strong></td><td class="dim">Набираются в пространстве вместе с кадром, сами остаются плоскими и контрастными: читаемость важнее эффекта.</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note" style="margin-top:14px;">Исходники проекта передаются заказчику: куб, материалы и свет из этого ролика дальше уходят в сборку мира и экономят её.</p>
+      <p class="note" style="margin-top:14px;">Исходники проекта передаются заказчику: станция, материалы и свет отсюда уходят дальше в сборку мира и экономят её.</p>
     </div>
   </section>
 
