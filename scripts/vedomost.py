@@ -37,7 +37,8 @@ MONTHS = {9: "Сентябрь", 10: "Октябрь", 11: "Ноябрь", 12: "
 # прошли три оплаты Кита на 2 400 USDT.
 TX = re.compile(r"tronscan\.org/(?:#/)?transaction/([0-9a-f]{64})")
 # «950$», «$950», «2 950$» — сумма рядом со словом об оплате.
-SUM = re.compile(r"(\d[\d  ]{0,9})\s?\$|\$\s?(\d[\d  ]{0,9})")
+SUM = re.compile(r"(\d[\d  ]{0,9})\s?\$|\$\s?(\d[\d  ]{0,9})"
+                 r"|(\d[\d  ]{0,9})\s?(?:usdt|USDT)")
 
 
 def yt(path, **params):
@@ -107,14 +108,20 @@ def find_payments(days):
         for i in issues or []:
             idr = i["idReadable"]
             text = issue_text(idr)
-            for line in text.split("\n"):
+            lines = text.split("\n")
+            for n, line in enumerate(lines):
                 for h in TX.findall(line):
                     if h in found:
                         continue
-                    m = SUM.search(line)
+                    # Сумма и ссылка часто стоят на РАЗНЫХ строках: Kit пишет
+                    # «оплачено 1350 usdt:» и ссылку следующей строкой. Поэтому
+                    # ищем сумму в окне вокруг строки с транзакцией, а не в ней.
+                    window = " ".join(lines[max(0, n - 2):n + 2])
+                    m = SUM.search(window)
                     amount = 0
                     if m:
-                        amount = int(re.sub(r"\D", "", m.group(1) or m.group(2)))
+                        amount = int(re.sub(r"\D", "",
+                                            m.group(1) or m.group(2) or m.group(3)))
                     found[h] = (idr, i.get("summary", ""), amount)
     return found
 
@@ -161,6 +168,7 @@ def main():
             money = f"${amount:,}".replace(",", " ") if amount else "сумма не распознана"
             print(f"  {idr:<13} {money:<22} tx {h[:8]}  {summ[:52]}")
         print("  → допишите строку в BUDGET.md: дата оплаты · сумма · оплачено · что · задача · tx")
+        print("  ⚠ сумма берётся из текста рядом со ссылкой — в плотном\n    комментарии может подхватиться соседнее число. Перед записью в\n    ведомость сверьте по самой ссылке.")
     elif not args.quiet:
         hdr("Оплаты и ведомость")
         print(f"  Расхождений нет: все транзакции за {args.days} дн. стоят в ведомости.")
