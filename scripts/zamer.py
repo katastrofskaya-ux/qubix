@@ -111,7 +111,8 @@ def live_only(full):
 
 
 LINE = re.compile(
-    r"^-\s*(\d{4}-\d{2}-\d{2})\s*·\s*(.+?)\s*·\s*(.+?)\s*·\s*([A-Z]+-\d+)\s*·\s*(\d+)\s*·\s*(.+?)\s*$"
+    r"^-\s*(\d{4}-\d{2}-\d{2})\s*·\s*(.+?)\s*·\s*(.+?)\s*·\s*([A-Z]+-\d+)\s*·\s*(\d+)\s*·\s*([^·]+?)"
+    r"(?:\s*·\s*(\d+|—))?\s*$"
 )
 
 
@@ -121,12 +122,13 @@ def read_vyhody():
         m = LINE.match(raw.strip())
         if not m:
             continue
-        date, channel, krug, task, spend, codes = m.groups()
+        date, channel, krug, task, spend, codes, views = m.groups()
         codes = [c.strip().upper() for c in codes.split(",") if c.strip() and c.strip() != "—"]
         if not codes:
             continue
         outs.append({"date": dt.date.fromisoformat(date), "channel": channel,
-                     "krug": krug, "task": task, "spend": int(spend), "codes": codes})
+                     "krug": krug, "task": task, "spend": int(spend), "codes": codes,
+                     "views": int(views) if views and views.isdigit() else None})
     return outs
 
 
@@ -200,13 +202,15 @@ def main():
     rows.sort(key=lambda r: (r[1]["рег"] == 0, r[0]["spend"] // r[1]["рег"] if r[1]["рег"] else 10**9))
 
     print("\n## Замеры по выходам\n")
-    print("| Канал | Круг | Задача | Оплачено | Выход | Рег | Лиц | Сервер | Покупка | В кассе | $/рег | $/лиц |")
-    print("|---|---|---|---|---|---|---|---|---|---|---|---|")
+    print("| Канал | Круг | Задача | Оплачено | Выход | Просмотры | Рег | Лиц | Сервер | Покупка | В кассе | $/рег | $/1000 просм |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for out, m in rows:
+        v = out["views"]
+        cpm = f"${round(out['spend'] / v * 1000)}" if v else "—"
         print(f"| {out['channel']} | {out['krug']} | {out['task']} | ${out['spend']} | "
-              f"{out['date'].strftime('%d.%m')} | {m['рег']} | {m['лиц']} | {m['сервер']} | "
-              f"{m['покупка']} | {m['касса']} | {price(out['spend'], m['рег'])} | "
-              f"{price(out['spend'], m['лиц'])} |")
+              f"{out['date'].strftime('%d.%m')} | {v if v else '—'} | "
+              f"{m['рег']} | {m['лиц']} | {m['сервер']} | "
+              f"{m['покупка']} | {m['касса']} | {price(out['spend'], m['рег'])} | {cpm} |")
 
     print(f"\nЛестница из MARKETING-76: ${LESTNICA['рег']} за регистрацию, "
           f"${LESTNICA['лиц']} за лицензию, ${LESTNICA['покупка']} за покупку.")
