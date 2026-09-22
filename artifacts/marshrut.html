@@ -1,0 +1,316 @@
+<title>Маршрут до 26 октября</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root{
+    --ground:#EDF0F2; --paper:#FFFFFF; --ink:#16222E; --muted:#5C6B78;
+    --line:#D3DAE0; --accent:#0E6E73; --accent-soft:#DCEBEB;
+    --crit:#A32B21; --crit-soft:#F6E2DF;
+    --warn:#8A5A00; --warn-soft:#F7EDD6;
+    --ok:#2C6A45; --ok-soft:#DFEDE4;
+    --wait:#4A5568; --wait-soft:#E3E7EB;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#12181D; --paper:#19212A; --ink:#E6ECF0; --muted:#93A1AD;
+      --line:#2A3540; --accent:#4FB3B8; --accent-soft:#12333A;
+      --crit:#E2705F; --crit-soft:#3A201C;
+      --warn:#D9A441; --warn-soft:#332713;
+      --ok:#63B183; --ok-soft:#16301F;
+      --wait:#9AA7B4; --wait-soft:#222B34;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#12181D; --paper:#19212A; --ink:#E6ECF0; --muted:#93A1AD;
+    --line:#2A3540; --accent:#4FB3B8; --accent-soft:#12333A;
+    --crit:#E2705F; --crit-soft:#3A201C;
+    --warn:#D9A441; --warn-soft:#332713;
+    --ok:#63B183; --ok-soft:#16301F;
+    --wait:#9AA7B4; --wait-soft:#222B34;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink); margin:0;
+    font:400 16px/1.55 "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    padding-inline:16px; padding-block:28px 64px;
+  }
+  .wrap{max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:32px}
+
+  header h1{
+    font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-weight:800; font-size:clamp(30px,6vw,44px); line-height:1.05;
+    margin:0 0 6px; letter-spacing:-.02em; text-wrap:balance;
+  }
+  .sub{color:var(--muted); font-size:15px; margin:0}
+  .rule{height:3px; background:var(--accent); width:56px; border-radius:2px; margin:14px 0 0}
+
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px}
+  .tile{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .tile .k{
+    font-family:"Bricolage Grotesque",sans-serif; font-weight:800;
+    font-size:30px; line-height:1; font-variant-numeric:tabular-nums;
+  }
+  .tile .lbl{
+    font-family:"Bricolage Grotesque",sans-serif; text-transform:uppercase;
+    letter-spacing:.09em; font-size:10.5px; font-weight:700; color:var(--muted); margin-top:7px;
+  }
+  .tile.hot .k{color:var(--crit)}
+  .tile.hot{border-color:var(--crit); background:var(--crit-soft)}
+
+  .lvl{display:flex; flex-direction:column; gap:12px}
+  .lvlhead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+  .floor{
+    font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:13px;
+    color:var(--paper); background:var(--ink); border-radius:5px;
+    padding:3px 9px; letter-spacing:.04em; flex:none;
+  }
+  .lvlhead h2{
+    font-family:"Bricolage Grotesque",sans-serif; font-weight:700;
+    font-size:clamp(19px,3.4vw,24px); margin:0; letter-spacing:-.01em;
+  }
+  .lvlhead .why{color:var(--muted); font-size:14px; width:100%; margin:0}
+
+  .rows{display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:10px; overflow:hidden}
+  .row{background:var(--paper); display:grid; grid-template-columns:auto 1fr; gap:12px; padding:13px 15px; align-items:start}
+  .row.done .txt{opacity:.45; text-decoration:line-through; text-decoration-thickness:1px}
+  .row input[type=checkbox]{
+    appearance:none; width:19px; height:19px; margin:2px 0 0; flex:none;
+    border:1.5px solid var(--muted); border-radius:5px; background:var(--paper); cursor:pointer;
+  }
+  .row input[type=checkbox]:checked{background:var(--accent); border-color:var(--accent)}
+  .row input[type=checkbox]:checked::after{
+    content:""; display:block; width:5px; height:10px; margin:1.5px auto 0;
+    border:solid var(--paper); border-width:0 2px 2px 0; transform:rotate(43deg);
+  }
+  .row input[type=checkbox]:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  .txt{min-width:0}
+  .title{font-weight:600; line-height:1.35}
+  .meta{color:var(--muted); font-size:14px; margin-top:3px}
+  .meta a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft)}
+  .meta a:hover{border-bottom-color:var(--accent)}
+
+  .chip{
+    display:inline-block; font-family:"Bricolage Grotesque",sans-serif; font-weight:700;
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.07em;
+    padding:2px 7px; border-radius:4px; margin-right:7px; vertical-align:1px; white-space:nowrap;
+  }
+  .c-crit{background:var(--crit-soft); color:var(--crit)}
+  .c-warn{background:var(--warn-soft); color:var(--warn)}
+  .c-ok{background:var(--ok-soft); color:var(--ok)}
+  .c-wait{background:var(--wait-soft); color:var(--wait)}
+
+  .note{
+    background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--warn);
+    border-radius:8px; padding:13px 15px; font-size:15px;
+  }
+  .note b{font-weight:600}
+
+  table{width:100%; border-collapse:collapse; font-size:14.5px}
+  .scroll{overflow-x:auto; background:var(--paper); border:1px solid var(--line); border-radius:10px}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line); white-space:nowrap}
+  th{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:11px;
+     text-transform:uppercase; letter-spacing:.07em; color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums}
+
+  footer{color:var(--muted); font-size:13.5px; border-top:1px solid var(--line); padding-top:16px}
+  #sync{font-size:13px; color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Маршрут до 26 октября</h1>
+    <p class="sub">Срез 22 сентября 2026. Сверху — то, что решает исход; ниже — то, что можно двигать. Галочки сохраняются.</p>
+    <div class="rule"></div>
+  </header>
+
+  <section class="tiles">
+    <div class="tile hot"><div class="k">4</div><div class="lbl">дня до вылета в Лиссабон</div></div>
+    <div class="tile"><div class="k">34</div><div class="lbl">дня до конца срока</div></div>
+    <div class="tile"><div class="k">$6 852</div><div class="lbl">зависло в незакрытых кассах</div></div>
+    <div class="tile"><div class="k">43</div><div class="lbl">клиента ждут касания</div></div>
+  </section>
+
+  <section class="lvl">
+    <div class="lvlhead">
+      <span class="floor">Этаж 1</span>
+      <h2>Решает исход срока</h2>
+      <p class="why">Три вещи, от которых зависит, чем закончится 26 октября. Всё остальное на странице — их обслуживание.</p>
+    </div>
+    <div class="rows" id="lvl1"></div>
+  </section>
+
+  <section class="lvl">
+    <div class="lvlhead">
+      <span class="floor">Этаж 2</span>
+      <h2>Горит по дате</h2>
+      <p class="why">У каждой строки своя дата, и она ближе, чем кажется. Подготовка Лиссабона — по списку из самой задачи поездки, он там уже расписан.</p>
+    </div>
+    <div class="rows" id="lvl2"></div>
+  </section>
+
+  <section class="lvl">
+    <div class="lvlhead">
+      <span class="floor">Этаж 3</span>
+      <h2>Касания клиентам — 43 человека</h2>
+      <p class="why">Живых клиентов всего 75. То есть касания ждут больше половины базы. Тексты и ссылки на карточки готовит <code>scripts/touch.py --letters</code>.</p>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Сегмент</th><th class="num">Человек</th><th>Почему сейчас</th></tr></thead>
+        <tbody>
+          <tr><td>Истекают в 10 дней</td><td class="num">11</td><td>После даты это уже возврат, а не продление</td></tr>
+          <tr><td>Истекли за 14 дней</td><td class="num">6</td><td>Продукт ставили — значит доходили до сути</td></tr>
+          <tr><td>Застряли без установки</td><td class="num">26</td><td>Подарочный месяц лежит и ждёт активации</td></tr>
+          <tr><td>Из них без Telegram</td><td class="num">4</td><td>Только почта: #61, #64, #90, #222</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rows" id="lvl3"></div>
+  </section>
+
+  <section class="lvl">
+    <div class="lvlhead">
+      <span class="floor">Этаж 4</span>
+      <h2>Ждёт чужого ответа</h2>
+      <p class="why">Тут работать нечего — только напомнить. Но два из трёх держат целые направления.</p>
+    </div>
+    <div class="rows" id="lvl4"></div>
+  </section>
+
+  <section class="lvl">
+    <div class="lvlhead">
+      <span class="floor">Этаж 5</span>
+      <h2>Готово, но не отправлено</h2>
+      <p class="why">Черновики, у которых в трекере следов нет. Про Telegram и почту вывод не делается — их не видно.</p>
+    </div>
+    <div class="rows" id="lvl5"></div>
+  </section>
+
+  <section class="note">
+    <b>Снято с «горит».</b> В плане висит «спросить владельца причину отказа по посту Игоря» — просрочено на 20 дней. Причина уже расшифрована: admin разобрал её по шести пунктам 2 сентября, третьим комментарием MARKETING-85. Строку в плане можно закрывать.
+  </section>
+
+  <footer>
+    <p>Источники: задачи Ю-трека, <code>admin.qubix.pro</code> (срез 22.09), ведомости июля–сентября. Промокоды сверены по базе: 76 кодов, под Лиссабон нет ни одного.</p>
+    <p id="sync">Галочки: загружаю…</p>
+  </footer>
+</div>
+
+<script>
+const YT = "https://team.qubix.capital/issue/";
+const DATA = {
+  lvl1: [
+    {id:"l1-lisbon", chip:["c-crit","26.09"], t:"Лиссабон — первое живое представительство Qubix",
+     m:'Цель №1 утверждена владельцем: <b>не менее трёх договорённостей с сетями и площадками</b>, каждая фиксируется задачей. Прямыми регистрациями поездка не окупается ни в одном из трёх сценариев — это записано в самой задаче. <a href="'+YT+'MARKETING-98">MARKETING-98</a>'},
+    {id:"l1-kassa", chip:["c-crit","деньги"], t:"Касса не закрывается — ближайшие деньги лежат тут",
+     m:'21 живой инстанс против 4 покупок за всё время, и шесть попыток оформления на $6 852: пять открыто, одна протухла. Один человек заходил дважды, второй раз на $2 999. Почему не доходит — из полей админки не видно.'},
+    {id:"l1-meshok", chip:["c-warn","держит три канала"], t:"Мешок тем стоит — и с ним канал, Будда и Хоменюк",
+     m:'Разделение пула на три группы предложено 15.09 и решения по нему нет. Пока групп нет, каждая тема обсуждается заново, и тексты уходят владельцу поштучно — против правила «только пулом». <a href="'+YT+'CONTENT-11">CONTENT-11</a>'}
+  ],
+  lvl2: [
+    {id:"l2-code", chip:["c-crit","до 26.09"], t:"Завести промокод поездки",
+     m:'В базе 76 кодов, под Лиссабон нет ни одного. Имя предложено в самой задаче: <b>LISBON</b>. Без него поездка не замеряется — ровно как Broconf.'},
+    {id:"l2-link", chip:["c-crit","до 26.09"], t:"Ссылка с метками и QR на телефон",
+     m:'<code>qubix.pro/?r=LISBON&utm_source=sbc&utm_medium=event&utm_campaign=lisbon</code> — метки теперь переживают редирект, проверено 21.09. QR с неё на телефон и на печать.'},
+    {id:"l2-voronka", chip:["c-crit","до 26.09"], t:"Текстовая воронка сопровождения в личке",
+     m:'Имя и должность, компания и сайт, чем занимаемся, бонус с реф-ссылкой. Это вывод №4 по Broconf её же словами: «не было чёткой текстовой воронки с сопровождением в личке».'},
+    {id:"l2-anons", chip:["c-warn","до 26.09"], t:"Анонс поездки: пост в канал и сторис",
+     m:'Медийка расписана в задаче: пост об участии и анонс в Instagram до 26.09, сторис с площадки 29.09–01.10, содержательный пост из зала 30.09.'},
+    {id:"l2-189", chip:["c-crit","3 дня"], t:"Клиент #189 po.trade — подписка истекает",
+     m:'Код POCKET, скидка 50%, Telegram есть. Разговор нужен до даты: после неё это уже возврат, а не продление.'},
+    {id:"l2-88", chip:["c-warn","5 дней"], t:"Клиент #88 — подписка истекает",
+     m:'Telegram есть, кода нет. Следом идут #212 и #209 — по 8 дней.'},
+    {id:"l2-studio", chip:["c-warn","висит с 15.09"], t:"€200 на студию Хоменюку",
+     m:'Материал обзора отснят заранее, под новую формулу нужна пересъёмка. Запрос отправлен 15.09, ответа нет. Без этих денег готовый ролик мёртвый. <a href="'+YT+'MARKETING-83">MARKETING-83</a>'},
+    {id:"l2-budda", chip:["c-warn","мяч у нас"], t:"Две правки в текст Будды — и на аппрув",
+     m:'Заменить «правки и автоправка ставятся на паузу» на «правила и автоматика останавливаются», и запятую в «30 дней бесплатно, со всеми возможностями». Это последнее слово перед аппрувом владельца. <a href="'+YT+'MARKETING-85">MARKETING-85</a>'}
+  ],
+  lvl3: [
+    {id:"l3-exp", chip:["c-crit","11 человек"], t:"Написать тем, у кого подписка истекает в 10 дней",
+     m:'Начать с #189 (3 дня) и #88 (5 дней). Касание заканчивается вопросом, продление клиент делает сам в кабинете.'},
+    {id:"l3-dead", chip:["c-warn","6 человек"], t:"Вернуть истёкших за две недели",
+     m:'Самый тёплый возврат: продукт ставили, значит доходили до сути.'},
+    {id:"l3-stuck", chip:["c-wait","26 человек"], t:"Расшевелить застрявших без установки",
+     m:'Подарочный месяц лежит на аккаунте и ждёт активации. Четверо без Telegram — этим на почту.'}
+  ],
+  lvl4: [
+    {id:"l4-znam", chip:["c-wait","с 21.09"], t:"Владелец: что считать ценой регистрации",
+     m:'Два варианта — цена закупки $28 013 или полная цена направления $40 611. Пока ответа нет, короткий замер и реестр не отправляются: иначе переписывать под другую методику. <a href="'+YT+'BRAND-12">BRAND-12</a>'},
+    {id:"l4-groups", chip:["c-wait","с 15.09"], t:"Владелец: три группы постов",
+     m:'Держит весь мешок тем, то есть канал и обоих блогеров. Самое дешёвое напоминание с самым большим эффектом. <a href="'+YT+'CONTENT-11">CONTENT-11</a>'},
+    {id:"l4-demo", chip:["c-wait","с 17.09"], t:"Жене — доступ к живому Qubix вместо демо",
+     m:'Демо-режим кончился, без реального доступа она не может готовить материалы канала. <a href="'+YT+'CONTENT-41">CONTENT-41</a>'}
+  ],
+  lvl5: [
+    {id:"l5-zamer", chip:["c-ok","готово"], t:"Реестр замеров и короткий замер в BRAND-12",
+     m:'Оба текста собраны и пересчитаны. Отправляются после ответа про знаменатель — порядок: сначала реестр получает номер, потом короткий коммент со ссылкой на него.'},
+    {id:"l5-site", chip:["c-warn","задачи нет"], t:"Сайт стоит на августовской редакции",
+     m:'Решение владельца от 10.09 до сайта не доехало: в хиро «от залива до финансов», «media-buying» дважды, новой формулы нет вовсе. Задачи на перенос не существует — черновик такой задачи готов.'},
+    {id:"l5-drafts", chip:["c-wait","около тридцати"], t:"Остальные черновики без следов в трекере",
+     m:'Сценарии роликов, шаблоны рубрик канала, статьи сентября, задачи по базе и рассылке. Полный список даёт <code>scripts/svodka.py --drafts</code> — там же видно, что ушло целиком, что частью.'}
+  ]
+};
+
+function render(){
+  for(const [lvl, items] of Object.entries(DATA)){
+    const host = document.getElementById(lvl);
+    host.innerHTML = "";
+    for(const it of items){
+      const row = document.createElement("div");
+      row.className = "row"; row.dataset.key = it.id;
+      const cb = document.createElement("input");
+      cb.type = "checkbox"; cb.id = it.id;
+      cb.setAttribute("aria-label", it.t);
+      const txt = document.createElement("div");
+      txt.className = "txt";
+      const ttl = document.createElement("div");
+      ttl.className = "title";
+      if(it.chip){
+        const c = document.createElement("span");
+        c.className = "chip " + it.chip[0];
+        c.textContent = it.chip[1];
+        ttl.appendChild(c);
+      }
+      ttl.appendChild(document.createTextNode(it.t));
+      const meta = document.createElement("div");
+      meta.className = "meta"; meta.innerHTML = it.m;
+      txt.append(ttl, meta);
+      row.append(cb, txt);
+      host.appendChild(row);
+    }
+  }
+}
+render();
+
+(async () => {
+  const note = document.getElementById("sync");
+  const db = await claude.use("db");
+  if(!db){ note.textContent = "Галочки не сохраняются в этом виде страницы."; return; }
+  const col = db.collection("checks");
+  const boxes = [...document.querySelectorAll('.row input[type=checkbox]')];
+  try{
+    const snap = await col.get();
+    const done = new Set();
+    for(const d of (snap.docs ?? snap ?? [])){
+      const data = d.data ? d.data() : d;
+      if(data && data.done) done.add(d.id ?? data.id);
+    }
+    for(const b of boxes){
+      b.checked = done.has(b.id);
+      b.closest(".row").classList.toggle("done", b.checked);
+    }
+    note.textContent = "Галочки сохраняются и переживают обновление страницы.";
+  }catch(e){
+    note.textContent = "Галочки пока только на этом экране.";
+  }
+  for(const b of boxes){
+    b.addEventListener("change", async () => {
+      b.closest(".row").classList.toggle("done", b.checked);
+      try{ await db.doc("checks/" + b.id).set({done: b.checked, at: Date.now()}); }
+      catch(e){ note.textContent = "Отметку сохранить не удалось — попробуйте ещё раз."; }
+    });
+  }
+})();
+</script>

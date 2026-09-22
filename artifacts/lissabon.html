@@ -1,0 +1,398 @@
+<title>Лиссабон: с кем и о чём</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root{
+    --ground:#EDF0F2; --paper:#FFFFFF; --ink:#16222E; --muted:#5C6B78;
+    --line:#D3DAE0; --accent:#0E6E73; --accent-soft:#DCEBEB;
+    --crit:#A32B21; --crit-soft:#F6E2DF;
+    --warn:#8A5A00; --warn-soft:#F7EDD6;
+    --ok:#2C6A45; --ok-soft:#DFEDE4;
+    --a:#0E6E73; --b:#2C6A45; --c:#8A5A00; --d:#5C6B78;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#12181D; --paper:#19212A; --ink:#E6ECF0; --muted:#93A1AD;
+      --line:#2A3540; --accent:#4FB3B8; --accent-soft:#12333A;
+      --crit:#E2705F; --crit-soft:#3A201C;
+      --warn:#D9A441; --warn-soft:#332713;
+      --ok:#63B183; --ok-soft:#16301F;
+      --a:#4FB3B8; --b:#63B183; --c:#D9A441; --d:#93A1AD;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#12181D; --paper:#19212A; --ink:#E6ECF0; --muted:#93A1AD;
+    --line:#2A3540; --accent:#4FB3B8; --accent-soft:#12333A;
+    --crit:#E2705F; --crit-soft:#3A201C;
+    --warn:#D9A441; --warn-soft:#332713;
+    --ok:#63B183; --ok-soft:#16301F;
+    --a:#4FB3B8; --b:#63B183; --c:#D9A441; --d:#93A1AD;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink); margin:0;
+    font:400 16px/1.55 "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    padding-inline:16px; padding-block:28px 64px;
+  }
+  .wrap{max-width:920px; margin:0 auto; display:flex; flex-direction:column; gap:34px}
+  h1{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; letter-spacing:-.02em;
+     font-size:clamp(30px,6vw,44px); line-height:1.05; margin:0 0 6px; text-wrap:balance}
+  h2{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; letter-spacing:-.01em;
+     font-size:clamp(20px,3.6vw,26px); margin:0}
+  h3{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:17px; margin:0}
+  .sub{color:var(--muted); font-size:15px; margin:0}
+  .rule{height:3px; background:var(--accent); width:56px; border-radius:2px; margin-top:14px}
+  section{display:flex; flex-direction:column; gap:14px}
+  .why{color:var(--muted); font-size:14.5px; margin:0}
+  a{color:var(--accent)}
+
+  .codebox{display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center;
+    background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:16px}
+  #qr{width:132px; height:132px; background:#fff; border-radius:8px; padding:8px; display:grid; place-items:center}
+  #qr img,#qr canvas{display:block; max-width:100%; height:auto}
+  .codeval{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:clamp(24px,4.6vw,32px)}
+  .link{font-size:13.5px; color:var(--muted); word-break:break-all; margin-top:6px; line-height:1.4}
+
+  .warnbox{background:var(--warn-soft); border:1px solid var(--warn); border-radius:12px; padding:15px 17px}
+  .warnbox h3{color:var(--warn); margin-bottom:8px}
+  .warnbox p{margin:0 0 8px} .warnbox p:last-child{margin-bottom:0}
+
+  .tier{background:var(--paper); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+  .tierhead{display:flex; gap:12px; align-items:baseline; padding:14px 17px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+  .badge{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:15px;
+    width:28px; height:28px; border-radius:7px; display:grid; place-items:center; color:#fff; flex:none}
+  .t-a .badge{background:var(--a)} .t-b .badge{background:var(--b)}
+  .t-c .badge{background:var(--c)} .t-d .badge{background:var(--d)}
+  .tierhead .win{width:100%; color:var(--muted); font-size:14px; margin:0}
+  .tierbody{padding:14px 17px; display:flex; flex-direction:column; gap:11px}
+  .tierbody p{margin:0}
+
+  .scroll{overflow-x:auto; background:var(--paper); border:1px solid var(--line); border-radius:12px}
+  table{width:100%; border-collapse:collapse; font-size:14.5px}
+  th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:11px;
+     text-transform:uppercase; letter-spacing:.07em; color:var(--muted); white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td.d{white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:600}
+  td.who{white-space:nowrap}
+
+  .pill{display:inline-block; font-family:"Bricolage Grotesque",sans-serif; font-weight:700;
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; padding:2px 7px;
+    border-radius:4px; white-space:nowrap}
+  .p-open{background:var(--ok-soft); color:var(--ok)}
+  .p-inv{background:var(--crit-soft); color:var(--crit)}
+  .p-vip{background:var(--accent-soft); color:var(--accent)}
+  .p-tick{background:var(--warn-soft); color:var(--warn)}
+  .p-own{background:var(--ok); color:#fff}
+  .p-try{background:var(--ground); color:var(--muted); border:1px solid var(--line)}
+
+  .msg{background:var(--paper); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+  .msghead{display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:12px 16px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+  .msghead .for{color:var(--muted); font-size:13.5px}
+  .msg pre{margin:0; padding:15px 16px; white-space:pre-wrap; word-wrap:break-word;
+    font:400 15px/1.6 "Source Sans 3",sans-serif; background:transparent}
+  button.copy{font:600 13px/1 "Source Sans 3",sans-serif; color:var(--paper); background:var(--accent);
+    border:none; border-radius:7px; padding:8px 14px; cursor:pointer; flex:none}
+  button.copy:hover{filter:brightness(1.08)}
+  button.copy:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+  button.copy.ok{background:var(--ok)}
+
+  ol,ul{margin:0; padding-left:22px; display:flex; flex-direction:column; gap:7px}
+  li::marker{color:var(--muted)}
+  code{font-size:.92em; background:var(--accent-soft); color:var(--accent); padding:1px 5px; border-radius:4px}
+  footer{color:var(--muted); font-size:13.5px; border-top:1px solid var(--line); padding-top:16px}
+  footer p{margin:0 0 7px}
+  @media (max-width:520px){ .codebox{grid-template-columns:1fr; justify-items:start} }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Лиссабон: с кем и о чём</h1>
+    <p class="sub">SBC Summit, 29.09–01.10, поездка 26.09–02.10. Цель №1 утверждена владельцем — не менее трёх договорённостей с сетями и площадками.</p>
+    <div class="rule"></div>
+  </header>
+
+  <section>
+    <div class="codebox">
+      <div id="qr" aria-label="QR-код на ссылку с промокодом"></div>
+      <div>
+        <div class="codeval">SBC_LISBON</div>
+        <div class="link" id="urlline"></div>
+      </div>
+    </div>
+
+    <div class="warnbox">
+      <h3>Про код — проверено по живым карточкам, не по полям</h3>
+      <p><b>Подарочный месяц приходит и без кода.</b> В базе 20 клиентов с пустым реф-кодом, у которых всё равно стоит оплата $0 методом trial. Месяц даёт привязка Telegram, а не промокод.</p>
+      <p><b>Скидка в коде на подарочный месяц не влияет.</b> Коды с 99% и коды с 50% дают одинаковую запись — месяц и так бесплатный.</p>
+      <p><b>Скидка по коду ни разу не отработала на живых деньгах.</b> Реальных оплат за всё время четыре, ни одна не прошла со скидкой по каналу. Поэтому тексты ниже обещают только месяц — это верно при любом ответе Ника.</p>
+      <p>Имя: владелец подтвердил 15.09 вариант <code>LISBON</code>, заведён <code>SBC_LISBON</code>. Стоит отписать одной строкой в задаче поездки.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Откуда эти данные</h2>
+    <p class="why">Чтобы не было вопросов к источнику: <b>кто едет — из их собственных анонсов в Telegram</b>, снятых по базе разведки за 07–22.09.2026. Это не официальный список участников: компания могла ехать и промолчать, а могла передумать после анонса. Официальный перечень экспонентов — у самого SBC.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Что</th><th>Где</th><th>Что с этим делать</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>433 компании: стенд, описание, контакты</b></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1WBS-9YplNbLJpBOULEN4tBsJAOJdWXCDt6SNPH9MXnA/edit">Таблица iGaming CMO</a></td>
+            <td>Главный источник контактов. Отобрать сети и партнёрки, написать до вылета</td>
+          </tr>
+          <tr>
+            <td><b>Таблица нетворкинга — куда можно добавиться</b></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1NUTWp7xYyc9AqLIAZBOBKd1xL9ogXBs6tbOKE49VYfs/edit">Смотреть</a> · <a href="https://forms.gle/6C6DAgKwahACRSs4A">форма, чтобы попасть в неё</a></td>
+            <td>Заполняется один раз и проходит модерацию — подать заявку сегодня</td>
+          </tr>
+          <tr>
+            <td><b>Таблица из чата</b></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1oW7E0L1gVYQnbBcP-owpRh-vdUeHbkvAgSE2HqgzAWs/edit">Ваша ссылка</a></td>
+            <td>Свести с первой, чтобы не писать одним и тем же дважды</td>
+          </tr>
+          <tr>
+            <td>Официальный перечень экспонентов</td>
+            <td><a href="https://sbcevents.com/sbc-summit/exhibitors/">sbcevents.com</a></td>
+            <td>Сверка: кто точно стоит стендом</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Шкала приоритетов</h2>
+    <p class="why">Сверху то, что даёт канал сбыта, а не одного клиента. У каждой ступени свой признак успеха: по нему и считаем поездку.</p>
+
+    <div class="tier t-a">
+      <div class="tierhead"><span class="badge">A</span><h3>Сети и партнёрки — выход на чужую базу вебмастеров</h3>
+        <p class="win">Успех: договорённость о созвоне после конференции, зафиксированная задачей. Три такие — и поездка выполнена.</p></div>
+      <div class="tierbody">
+        <p>У каждой сети есть база аффилиатов, которым она уже что-то даёт: офферы, компенсации, бонусы. Qubix встаёт туда же — то, что сеть даёт своим топам. Это не один клиент, а канал.</p>
+        <p><b>Где искать:</b> стендами стоят Stars Partners (F121), SpinBetter Partners (F133), Linebet (F336), N1 Partners (F431), DELULU (A225), плюс StarCrown, R2D Partners, YesPlay. Контакты по каждой — в таблице iGaming CMO выше.</p>
+        <p><b>Чего не делать:</b> называть условия, доли и проценты. Полномочия консультанта не включают обязательств перед партнёрами — на площадке фиксируем интерес и дату созвона, условия обсуждаются письменно после.</p>
+      </div>
+    </div>
+
+    <div class="tier t-b">
+      <div class="tierhead"><span class="badge">B</span><h3>Площадки, с которыми уже идут деньги</h3>
+        <p class="win">Успех: переход от разовых слотов к пакету или обмену — и живой человек вместо переписки с менеджером.</p></div>
+      <div class="tierbody">
+        <p>Самый короткий разговор на всей конференции: не «кто вы такие», а «давайте по-другому». Все они едут — по их же постам за последнюю неделю. Контакты, с которыми мы уже вели закупку:</p>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Площадка</th><th class="who">Контакт</th><th>Что с ними было</th></tr></thead>
+          <tbody>
+            <tr><td>iGaming News</td><td class="who">@anton_drozd</td><td>Два посева, $1 800. Привратник рынка</td></tr>
+            <tr><td>FB killa</td><td class="who">@ads_fbkilla</td><td>Посев $490 и листинг $1 370</td></tr>
+            <tr><td>.Aff Inside</td><td class="who">@to4ka_PR</td><td>Два посева, $2 444. Единственная оплата за всё время пришла отсюда</td></tr>
+            <tr><td>CPAGRAM</td><td class="who">@akhloponin</td><td>Два посева, $1 080</td></tr>
+            <tr><td>adhunt</td><td class="who">@sisuffa · @trvsxo</td><td>Два посева, $1 000. Единственный канал, подешевевший со второго круга</td></tr>
+            <tr><td>Партнеркин</td><td class="who">контакт в задаче CONTENT-35</td><td>Листинг $299</td></tr>
+            <tr><td>Traffnews</td><td class="who">контакт в задаче CONTENT-32</td><td>Листинг $300 одобрен, деньги не ушли</td></tr>
+            <tr><td>cpa.rip</td><td class="who">—</td><td>Tier 1 по медиа-карте, код CPARIP заведён</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tierbody">
+        <p>И просьба ко всем: поставить нас в список участников саммита. Им это одна строка, нам — видимость.</p>
+      </div>
+    </div>
+
+    <div class="tier t-c">
+      <div class="tierhead"><span class="badge">C</span><h3>Операторы и бренды со своими командами</h3>
+        <p class="win">Успех: контакт технического или операционного руководителя и согласие на демонстрацию.</p></div>
+      <div class="tierbody">
+        <p>У оператора внутри своя команда закупки, и ей нужен тот же стек. Цикл длинный, решение коллегиальное — поэтому цель скромнее: выйти на того, кто отвечает за инструменты, а не за офферы.</p>
+      </div>
+    </div>
+
+    <div class="tier t-d">
+      <div class="tierhead"><span class="badge">D</span><h3>Байеры и тимлиды — знакомство и регистрация в моменте</h3>
+        <p class="win">Успех: регистрация по коду прямо у стенда, а не обещание зарегистрироваться потом.</p></div>
+      <div class="tierbody">
+        <p>Наша прямая аудитория, но на SBC она в меньшинстве: саммит собирает операторов и партнёрки. Разговор короткий, телефон с QR в руке.</p>
+        <p><b>Урок Broconf:</b> контакты собрали, регистрации не случились, потому что дожимали потом.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Сайд-ивенты — куда идём</h2>
+    <p class="why">Отобрано вами из трёх подборок каналов ниши. Время и место перепроверяйте по ссылке: анонсы правят. Метка доступа — то, что написано в самом анонсе.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Дата</th><th>Событие</th><th>Где</th><th>Доступ</th></tr></thead>
+        <tbody id="events"></tbody>
+      </table>
+    </div>
+    <div class="warnbox">
+      <h3>Про проходки</h3>
+      <p><b>Два уже ваши.</b> Affiliate Morning Club от Kitline и Fastly — билет на руках, два утра подряд с девяти до полудня. Opening Party 29.09 — по VIP Pass на Affiliate Leaders Summit, это прямо написано в её анонсе.</p>
+      <p><b>Открытые — подавайтесь сегодня.</b> Регистрация по ссылке, чаще через luma, занимает минуту. У части из них места кончаются раньше даты.</p>
+      <p><b>Стоит уточнить одно:</b> VIP Affiliate Leaders Dinner 29.09 идёт по линии Affiliate Leaders Summit — возможно, он тоже входит в ваш билет. Вопрос организаторам на одну строку.</p>
+      <p><b>Убрано по вашей разметке:</b> Leaders Summit, Big Betty Night (отказ), Affiliate Leaders Awards, Rooftop Party, Finnovation Night, оба VIP-ужина SBC, Payment Expert Summit и Dinner, DELULU, Prediction Markets Forum, P.S. Lisbon, SBC Awards. Остались только те, куда вы идёте или куда пробуете попасть.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Тексты для Telegram</h2>
+    <p class="why">Переписаны по своду копирайта: боль внутри вопроса, ответ вторым; про нас и про состояние после, а не про чужие сервисы; тарифную ступень не называем; в перечне только то, что уже открыто клиентам. Каждый заканчивается вопросом на одну фразу.</p>
+    <div id="msgs"></div>
+  </section>
+
+  <section>
+    <h2>До вылета</h2>
+    <ol>
+      <li>Подать себя в таблицу нетворкинга — форма выше, модерация занимает время.</li>
+      <li>Отобрать из 433 компаний сети и партнёрки, написать холодное касание до конференции.</li>
+      <li>Зарегистрироваться на открытые сайд-ивенты, начиная с 28.09 — они первые.</li>
+      <li>Спросить организаторов, входит ли VIP Affiliate Leaders Dinner в ваш билет.</li>
+      <li>Решить с Ником, что делает скидка в коде, и поправить тексты, если она работает.</li>
+      <li>Отписать в задаче поездки, что код заведён как <code>SBC_LISBON</code>.</li>
+      <li>Сохранить QR на телефон и в избранное Telegram.</li>
+      <li>Завести заметку на каждую договорённость ступени A прямо на площадке: имя, компания, о чём договорились, дата созвона.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <p>Кто едет и сайд-ивенты — замер по базе Telegram-разведки, посты каналов за 01–22.09.2026. Номера стендов — из анонсов самих компаний. Контакты площадок — из медиа-карты и базы разведки.</p>
+    <p>Цель, длительность и KPI поездки — задача MARKETING-98, утверждены владельцем 15.09. Промокод сверен по базе продукта 22.09.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const URL_ = "https://qubix.pro/?r=SBC_LISBON&utm_source=sbc&utm_medium=event&utm_campaign=lisbon";
+document.getElementById("urlline").textContent = URL_;
+try{
+  new QRCode(document.getElementById("qr"), {text:URL_, width:116, height:116,
+    colorDark:"#16222E", colorLight:"#FFFFFF", correctLevel:QRCode.CorrectLevel.M});
+}catch(e){ document.getElementById("qr").textContent = "QR не отрисовался, ссылка ниже рабочая"; }
+
+const EV = [
+ ["28.09","Padel Cup &amp; BBQ Networking","ConcordTech × AffPapa · W Padel Country Club","open","https://concordtech.io/event/"],
+ ["28.09","iGaming Club Lisbon","AffPapa · руфтоп Ferroviário, 19:00","tick","https://igaming.club/lisbon-2026/#tickets"],
+ ["28.09","Above Lisbon: A Sunset App-eritif","скрытая локация, 18:30","open","https://luma.com/fkz3jb0d"],
+ ["28.09","Growth &amp; Acquisition Night","TechEmbassy · The Station · привлечение, CRM, аналитика","open","https://luma.com/k4u7uwsj"],
+ ["29.09","Speed Networking","FIL, Speed Networking Lounge, 10:30","vip","https://sbcevents.com/sbc-summit/speed-networking/"],
+ ["29.09","Forte da Fortuna","TrueLabel × 100FTD · Forte da Cruz","open","https://luma.com/q6pam7l0"],
+ ["29.09","ANS Lisbon 2026","WintEvents · Terrace Restaurant, 300+ гостей","open","https://wintevents.com/anslisbon2026"],
+ ["29.09","C-Suite Dinner","Conversion Club · Kabuki Lisboa, 19:00","inv","https://www.conversion-club.com/c-suite-dinner-lisbon-2026"],
+ ["29.09","VIP Affiliate Leaders Dinner","SBC · Kais — спросить, входит ли в ваш VIP Pass","inv","https://sbcevents.com/affiliate-leaders-summit/event-networking/"],
+ ["29.09","SBC Summit Opening Party","Pavilhão Carlos Lopes, 20:00 · The Script","vip","https://sbcevents.com/sbc-summit/opening-party/"],
+ ["29.09","Afterparty SpinBetter × SLYSE","скрытая локация, 21:00","open","https://luma.com/6zryrz53"],
+ ["30.09","Affiliate Morning Club","Kitline &amp; Fastly · 09:00–12:00","own",""],
+ ["30.09","SBC African Gaming Forum","Myriad hotel, 11:30","open","https://sbcevents.com/african-gaming-forum"],
+ ["01.10","Affiliate Morning Club","Kitline &amp; Fastly · 09:00–12:00","own",""],
+ ["01.10","Satoshkin Meetup","финтех и iGaming · пробуем попасть","try",""],
+ ["29.09–01.10","Festival Square","FIL, зона встреч между сессиями","vip",""]
+];
+const LBL = {
+  open:["p-open","открытая"], inv:["p-inv","по приглашению"],
+  vip:["p-vip","по вашему билету"], tick:["p-tick","нужен билет"],
+  own:["p-own","билет есть"], try:["p-try","пробуем попасть"]
+};
+document.getElementById("events").innerHTML = EV.map(([d,name,place,acc,url]) => {
+  const [cls,txt] = LBL[acc];
+  const title = url ? `<a href="${url}">${name}</a>` : name;
+  return `<tr><td class="d">${d}</td><td>${title}</td><td>${place}</td><td><span class="pill ${cls}">${txt}</span></td></tr>`;
+}).join("");
+
+const MSGS = [
+ {for:"Ступень A — сеть или партнёрка, после знакомства",
+  text:`Анастасия, Qubix. Рада знакомству.
+
+Обещала прислать то, о чём мы говорили.
+
+У ваших аффилиатов есть расход, который растёт ровно тогда, когда у них всё получается: залив зашёл — и счёт за установки растёт вместе с ним.
+
+В Qubix наоборот. Чем лучше идёт, тем больше они оставляют себе: конструктор витрин стоит на их собственном сервере, установки бесплатны и безлимитны. Там же трекер, автоправила, пуши и вся аналитика. Связки и статистика остаются у них.
+
+Мне кажется, это может работать как то, что вы даёте своим топам. Им — снятая статья расходов, вам — ещё один повод, по которому выбирают вас.
+
+Покажу на созвоне, как это устроено. Какой день вам удобен?`},
+
+ {for:"Ступень B — площадка, с которой уже работаем",
+  text:`Анастасия, Qubix. Как хорошо, что наконец увиделись вживую.
+
+Мы с вами в этом году уже размещались. Хочу перевести это во что-то более длинное, чем разовые слоты: годовой пакет, обмен размещениями, совместный материал — что вам самим интереснее.
+
+И маленькая просьба. Сейчас собирают список участников саммита — добавьте нас, пожалуйста. Вам одна строка, нам видимость.
+
+С кем у вас лучше обсудить пакет?`},
+
+ {for:"Ступень C — оператор или бренд со своей командой",
+  text:`Анастасия, Qubix. Обещала прислать суть — вот она.
+
+Где сейчас живут документы, таблицы и файлы вашей команды?
+
+В Qubix они лежат там же, где залив: совместная правка, история версий, общий диск с правами по зонам. Один вход, один сервер, отдельно ставить и переносить нечего.
+
+И то, ради чего это обычно и заводят. Уходит человек — доступ закрывается в одно действие, а всё сделанное остаётся у команды.
+
+Показать на живом экране быстрее, чем описать: минут пятнадцать. Кому из ваших это ближе?`},
+
+ {for:"Ступень D — байер или тимлид, знакомство",
+  text:`Анастасия, Qubix. Мы пересеклись на SBC.
+
+Кто остановит убыточное объявление в четыре утра?
+
+В Qubix — правило. Оно гасит минусовые само, а когда пошли регистрации и депозиты, само возвращает объявление в дело. Круглые сутки, без дежурного.
+
+И это настоящий язык, а не набор галочек по CTR: правило видит каждый показатель объявления и может запросом достать любую статистику продукта.
+
+Право останавливать отдаёте не на слово. Прогоните правило вхолостую — оно покажет по вашим живым объявлениям, что сделало бы, и ничего не тронет.
+
+Стоит всё это у вас на сервере: трекер, витрины, пуши, аналитика. Связки и статистика — тоже у вас.
+
+Месяц бесплатно, со всеми возможностями, по коду с саммита.
+Промокод: SBC_LISBON
+👉 qubix.pro/?r=SBC_LISBON
+
+Попробуете на своих данных?`},
+
+ {for:"Холодное касание до конференции",
+  text:`Здравствуйте! Меня зовут Анастасия, я CEO Qubix.
+
+Qubix:
+Свой сервер — своя ракета! 🚀
+Тянет от залива до офисного пакета.
+
+Если по-деловому: мы сделали Affiliate SuperApp. Трекер, конструктор витрин, пуши, автоправила и рабочие файлы команды стоят на одном сервере — вашем. Связки, креативы и статистика лежат там же.
+
+С 29 сентября по 1 октября буду на SBC Summit в Лиссабоне. Хочу познакомиться и показать продукт руками: минут пятнадцать, и вопросов после обычно меньше, чем до.
+
+Вы будете на площадке в эти дни?`}
+];
+
+const host = document.getElementById("msgs");
+host.style.cssText = "display:flex;flex-direction:column;gap:14px";
+MSGS.forEach((m, i) => {
+  const box = document.createElement("div"); box.className = "msg";
+  const head = document.createElement("div"); head.className = "msghead";
+  const lab = document.createElement("span"); lab.className = "for"; lab.textContent = m.for;
+  const btn = document.createElement("button");
+  btn.className = "copy"; btn.type = "button"; btn.textContent = "Скопировать"; btn.id = "cp" + i;
+  const pre = document.createElement("pre"); pre.id = "m" + i; pre.textContent = m.text;
+  btn.addEventListener("click", async () => {
+    let ok = false;
+    try{ await navigator.clipboard.writeText(m.text); ok = true; }
+    catch(e){
+      try{
+        const r = document.createRange(); r.selectNodeContents(pre);
+        const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        ok = document.execCommand("copy");
+      }catch(e2){ ok = false; }
+    }
+    btn.textContent = ok ? "Готово" : "Выделите текст вручную";
+    btn.classList.toggle("ok", ok);
+    setTimeout(() => { btn.textContent = "Скопировать"; btn.classList.remove("ok"); }, 2200);
+  });
+  head.append(lab, btn); box.append(head, pre); host.appendChild(box);
+});
+</script>
