@@ -8,12 +8,12 @@ PRODUCT и DEV в проход не входят: там обращений к �
 
 | Висит | Задача | Стадия | От кого | О чём |
 |---|---|---|---|---|
-| 45 дн | [MARKETING-72](https://team.qubix.capital/issue/MARKETING-72) | Submitted | admin | @Anastasia - обновил тело этой задачи. Ниже что изменилось, чтобы не перечитывать целиком. |
+| 45 дн | [BRAND-14](https://team.qubix.capital/issue/BRAND-14) | Submitted | admin | @Anastasia - обновил тело этой задачи. Ниже что изменилось, чтобы не перечитывать целиком. |
 | 40 дн | [MARKETING-75](https://team.qubix.capital/issue/MARKETING-75) | Submitted | admin | @Anastasia — по экранам подтверждаю, можете заменять тело задачи. |
 | 32 дн | [MARKETING-81](https://team.qubix.capital/issue/MARKETING-81) | Submitted | Kit | @Anastasia  |
 | 32 дн | [SALES-151](https://team.qubix.capital/issue/SALES-151) | New | Qubix Support | 👤 @AnastasiaVoitenko_Qubix Подскажи внутри сервиса шаблона пуш уведомлений для igaming нету? |
 | 32 дн | [CONTENT-4](https://team.qubix.capital/issue/CONTENT-4) | In Progress | Evgenia | @Anastasia общаюсь с площадками по слотам на новые даты |
-| 26 дн | [MARKETING-5](https://team.qubix.capital/issue/MARKETING-5) | Submitted | admin | @Anastasia — противоречие было настоящим, и его уже сняла разработка: оба пункта моего комментария от 19.08 ус |
+| 26 дн | [BRAND-5](https://team.qubix.capital/issue/BRAND-5) | Submitted | admin | @Anastasia — противоречие было настоящим, и его уже сняла разработка: оба пункта моего комментария от 19.08 ус |
 | 26 дн | [CONTENT-6](https://team.qubix.capital/issue/CONTENT-6) | Submitted | admin | @Evgenia @Anastasia — вопрос по голосу постов, он влияет на все «ты»-версии волны. |
 | 25 дн | [CONTENT-18](https://team.qubix.capital/issue/CONTENT-18) | In Progress | Evgenia | @Anastasia жду информацию от BroBuy по форматам, пометке "реклама" и готовности публиковать пост от имени кана |
 | 25 дн | [CONTENT-19](https://team.qubix.capital/issue/CONTENT-19) | In Progress | Evgenia | @Anastasia жду информацию от BroBuy по пометке и стоимости натвного поста |
@@ -21,7 +21,7 @@ PRODUCT и DEV в проход не входят: там обращений к �
 | 24 дн | [CONTENT-25](https://team.qubix.capital/issue/CONTENT-25) | In Progress | Evgenia | @Anastasia здесь тоде планировалась публикация на 31.08, так как владелец сети обещал поставить в любой удобны |
 | 23 дн | [CONTENT-24](https://team.qubix.capital/issue/CONTENT-24) | In Progress | Kit | @Evgenia @Anastasia  |
 | 23 дн | [CONTENT-23](https://team.qubix.capital/issue/CONTENT-23) | In Progress | Kit | @Evgenia @Anastasia  |
-| 20 дн | [MARKETING-68](https://team.qubix.capital/issue/MARKETING-68) | Submitted | admin | @Anastasia — тело обновлено по решению владельца от 01.09.2026: из строки 4 матрицы (столбец «Как снимаем») и  |
+| 20 дн | [BRAND-2](https://team.qubix.capital/issue/BRAND-2) | Submitted | admin | @Anastasia — тело обновлено по решению владельца от 01.09.2026: из строки 4 матрицы (столбец «Как снимаем») и  |
 | 20 дн | [CONTENT-34](https://team.qubix.capital/issue/CONTENT-34) | In Progress | admin | @Anastasia — согласование версии поста в голосе канала выше: три правки (слово «переезжаете» → «переключаетесь |
 | 20 дн | [CONTENT-37](https://team.qubix.capital/issue/CONTENT-37) | In Progress | Kit | @Anastasia 500$ переведено - <https://tronscan.org/transaction/3abe3ba1ca0a0761cfe46259a1ca3d874fdf4b26e2309c5 |
 | 19 дн | [CONTENT-27](https://team.qubix.capital/issue/CONTENT-27) | In Progress | Evgenia | @Kit @Anastasia оплачено 100$ <https://tronscan.org/transaction/caf6acf300456660a4b9893b2227e4568f3efb8cc45262 |
@@ -36,26 +36,26 @@ PRODUCT и DEV в проход не входят: там обращений к �
 | 12 дн | [MARKETING-95](https://team.qubix.capital/issue/MARKETING-95) | Submitted | admin | @Anastasia — июльская ведомость принята владельцем 09.09: итог $7 172 ($4 172 размещения — сходится с итогом и |
 | 12 дн | [CONTENT-26](https://team.qubix.capital/issue/CONTENT-26) | In Progress | Evgenia | @Anastasia все необходимые материалы для обзора и листинга отправлены. |
 | 12 дн | [FIN-10](https://team.qubix.capital/issue/FIN-10) | Submitted | admin | @Anastasia — по заявке на 21 ролик, перед аппрувом. |
-| 12 дн | [MARKETING-7](https://team.qubix.capital/issue/MARKETING-7) | Submitted | admin | @Anastasia — тело обновлено в двух местах; оба изменения — приведение к уже принятым решениям владельца, новог |
-| 12 дн | [MARKETING-9](https://team.qubix.capital/issue/MARKETING-9) | Submitted | admin | @Anastasia — тело обновлено в двух местах; оба изменения — приведение свода к его же правилам, нового здесь не |
+| 12 дн | [BRAND-3](https://team.qubix.capital/issue/BRAND-3) | Submitted | admin | @Anastasia — тело обновлено в двух местах; оба изменения — приведение к уже принятым решениям владельца, новог |
+| 12 дн | [BRAND-4](https://team.qubix.capital/issue/BRAND-4) | Submitted | admin | @Anastasia — тело обновлено в двух местах; оба изменения — приведение свода к его же правилам, нового здесь не |
 | 12 дн | [SUPPORT-20](https://team.qubix.capital/issue/SUPPORT-20) | Awaiting approval | admin | ## Решение владельца, 10.09.2026 |
 | 11 дн | [HR-11](https://team.qubix.capital/issue/HR-11) | Submitted | Kit | @Anastasia отлично, тогда NDA + доп подписанные пусть высылает на legal@qubix.pro |
 | 11 дн | [CONTENT-35](https://team.qubix.capital/issue/CONTENT-35) | In Progress | Evgenia | @Anastasia материалы для добавления в категории отправлены |
 | 11 дн | [FIN-11](https://team.qubix.capital/issue/FIN-11) | Submitted | admin | @Anastasia — по заявке возражений нет, она готова к аппруву владельца. |
 | 11 дн | [CONTRACT-7](https://team.qubix.capital/issue/CONTRACT-7) | Submitted | admin | @Anastasia — реквизиты добавлены, кошелёк сходится с тем, что стоит в FIN-11: расхождения нет, это хорошо. |
 | 11 дн | [MARKETING-85](https://team.qubix.capital/issue/MARKETING-85) | Submitted | admin | @Anastasia — текст сильный: заход настоящим вопросом в поддержку, боль подана состоянием, оффер и скидка в кан |
-| 10 дн | [MARKETING-70](https://team.qubix.capital/issue/MARKETING-70) | Submitted | admin | @Anastasia — решение владельца от 11.09.2026: **приём постбэков в формате любого трекера опущен из козырей (яр |
+| 10 дн | [BRAND-1](https://team.qubix.capital/issue/BRAND-1) | Submitted | admin | @Anastasia — решение владельца от 11.09.2026: **приём постбэков в формате любого трекера опущен из козырей (яр |
 | 9 дн | [CONTENT-53](https://team.qubix.capital/issue/CONTENT-53) | Submitted | Evgenia | @Anastasia все три пункта поправлены в теле: |
 | 7 дн | [CONTENT-43](https://team.qubix.capital/issue/CONTENT-43) | Submitted | Evgenia | @Anastasia @admin ссылка на канал <https://t.me/qubix_pro> |
-| 6 дн | [MARKETING-101](https://team.qubix.capital/issue/MARKETING-101) | Submitted | admin | @Anastasia — решения владельца от 15.09.2026 по трём развилкам задачи. |
-| 6 дн | [MARKETING-76](https://team.qubix.capital/issue/MARKETING-76) | Submitted | admin | @Anastasia — решение владельца от 15.09.2026 по переносу неизрасходованного августа: **не переносить**. Сентяб |
+| 6 дн | [BRAND-7](https://team.qubix.capital/issue/BRAND-7) | Submitted | admin | @Anastasia — решения владельца от 15.09.2026 по трём развилкам задачи. |
+| 6 дн | [BRAND-12](https://team.qubix.capital/issue/BRAND-12) | Submitted | admin | @Anastasia — решение владельца от 15.09.2026 по переносу неизрасходованного августа: **не переносить**. Сентяб |
 | 6 дн | [HR-15](https://team.qubix.capital/issue/HR-15) | Submitted | admin | @Anastasia — решение владельца от 15.09.2026 по найму менеджера по продажам, его словами: «пока что мастер-кла |
 | 6 дн | [HR-16](https://team.qubix.capital/issue/HR-16) | Submitted | admin | @Anastasia — решение владельца от 15.09.2026 по найму операционного ассистента, его словами: «пока что мастер- |
 | 6 дн | [MARKETING-102](https://team.qubix.capital/issue/MARKETING-102) | Submitted | admin | @Anastasia — по звонку Егору и колабе с Mostbet Partners, решения владельца от 15.09.2026. |
 | 6 дн | [MARKETING-98](https://team.qubix.capital/issue/MARKETING-98) | Submitted | admin | @Anastasia — цель и длительность поездки утверждены владельцем 15.09.2026: партнёрства с сетями и площадками к |
 | 6 дн | [CONTENT-46](https://team.qubix.capital/issue/CONTENT-46) | Submitted | admin | @Anastasia @Evgenia — тело склада заменено: формула бренда приведена к канону по всему складу разом (решение в |
 | 6 дн | [MARKETING-99](https://team.qubix.capital/issue/MARKETING-99) | Submitted | admin | # Рамка мира v2 — концепция «Планеты». Заменяет комментарий #1 |
-| 6 дн | [MARKETING-97](https://team.qubix.capital/issue/MARKETING-97) | Submitted | admin | @Anastasia — тело образа обновлено по решениям владельца от 15.09.2026 (MARKETING-101), три правки: |
+| 6 дн | [BRAND-6](https://team.qubix.capital/issue/BRAND-6) | Submitted | admin | @Anastasia — тело образа обновлено по решениям владельца от 15.09.2026 (BRAND-7), три правки: |
 | 6 дн | [CONTENT-28](https://team.qubix.capital/issue/CONTENT-28) | In Progress | Evgenia | @Anastasia прислали текст обзора на согласование <https://docs.google.com/document/d/12npTtIGBS4Cs5bnfE_CxN-wa |
 | 6 дн | [CONTENT-61](https://team.qubix.capital/issue/CONTENT-61) | In Progress | Evgenia | @Anastasia внесла изменения с учётом обновления якоря от 15.09: добавила якорь-двустишие в выход 1 (18.09) — ф |
 | 6 дн | [CONTENT-63](https://team.qubix.capital/issue/CONTENT-63) | In Progress | Evgenia | @Anastasia проверила по твоей просьбе, не вставляю якорь-двустишие (форма от 11.09, подтверждена владельцем 15 |
