@@ -4,7 +4,7 @@
 - обычный белый лист A4, PDF, без бланка, без подписей и печатей;
 - номер инвойса = дата + порядковый номер на эту дату: 2026-08-01-1;
 - между датой инвойса и датой оплаты — несколько дней, ни одна дата не на выходных;
-- реквизиты получения — кошелёк, на который платёж реально пришёл (FIN-2/7/12);
+- реквизиты получения — Designated Wallet из договора (п. 4.8);
 - суммы и даты — ровно те, что реально прошли (чеки в задачах FIN).
 
 Запуск: python3 drafts/invoice-gen.py  → drafts/invoices/*.html
@@ -18,8 +18,10 @@ OUT = pathlib.Path(__file__).parent / "invoices"
 OUT.mkdir(exist_ok=True)
 
 CONSULTANT = {
-    "name": "Anastasia Voitenko",
-    "address": "[ЗАПОЛНИТЬ — адрес консультанта, как в договоре]",
+    "name": "Anastassiya Voitenko",
+    # Адрес — личные данные, в репозиторий не идёт: лежит в drafts/invoices/.consultant-address (gitignore)
+    "address": (pathlib.Path(__file__).parent / "invoices" / ".consultant-address").read_text().strip()
+               if (pathlib.Path(__file__).parent / "invoices" / ".consultant-address").exists() else "[ЗАПОЛНИТЬ — адрес консультанта, как в договоре]",
     "email": "anastasiavoitenko@qubix.pro",
 }
 COMPANY = {
@@ -29,10 +31,12 @@ COMPANY = {
     "contact": "legal@qubix.pro",
 }
 CONTRACT = "Consulting Services Agreement dated 27 July 2026"
-# Кошельки — те, куда деньги реально пришли (реквизиты в FIN-2/FIN-7 и FIN-12).
-# Если в договоре указан другой адрес — заменить здесь на договорный.
-WALLET_1 = "USDT (ERC-20) 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7"
-WALLET_2 = "USDT (ERC-20) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25"
+# Designated Wallet по договору, п. 4.8 (ERC-20). Туда же прошли FIN-2 и FIN-7.
+# В FIN-12 стоит другой адрес (0x0C1E…3c25) — по п. 4.8 смена кошелька требует
+# письменного уведомления, верификационного звонка и 5 рабочих дней; пока этого
+# нет, в инвойсе стоит договорный.
+WALLET_1 = "USDT (ERC-20) 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7 (Designated Wallet, Clause 4.8)"
+WALLET_2 = WALLET_1
 SERVICES = ("Consulting services under Schedule 1 of the Agreement: promotion and media, "
             "partnerships, public representation and events, sales management, "
             "HR and operational management of the commercial team.")
@@ -111,7 +115,7 @@ table.lines tr.total td {{ border-bottom: none; border-top: 2px solid #000; font
 <div class="pay"><h3>Payment details</h3>
 Currency: USDT, in the amount equivalent to the total above.<br>
 Wallet: <b>{wallet}</b><br>
-Payment terms: within the term set by the Agreement.</div>
+Payment terms: Clause 4.5(a) of the Agreement — within the first 10 days of the month following the service month; Clause 4.7 — settlement in USDT at 1 USDT = 1 USD.</div>
 <p class="small">Issued by the Consultant to the Client under the Agreement. No signature or stamp required.</p>
 </body></html>"""
 

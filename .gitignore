@@ -1,3 +1,8 @@
 __pycache__/
 data/mail-state.json
 data/zamer-clients.json
+
+# Инвойсы с личными данными — не коммитить
+drafts/invoices/.consultant-address
+drafts/invoices/*.html
+drafts/invoices/*.pdf
