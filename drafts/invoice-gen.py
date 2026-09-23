@@ -53,6 +53,13 @@ INVOICES = [
                 ("Less: set-off, as agreed by the Parties, of the unspent balance of funds provided by the Company for business trips to Moscow, August 2026 (RUB 92,734.53 at 84.2820, per the Company's calculation of 27.08.2026)", -1100.00)],
          paid="Paid on 27.08.2026 — 3,900 USDT (ERC-20) to the Designated Wallet (tx 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc)",
          paid_ref="FIN-7 · 27.08.2026 · $3 900 USDT (ERC-20)", note=""),
+    dict(inv_date="2026-09-24", seq=3,
+         period="September 2026",
+         lines=[("Consulting services under the Agreement, September 2026 (monthly fee, Clause 4.2)", 5000.00),
+                ("Less: set-off, as agreed by the Parties — Lisbon travel tickets paid by the Company (EUR 599)", -681.00)],
+         paid="Not yet paid. Payable under Clause 4.5(a) within the first 10 days of October 2026 to the new Designated Wallet (ERC-20 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25) once the change notified on 24.09.2026 takes effect under Clause 4.8; test transfer of 50 USDT precedes the first payment.",
+         wallet="USDT (ERC-20) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25 (new Designated Wallet — notice of 24.09.2026, Clause 4.8)",
+         paid_ref="FIN-12 · к оплате · 4 319 USDT (ERC-20) на 0x0C1E… · аппрув владельца 23.09", note="Выставлен до платежа — как и должно быть."),
 ]
 
 def weekday(d):
@@ -127,7 +134,7 @@ for inv in INVOICES:
         contract=CONTRACT, period=html.escape(inv["period"]),
         c_name=CONSULTANT["name"], c_addr=CONSULTANT["address"], c_email=CONSULTANT["email"],
         k_name=COMPANY["name"], k_addr=COMPANY["address"], k_reg=COMPANY["reg"], k_contact=COMPANY["contact"],
-        services=html.escape(SERVICES), rows=rows, total=money(total), wallet=WALLET_1)
+        services=html.escape(SERVICES), rows=rows, total=money(total), wallet=inv.get('wallet', WALLET_1))
     path = OUT / f"invoice-{number}.html"
     path.write_text(page, encoding="utf-8")
     probs = check(inv)
