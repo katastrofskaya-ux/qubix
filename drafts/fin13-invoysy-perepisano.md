@@ -25,14 +25,38 @@
 
 Реквизиты в инвойсах — из договора: стороны как в преамбуле, кошелёк — Designated Wallet п. 4.8, ERC-20 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7. FIN-2 и FIN-7 пришли именно на него.
 
-## 2. Прошу от компании — письмо-подтверждение оплаты
+## 2. Письмо в компанию с просьбой подтвердить оплаты — приложено
 
-Простой текст, A4, PDF, по каждому инвойсу: номер, дата, сумма, дата оплаты, сеть и адрес получателя, хеш транзакции, основание — договор от 27.07.2026.
+По слову владельца: я пишу письмо в компанию с просьбой подтвердить оплаты по инвойсам, компания подтверждает ответом. Ответ — простой текст, по каждому инвойсу: номер, дата, сумма, дата оплаты, сеть и адрес получателя, хеш транзакции, основание — договор от 27.07.2026.
 
 ## Приложено
 
 - invoice-2026-07-27-1.pdf, invoice-2026-08-24-1.pdf
+- письмо в компанию с просьбой подтвердить оплаты (ниже)
 - сопроводительное письмо в кошелёк (ниже)
+
+---
+
+# Письмо в компанию — просьба подтвердить оплаты (от Анастасии на legal@qubix.pro)
+
+Subject: Request for payment confirmation — Consulting Services Agreement dated 27 July 2026
+
+Dear Sirs,
+
+Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A.S. and me as Consultant, I have issued the following invoices, which have been settled in USDT (ERC-20) to the Designated Wallet under Clause 4.8, 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7:
+
+| Invoice No. | Invoice date | Amount, USD | Paid on | Transaction hash |
+|---|---|---|---|---|
+| 2026-07-27-1 | 27.07.2026 | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
+| 2026-08-24-1 | 24.08.2026 | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
+
+My custodial wallet provider has paused a withdrawal and asks for confirmation of the source of these funds. Could you please confirm in writing that the above invoices were paid by YARD TECH S.A.S. to me as consideration for consulting services under the Agreement, stating for each invoice the number, date, amount, payment date, network and recipient address, and transaction hash?
+
+A plain reply by e-mail is sufficient.
+
+Kind regards,
+Anastassiya Voitenko
+Consultant under the Consulting Services Agreement dated 27 July 2026
 
 ---
 
