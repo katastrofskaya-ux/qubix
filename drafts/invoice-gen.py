@@ -105,7 +105,7 @@ table.lines tr.total td {{ border-bottom: none; border-top: 2px solid #000; font
 <div class="pay"><h3>Payment details</h3>
 Currency: USDT, in the amount equivalent to the total above.<br>
 Wallet: <b>{wallet}</b><br>
-Payment terms: Clause 4.5(a) of the Agreement — within the first 10 days of the month following the service month; Clause 4.7 — settlement in USDT at 1 USDT = 1 USD.</div>
+Settlement in USDT at 1 USDT = 1 USD (Clause 4.7 of the Agreement).</div>
 <p class="small">Issued by the Consultant to the Client under the Agreement. No signature or stamp required.</p>
 </body></html>"""
 
