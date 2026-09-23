@@ -4,7 +4,7 @@
 - обычный белый лист A4, PDF, без бланка, без подписей и печатей;
 - номер инвойса = дата + порядковый номер на эту дату: 2026-08-01-1;
 - между датой инвойса и датой оплаты — несколько дней, ни одна дата не на выходных;
-- реквизиты получения — кошелёк, тот самый, что указан в договоре;
+- реквизиты получения — кошелёк, на который платёж реально пришёл (FIN-2/7/12);
 - суммы и даты — ровно те, что реально прошли (чеки в задачах FIN).
 
 Запуск: python3 drafts/invoice-gen.py  → drafts/invoices/*.html
@@ -24,12 +24,15 @@ CONSULTANT = {
 }
 COMPANY = {
     "name": "YARD TECH S.A.S.",
-    "address": "[ЗАПОЛНИТЬ — юридический адрес компании из договора, Уругвай]",
-    "reg": "[ЗАПОЛНИТЬ — регистрационный номер / RUT, если есть в договоре]",
+    "address": "Potosi 1615, Montevideo, Oriental Republic of Uruguay",
+    "reg": "RUT No. 219861600014, National Registry of Commerce No. 7718",
     "contact": "legal@qubix.pro",
 }
 CONTRACT = "Consulting Services Agreement dated 27 July 2026"
-WALLET = "[ЗАПОЛНИТЬ — кошелёк из договора, сеть и адрес дословно]"
+# Кошельки — те, куда деньги реально пришли (реквизиты в FIN-2/FIN-7 и FIN-12).
+# Если в договоре указан другой адрес — заменить здесь на договорный.
+WALLET_1 = "USDT (ERC-20) 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7"
+WALLET_2 = "USDT (ERC-20) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25"
 SERVICES = ("Consulting services under Schedule 1 of the Agreement: promotion and media, "
             "partnerships, public representation and events, sales management, "
             "HR and operational management of the commercial team.")
@@ -37,17 +40,17 @@ SERVICES = ("Consulting services under Schedule 1 of the Agreement: promotion an
 # Факты по выплатам — из задач FIN (чеки там). Дата инвойса — рабочий день за
 # несколько дней до оплаты. Первый инвойс не может быть раньше даты договора.
 INVOICES = [
-    dict(inv_date="2026-07-27", pay_date="2026-07-28", seq=1,
+    dict(inv_date="2026-07-27", pay_date="2026-07-28", seq=1, wallet=WALLET_1,
          period="July 2026 (from 27 July) — advance payment",
          lines=[("Advance payment for consulting services, July–August 2026", 2500.00)],
          paid_ref="FIN-2 · 28.07.2026 · $100 + $2 400 USDT (ERC-20) · etherscan 0x922d…3dec8, 0x0fab…7abc",
          note="Договор подписан 27.07, аванс уплачен 28.07 — здесь между инвойсом и оплатой один день, и это правда, её не подгоняем."),
-    dict(inv_date="2026-08-24", pay_date="2026-08-27", seq=1,
+    dict(inv_date="2026-08-24", pay_date="2026-08-27", seq=1, wallet=WALLET_1,
          period="August 2026",
          lines=[("Consulting services, August 2026", 3900.00)],
          paid_ref="FIN-7 · 27.08.2026 · $3 900 USDT (ERC-20) · etherscan 0x6ad8…4cacc",
          note=""),
-    dict(inv_date="2026-09-22", pay_date="2026-09-25", seq=1,
+    dict(inv_date="2026-09-22", pay_date="2026-09-25", seq=1, wallet=WALLET_2,
          period="September 2026 (second part) and advance for October 2026",
          lines=[("Consulting services, September 2026 — second part", 2500.00),
                 ("Advance payment for consulting services, October 2026", 2500.00),
@@ -107,7 +110,7 @@ table.lines tr.total td {{ border-bottom: none; border-top: 2px solid #000; font
 </tbody></table>
 <div class="pay"><h3>Payment details</h3>
 Currency: USDT, in the amount equivalent to the total above.<br>
-Wallet (as specified in the Agreement): <b>{wallet}</b><br>
+Wallet: <b>{wallet}</b><br>
 Payment terms: within the term set by the Agreement.</div>
 <p class="small">Issued by the Consultant to the Client under the Agreement. No signature or stamp required.</p>
 </body></html>"""
@@ -130,7 +133,7 @@ for inv in INVOICES:
         contract=CONTRACT, period=html.escape(inv["period"]),
         c_name=CONSULTANT["name"], c_addr=CONSULTANT["address"], c_email=CONSULTANT["email"],
         k_name=COMPANY["name"], k_addr=COMPANY["address"], k_reg=COMPANY["reg"], k_contact=COMPANY["contact"],
-        services=html.escape(SERVICES), rows=rows, total=money(total), wallet=WALLET)
+        services=html.escape(SERVICES), rows=rows, total=money(total), wallet=inv['wallet'])
     path = OUT / f"invoice-{number}.html"
     path.write_text(page, encoding="utf-8")
     probs = check(inv)
