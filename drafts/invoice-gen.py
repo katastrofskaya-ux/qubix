@@ -42,13 +42,13 @@ SERVICES = ("Consulting services under Schedule 1 of the Agreement: promotion an
 # несколько дней до оплаты. Первый инвойс не может быть раньше даты договора.
 INVOICES = [
     dict(inv_date="2026-07-27", pay_date="2026-07-28", seq=1, wallet=WALLET_1,
-         period="July–August 2026",
-         lines=[("Consulting services under the Agreement, July–August 2026 — first payment, by agreement of the Parties", 2500.00)],
+         period="Consulting services from 27 July 2026",
+         lines=[("Consulting services under the Agreement from 27 July 2026 — paid early by agreement of the Parties", 2500.00)],
          paid_ref="FIN-2 · 28.07.2026 · $100 + $2 400 USDT (ERC-20) · etherscan 0x922d…3dec8, 0x0fab…7abc",
          note="Договор подписан 27.07, аванс уплачен 28.07 — здесь между инвойсом и оплатой один день, и это правда, её не подгоняем."),
     dict(inv_date="2026-08-24", pay_date="2026-08-27", seq=1, wallet=WALLET_1,
          period="August 2026",
-         lines=[("Consulting services under the Agreement, August 2026 (monthly fee, Clause 4.2)", 5000.00),
+         lines=[("Consulting services under the Agreement, August 2026 (monthly fee, Clause 4.2) — paid early by agreement of the Parties", 5000.00),
                 ("Less: set-off of the unspent balance of the expense advance for the business trip to Moscow, August 2026 (RUB 92,734.53 at 84.2820, rounded), as agreed by the Parties", -1100.00)],
          paid_ref="FIN-7 · 27.08.2026 · $3 900 USDT (ERC-20) · etherscan 0x6ad8…4cacc",
          note="Состав 3 900 — по расчёту Kit (подотчёт, 27.08): 5 000 минус зачёт остатка подотчёта 92 734,53 ₽ по 84,2820 = 1 100 (округлено в пользу консультанта)."),

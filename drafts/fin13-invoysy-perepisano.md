@@ -18,14 +18,14 @@
 
 | Инвойс | Дата | За что | Сумма, $ | Оплата (факт) | Задача |
 |---|---|---|---|---|---|
-| 2026-07-27-1 | 27.07 | услуги по договору, июль–август — первая выплата по договорённости сторон | 2 500 | 28.07, $100 + $2 400 | FIN-2 |
-| 2026-08-24-1 | 24.08 | услуги за август: фикс 5 000 (п. 4.2) минус зачёт остатка подотчёта по Москве 1 100 (расчёт компании 27.08: 92 734,53 ₽ по 84,2820) | 3 900 | 27.08, $3 900 | FIN-7 |
+| 2026-07-27-1 | 27.07 | услуги по договору с 27.07.2026 — оплачено досрочно по договорённости сторон | 2 500 | 28.07, $100 + $2 400 | FIN-2 |
+| 2026-08-24-1 | 24.08 | услуги за август: фикс 5 000 (п. 4.2), оплачено досрочно по договорённости сторон, минус зачёт остатка подотчёта по Москве 1 100 (расчёт компании 27.08: 92 734,53 ₽ по 84,2820) | 3 900 | 27.08, $3 900 | FIN-7 |
 
 Реквизиты из договора: стороны — по преамбуле, контакт консультанта — п. 9.2, кошелёк — Designated Wallet п. 4.8, ERC-20 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7 (обе оплаты пришли на него), USDT 1:1 — п. 4.7.
 
 ## 2. Письмо в компанию — приложено
 
-Просьба подтвердить оплаты по двум инвойсам ответом в форме расчётной ведомости п. 4.5(a): по каждому инвойсу номер, дата, начислено и выплачено (с зачётом за август), дата оплаты, сеть, адрес отправителя компании и адрес получателя, хеш транзакции.
+По решению владельца (комментарий admin 23.09): письмо на legal@qubix.pro (п. 9.2), с указанием, кто и зачем запрашивает подтверждение; ответ приходит с того же адреса. Просьба подтвердить оплаты по двум инвойсам ответом в форме расчётной ведомости п. 4.5(a): по каждому инвойсу номер, дата, начислено и выплачено (с зачётом за август), дата оплаты, сеть, адрес отправителя компании и адрес получателя, хеш транзакции.
 
 ## 3. Отдельно — FIN-12 и смена кошелька
 
@@ -52,7 +52,7 @@ Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A
 | 2026-07-27-1 | 27.07.2026 | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
 | 2026-08-24-1 | 24.08.2026 | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
 
-My custodial wallet provider has paused a withdrawal and asks for confirmation of the source of these funds. Could you please confirm in writing that the above invoices were paid by YARD TECH S.A.S. to me as consideration for consulting services under the Agreement, stating for each invoice the number, date, amount accrued and amount paid (with the set-off for August), payment date, network, the Company's sending address and the recipient address, and the transaction hash — in the form of the calculation statement provided for in Clause 4.5(a)?
+This confirmation is requested by me, the Consultant, for my custodial wallet provider (Wallet in Telegram), which has paused my withdrawal pending confirmation of the source of these funds under the Agreement. Could you please confirm in writing that the above invoices were paid by YARD TECH S.A.S. to me as consideration for consulting services under the Agreement, stating for each invoice the number, date, amount accrued and amount paid (with the set-off for August), payment date, network, the Company's sending address and the recipient address, and the transaction hash — in the form of the calculation statement provided for in Clause 4.5(a)?
 
 A plain reply by e-mail is sufficient.
 
