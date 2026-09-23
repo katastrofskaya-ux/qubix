@@ -10,18 +10,17 @@
 
 ## Порядок (по слову владельца 23.09)
 
-1. Инвойсы компании выставляю я (п. 2.5). Белый лист A4, PDF, без бланка, подписей и печатей. Номер = дата + порядковый номер за день. Только оплаченные выплаты.
+1. Инвойсы компании выставляю я (п. 2.5). Белый лист A4, PDF, без бланка, подписей и печатей. Номер = дата + порядковый номер за день. **Датой выставления — сегодня, задним числом ничего** (admin 23.09 21:34): период услуг и дата уже полученного платежа с хешем — отдельными строками внутри инвойса. Только оплаченные выплаты.
 2. Я пишу письмо в компанию с просьбой подтвердить оплаты по инвойсам — компания подтверждает ответом.
 3. Ответ компании (.eml) + инвойсы уходят в кошелёк.
 
 ## 1. Инвойсы — приложены
 
-| Инвойс | Дата | За что | Сумма, $ | Оплата (факт) | Задача |
+| Инвойс | Выставлен | Период услуг | Сумма, $ | Оплата (факт — в инвойсе строкой с хешем) | Задача |
 |---|---|---|---|---|---|
-| 2026-07-27-1 | 27.07 | услуги по договору, 27–31.07.2026 — к оплате досрочно по договорённости сторон | 2 500 | 28.07, $100 + $2 400 | FIN-2 |
-| 2026-08-24-1 | 24.08 | услуги за август: фикс 5 000 (п. 4.2), к оплате досрочно по договорённости сторон, минус зачёт 1 100 по договорённости сторон — неизрасходованный остаток средств компании на поездки в Москву | 3 900 | 27.08, $3 900 | FIN-7 |
+| 2026-09-24-1 | 24.09 | 27–31.07.2026 | 2 500 | 28.07, $100 + $2 400 | FIN-2 |
+| 2026-09-24-2 | 24.09 | август 2026: фикс 5 000 (п. 4.2) минус зачёт 1 100 по договорённости сторон — неизрасходованный остаток средств компании на поездки в Москву (92 734,53 ₽ по 84,2820, расчёт компании 27.08, FIN-4) | 3 900 | 27.08, $3 900 | FIN-7 |
 
-Расшифровка зачёта (92 734,53 ₽ по 84,2820 = 1 100, расчёт компании 27.08, FIN-4) — только в письме и в подтверждении компании: инвойс датирован 24.08 и знать расчёт от 27.08 не может.
 
 Реквизиты из договора: стороны — по преамбуле, контакт консультанта — п. 9.2, кошелёк — Designated Wallet п. 4.8, ERC-20 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7 (обе оплаты пришли на него), USDT 1:1 — п. 4.7.
 
@@ -35,7 +34,7 @@
 
 ## Приложено
 
-- invoice-2026-07-27-1.pdf, invoice-2026-08-24-1.pdf
+- invoice-2026-09-24-1.pdf, invoice-2026-09-24-2.pdf
 - письмо в компанию (текст ниже)
 - сопроводительное письмо в кошелёк (текст ниже)
 
@@ -47,12 +46,12 @@ Subject: Request for payment confirmation — Consulting Services Agreement date
 
 Dear Sirs,
 
-Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A.S. and me as Consultant, I have issued the following invoices, which have been settled in USDT (ERC-20) to the Designated Wallet under Clause 4.8, 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7. Invoice 2026-08-24-1 is the August monthly fee of USD 5,000.00 less USD 1,100.00 set off, as agreed by the Parties, against the unspent balance of funds provided by the Company for business trips to Moscow (RUB 92,734.53 at 84.2820, per the Company's calculation of 27.08.2026):
+Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A.S. and me as Consultant, I have issued today the following invoices for the services already paid for, which were settled in USDT (ERC-20) to the Designated Wallet under Clause 4.8, 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7. Invoice 2026-09-24-2 is the August monthly fee of USD 5,000.00 less USD 1,100.00 set off, as agreed by the Parties, against the unspent balance of funds provided by the Company for business trips to Moscow (RUB 92,734.53 at 84.2820, per the Company's calculation of 27.08.2026):
 
 | Invoice No. | Invoice date | Amount, USD | Paid on | Transaction hash |
 |---|---|---|---|---|
-| 2026-07-27-1 | 27.07.2026 | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
-| 2026-08-24-1 | 24.08.2026 | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
+| 2026-09-24-1 | 24.09.2026 (services 27–31 July 2026) | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
+| 2026-09-24-2 | 24.09.2026 (services August 2026) | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
 
 This confirmation is requested by me, the Consultant, for a compliance check by my wallet service provider, which has paused my withdrawal pending confirmation of the source of these funds under the Agreement. Could you please confirm in writing that the above invoices were paid by YARD TECH S.A.S. to me as consideration for consulting services under the Agreement, stating for each invoice the number, date, amount invoiced and amount paid (with the set-off for August), payment date, network, the Company's sending address and the recipient address, and the transaction hash — in the form of the calculation statement provided for in Clause 4.5(a)?
 
@@ -70,7 +69,7 @@ Consultant under the Consulting Services Agreement dated 27 July 2026
 
 Уточняю по документу, который я направила ранее: это Consulting Services Agreement — договор об оказании консультационных услуг между мной как независимым консультантом и YARD TECH S.A.S., не трудовой договор. Расчётных листков по нему не существует: оплата идёт по инвойсам, которые я выставляю компании.
 
-Прилагаю: инвойсы №№ 2026-07-27-1 и 2026-08-24-1 и подтверждение компании об оплате (.eml) с датами, суммами, адресами отправителя и получателя и хешами транзакций.
+Прилагаю: инвойсы №№ 2026-09-24-1 и 2026-09-24-2 и подтверждение компании об оплате (.eml) с датами, суммами, адресами отправителя и получателя и хешами транзакций.
 
 Какого из документов вам достаточно для завершения проверки, или нужен ещё какой-то?
 
