@@ -74,3 +74,28 @@ Consultant under the Consulting Services Agreement dated 27 July 2026
 
 С уважением,
 Анастасия Войтенко
+
+---
+
+# Уведомление о смене Designated Wallet (п. 4.8) — от Анастасии в компанию
+
+Порядок по п. 4.8: (1) письменное уведомление за подписью консультанта → (2) компания подтверждает верификационным звонком/видеозвонком на контакт из договора (Telegram @AnastasiaV23 / телефон из п. 9.2 — не тот, что указан в уведомлении) → (3) смена вступает через 5 рабочих дней после подтверждения → (4) перед первым платежом компания делает тест 50 USDT, консультант подтверждает получение.
+
+Subject: Notice of change of the Designated Wallet — Clause 4.8, Consulting Services Agreement dated 27 July 2026
+
+Dear Sirs,
+
+Pursuant to Clause 4.8 of the Consulting Services Agreement dated 27 July 2026, I hereby give written notice of a change of my Designated Wallet.
+
+Current Designated Wallet (at signing): ERC-20 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7; TRC-20 TGhXdMjcCR3k5HD7CxtNcPF1wzAb1U7zst.
+
+New Designated Wallet: ERC-20 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25.
+
+I confirm that the new wallet is owned and controlled solely by me (Clause 4.12). I am available for the verification call under Clause 4.8 at the contact details on file (Clause 9.2). I acknowledge that the change takes effect five (5) business days after the Company's confirmation and that a test transfer of 50 USDT precedes the first payment to the new wallet, receipt of which I will confirm.
+
+Date: 24 September 2026
+
+Anastassiya Voitenko
+Consultant
+
+---
