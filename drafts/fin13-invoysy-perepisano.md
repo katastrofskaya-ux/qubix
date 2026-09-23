@@ -6,12 +6,14 @@
 
 ## Зачем
 
-Кастодиальный кошелёк приостановил мой вывод и просит подтвердить источник поступлений по договору, который я им показала. Принимают инвойсы и подтверждение оплаты. Я консультант, не сотрудник (п. 2.5): расчётных листков нет — подтверждаю инвойсами и ответом компании.
+Кастодиальный кошелёк приостановил мой вывод и просит подтвердить источник поступлений по договору, который я им показала. Принимают инвойсы и подтверждение оплаты. Я консультант, не сотрудник (п. 2.5): расчётных листков нет — подтверждаю ответом компании и инвойсами.
+
+**Факт, который нельзя обыгрывать иначе (владелец, 24.09 00:59):** оплаты 28.07 и 27.08 прошли **по договору, без инвойсов**. Инвойсы выставлены сегодня и документируют уже полученные платежи. Компания подтверждает оплаты **по договору** и что сегодняшние инвойсы им соответствуют — не «оплату по инвойсам».
 
 ## Порядок (по слову владельца 23.09)
 
 1. Инвойсы компании выставляю я (п. 2.5). Белый лист A4, PDF, без бланка, подписей и печатей. Номер = дата + порядковый номер за день. **Датой выставления — сегодня, задним числом ничего** (admin 23.09 21:34): период услуг и дата уже полученного платежа с хешем — отдельными строками внутри инвойса. Только оплаченные выплаты.
-2. Я пишу письмо в компанию с просьбой подтвердить оплаты по инвойсам — компания подтверждает ответом.
+2. Я пишу письмо в компанию с просьбой подтвердить оплаты по договору и соответствие им сегодняшних инвойсов — компания подтверждает ответом.
 3. Ответ компании (.eml) + инвойсы уходят в кошелёк.
 
 ## 1. Инвойсы — приложены
@@ -26,7 +28,7 @@
 
 ## 2. Письмо в компанию — приложено
 
-По решению владельца (комментарий admin 23.09): письмо **с моей почты по п. 9.2 (Katastrofskaya@gmail.com) на legal@qubix.pro** — по п. 9.1 уведомления только почтой, мессенджеры не канал; с указанием, кто и зачем запрашивает; ответ приходит с того же адреса, его .eml идёт в кошелёк. Просьба подтвердить оплаты по двум инвойсам в форме ведомости п. 4.5(a): по каждому инвойсу номер, дата, выставлено и выплачено (с зачётом за август), дата оплаты, сеть, адрес отправителя компании и адрес получателя, хеш транзакции. Формулировка в ответе — «за консультационные услуги по договору», не «зп/аванс» из карточек FIN.
+По решению владельца (комментарий admin 23.09): письмо **с моей почты по п. 9.2 (Katastrofskaya@gmail.com) на legal@qubix.pro** — по п. 9.1 уведомления только почтой, мессенджеры не канал; с указанием, кто и зачем запрашивает; ответ приходит с того же адреса, его .eml идёт в кошелёк. Просьба подтвердить, что два платежа сделаны по договору за консультационные услуги и что выставленные сегодня инвойсы им соответствуют — в форме ведомости п. 4.5(a): по каждому платежу период услуг, причиталось и выплачено (с зачётом за август), дата оплаты, сеть, адрес отправителя компании и адрес получателя, хеш транзакции. Формулировка в ответе — «за консультационные услуги по договору», не «зп/аванс» из карточек FIN и не «по инвойсам».
 
 ## 3. Отдельно — FIN-12 и смена кошелька
 
@@ -46,14 +48,14 @@ Subject: Request for payment confirmation — Consulting Services Agreement date
 
 Dear Sirs,
 
-Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A.S. and me as Consultant, I have issued today the following invoices for the services already paid for, which were settled in USDT (ERC-20) to the Designated Wallet under Clause 4.8, 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7. Invoice 2026-09-24-2 is the August monthly fee of USD 5,000.00 less USD 1,100.00 set off, as agreed by the Parties, against the unspent balance of funds provided by the Company for business trips to Moscow (RUB 92,734.53 at 84.2820, per the Company's calculation of 27.08.2026):
+Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A.S. and me as Consultant, the Company has made to me the following payments of Fees in USDT (ERC-20) to the Designated Wallet under Clause 4.8, 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7. No invoices were issued before these payments; today I have issued invoices 2026-09-24-1 and 2026-09-24-2 (attached), which document the payments already received. Invoice 2026-09-24-2 is the August monthly fee of USD 5,000.00 less USD 1,100.00 set off, as agreed by the Parties, against the unspent balance of funds provided by the Company for business trips to Moscow (RUB 92,734.53 at 84.2820, per the Company's calculation of 27.08.2026):
 
-| Invoice No. | Invoice date | Amount, USD | Paid on | Transaction hash |
+| Payment | Service period | Amount, USD | Paid on | Transaction hash |
 |---|---|---|---|---|
-| 2026-09-24-1 | 24.09.2026 (services 27–31 July 2026) | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
-| 2026-09-24-2 | 24.09.2026 (services August 2026) | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
+| Fees (invoice 2026-09-24-1, issued 24.09.2026) | 27–31 July 2026 | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
+| Fees (invoice 2026-09-24-2, issued 24.09.2026) | August 2026 | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
 
-This confirmation is requested by me, the Consultant, for a compliance check by my wallet service provider, which has paused my withdrawal pending confirmation of the source of these funds under the Agreement. Could you please confirm in writing that the above invoices were paid by YARD TECH S.A.S. to me as consideration for consulting services under the Agreement, stating for each invoice the number, date, amount invoiced and amount paid (with the set-off for August), payment date, network, the Company's sending address and the recipient address, and the transaction hash — in the form of the calculation statement provided for in Clause 4.5(a)?
+This confirmation is requested by me, the Consultant, for a compliance check by my wallet service provider, which has paused my withdrawal pending confirmation of the source of these funds under the Agreement. Could you please confirm in writing that the above payments were made by YARD TECH S.A.S. to me under the Agreement as consideration for consulting services, and that the invoices issued today correspond to those payments — stating for each payment the service period, amount due and amount paid (with the set-off for August), payment date, network, the Company's sending address and the recipient address, and the transaction hash, in the form of the calculation statement provided for in Clause 4.5(a)?
 
 A plain reply by e-mail is sufficient.
 
@@ -67,9 +69,9 @@ Consultant under the Consulting Services Agreement dated 27 July 2026
 
 Добрый день.
 
-Уточняю по документу, который я направила ранее: это Consulting Services Agreement — договор об оказании консультационных услуг между мной как независимым консультантом и YARD TECH S.A.S., не трудовой договор. Расчётных листков по нему не существует: оплата идёт по инвойсам, которые я выставляю компании.
+Уточняю по документу, который я направила ранее: это Consulting Services Agreement — договор об оказании консультационных услуг между мной как независимым консультантом и YARD TECH S.A.S., не трудовой договор. Расчётных листков по нему не существует: вознаграждение выплачивается по договору, инвойсы компании выставляю я.
 
-Прилагаю: инвойсы №№ 2026-09-24-1 и 2026-09-24-2 и подтверждение компании об оплате (.eml) с датами, суммами, адресами отправителя и получателя и хешами транзакций.
+Прилагаю: подтверждение компании (.eml) о выплатах по договору с датами, суммами, адресами отправителя и получателя и хешами транзакций, и инвойсы №№ 2026-09-24-1 и 2026-09-24-2, которые эти выплаты документируют.
 
 Какого из документов вам достаточно для завершения проверки, или нужен ещё какой-то?
 
