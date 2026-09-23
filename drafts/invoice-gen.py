@@ -56,7 +56,7 @@ INVOICES = [
     dict(inv_date="2026-09-24", seq=3,
          period="September 2026",
          lines=[("Consulting services under the Agreement, September 2026 (monthly fee, Clause 4.2)", 5000.00),
-                ("Less: set-off, as agreed by the Parties — SBC Lisbon conference ticket (EUR 599) funded by the Company under FIN-6 and obtained free of charge; USD 681.00 as approved by the Company on 23.09.2026", -681.00)],
+                ("Less: set-off as agreed by the Parties (EUR 599 at 1.14)", -681.00)],
          paid="Not yet paid. Payable under Clause 4.5(a) within the first 10 days of October 2026 to the new Designated Wallet (ERC-20 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25) once the change notified on 24.09.2026 takes effect under Clause 4.8; test transfer of 50 USDT precedes the first payment.",
          wallet="USDT (ERC-20) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25 (new Designated Wallet — notice of 24.09.2026, Clause 4.8)",
          footer="Amount due: USD 4,319.00.",
