@@ -56,9 +56,10 @@ INVOICES = [
     dict(inv_date="2026-09-24", seq=3,
          period="September 2026",
          lines=[("Consulting services under the Agreement, September 2026 (monthly fee, Clause 4.2)", 5000.00),
-                ("Less: set-off, as agreed by the Parties — Lisbon travel tickets paid by the Company (EUR 599)", -681.00)],
+                ("Less: set-off, as agreed by the Parties — SBC Lisbon conference ticket (EUR 599) funded by the Company under FIN-6 and obtained free of charge; USD 681.00 as approved by the Company on 23.09.2026", -681.00)],
          paid="Not yet paid. Payable under Clause 4.5(a) within the first 10 days of October 2026 to the new Designated Wallet (ERC-20 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25) once the change notified on 24.09.2026 takes effect under Clause 4.8; test transfer of 50 USDT precedes the first payment.",
          wallet="USDT (ERC-20) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25 (new Designated Wallet — notice of 24.09.2026, Clause 4.8)",
+         footer="Amount due: USD 4,319.00.",
          paid_ref="FIN-12 · к оплате · 4 319 USDT (ERC-20) на 0x0C1E… · аппрув владельца 23.09", note="Выставлен до платежа — как и должно быть."),
 ]
 
@@ -112,7 +113,7 @@ table.lines tr.total td {{ border-bottom: none; border-top: 2px solid #000; font
 </tbody></table>
 <div class="pay"><h3>Payment details</h3>
 Wallet: <b>{wallet}</b><br>
-Settlement in USDT at 1 USDT = 1 USD (Clause 4.7 of the Agreement). This invoice documents a payment already received; no further payment is due under it.</div>
+Settlement in USDT at 1 USDT = 1 USD (Clause 4.7 of the Agreement). {footer}</div>
 <p class="small">Issued by the Consultant to the Company under the Agreement on the date stated above. No signature or stamp required.</p>
 </body></html>"""
 
@@ -134,7 +135,8 @@ for inv in INVOICES:
         contract=CONTRACT, period=html.escape(inv["period"]),
         c_name=CONSULTANT["name"], c_addr=CONSULTANT["address"], c_email=CONSULTANT["email"],
         k_name=COMPANY["name"], k_addr=COMPANY["address"], k_reg=COMPANY["reg"], k_contact=COMPANY["contact"],
-        services=html.escape(SERVICES), rows=rows, total=money(total), wallet=inv.get('wallet', WALLET_1))
+        services=html.escape(SERVICES), rows=rows, total=money(total), wallet=inv.get('wallet', WALLET_1),
+        footer=inv.get('footer', 'This invoice documents a payment already received; no further payment is due under it.'))
     path = OUT / f"invoice-{number}.html"
     path.write_text(page, encoding="utf-8")
     probs = check(inv)
