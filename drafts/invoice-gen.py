@@ -31,12 +31,9 @@ COMPANY = {
     "contact": "legal@qubix.pro",
 }
 CONTRACT = "Consulting Services Agreement dated 27 July 2026"
-# Designated Wallet по договору, п. 4.8 (ERC-20). Туда же прошли FIN-2 и FIN-7.
-# В FIN-12 стоит другой адрес (0x0C1E…3c25) — по п. 4.8 смена кошелька требует
-# письменного уведомления, верификационного звонка и 5 рабочих дней; пока этого
-# нет, в инвойсе стоит договорный.
+# Designated Wallet по договору, п. 4.8 (ERC-20). Туда прошли FIN-2 и FIN-7.
+# Только оплаченные выплаты; неоплаченное (FIN-12) в пакет не идёт.
 WALLET_1 = "USDT (ERC-20) 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7 (Designated Wallet, Clause 4.8)"
-WALLET_2 = WALLET_1
 SERVICES = ("Consulting services under Schedule 1 of the Agreement: promotion and media, "
             "partnerships, public representation and events, sales management, "
             "HR and operational management of the commercial team.")
@@ -54,13 +51,6 @@ INVOICES = [
          lines=[("Consulting services, August 2026", 3900.00)],
          paid_ref="FIN-7 · 27.08.2026 · $3 900 USDT (ERC-20) · etherscan 0x6ad8…4cacc",
          note=""),
-    dict(inv_date="2026-09-22", pay_date="2026-09-25", seq=1, wallet=WALLET_2,
-         period="September 2026 (second part) and advance for October 2026",
-         lines=[("Consulting services, September 2026 — second part", 2500.00),
-                ("Advance payment for consulting services, October 2026", 2500.00),
-                ("Less: Lisbon travel tickets paid by the Company (FIN-6), €599 at 1.14", -681.00)],
-         paid_ref="FIN-12 · к оплате до 25.09.2026 · 4 319 USDT (ERC-20) · аппрув владельца 23.09",
-         note="Сумма 4 319 — как в FIN-12: 5 000 минус 599 € по курсу 1,14. Оплата ещё не прошла; после оплаты в письмо-подтверждение ставится хеш."),
 ]
 
 def weekday(d):
