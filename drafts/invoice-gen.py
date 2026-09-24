@@ -50,7 +50,7 @@ INVOICES = [
     dict(inv_date="2026-09-24", seq=2,
          period="August 2026",
          lines=[("Consulting services under the Agreement, August 2026 (monthly fee, Clause 4.2)", 5000.00),
-                ("Less: set-off, as agreed by the Parties, of the unspent balance of funds provided by the Company for business trips to Moscow, August 2026 (RUB 92,734.53 at 84.2820, per the Company's calculation of 27.08.2026)", -1100.00)],
+                ("Less: set-off, as agreed by the Parties, of the unspent balance of funds provided by the Company for business trips to Moscow, August 2026 (RUB 92,734.53 at 84.2820 = USD 1,100.29, rounded to USD 1,100.00 by agreement of the Parties; the Company's calculation of 27.08.2026)", -1100.00)],
          paid="Paid on 27.08.2026 — 3,900 USDT (ERC-20) to the Designated Wallet (tx 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc)",
          paid_ref="FIN-7 · 27.08.2026 · $3 900 USDT (ERC-20)", note=""),
     dict(inv_date="2026-09-24", seq=3,

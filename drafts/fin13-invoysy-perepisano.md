@@ -57,6 +57,8 @@ Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A
 
 This confirmation is requested by me, the Consultant, for a compliance check by my wallet service provider, which has paused my withdrawal pending confirmation of the source of these funds under the Agreement. Could you please confirm in writing that the above payments were made by YARD TECH S.A.S. to me under the Agreement as consideration for consulting services, and that the invoices issued today correspond to those payments — stating for each payment the service period, amount due and amount paid (with the set-off for August), payment date, network, the Company's sending address and the recipient address, and the transaction hash, in the form of the calculation statement provided for in Clause 4.5(a)?
 
+Please also confirm that the Company consents, for the purpose of this compliance check only, to my providing the wallet service provider with the Agreement, the two invoices and the Company's confirmation.
+
 A plain reply by e-mail is sufficient.
 
 Kind regards,
