@@ -20,8 +20,10 @@
 
 | Инвойс | Выставлен | Период услуг | Сумма, $ | Оплата (факт — в инвойсе строкой с хешем) | Задача |
 |---|---|---|---|---|---|
-| 2026-09-24-1 | 24.09 | 27–31.07.2026 | 2 500 | 28.07, $100 + $2 400 | FIN-2 |
-| 2026-09-24-2 | 24.09 | август 2026: фикс 5 000 (п. 4.2) минус зачёт 1 100 по договорённости сторон — неизрасходованный остаток средств компании на поездки в Москву (92 734,53 ₽ по 84,2820, расчёт компании 27.08, FIN-4) | 3 900 | 27.08, $3 900 | FIN-7 |
+| 2026-09-24-1 | 24.09 | ½ фикса за август, вперёд по моей просьбе | 2 500 | 28.07, $100 + $2 400 | FIN-2 |
+| 2026-09-24-2 | 24.09 | ½ августа (2 500) + ½ сентября вперёд (2 500) минус зачёт 1 100 по договорённости сторон — неизрасходованный остаток подотчёта по Москве (92 734,53 ₽ по 84,2820 = 1 100,29, округлено до 1 100; расчёт компании 27.08, FIN-4) | 3 900 | 27.08, $3 900 | FIN-7 |
+
+Схема по договорённости сторон: фикс 5 000 (п. 4.2) с августа (хвост 27–31.07 не выставлялся), платится половинами — вторая половина месяца вместе с первой половиной следующего, вперёд. FIN-12 в ту же схему: ½ сентября + ½ октября − 681 = 4 319.
 
 
 Реквизиты из договора: стороны — по преамбуле, контакт консультанта — п. 9.2, кошелёк — Designated Wallet п. 4.8, ERC-20 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7 (обе оплаты пришли на него), USDT 1:1 — п. 4.7.
@@ -48,12 +50,12 @@ Subject: Request for payment confirmation — Consulting Services Agreement date
 
 Dear Sirs,
 
-Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A.S. and me as Consultant, the Company has made to me the following payments of Fees in USDT (ERC-20) to the Designated Wallet under Clause 4.8, 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7. No invoices were issued before these payments; today I have issued invoices 2026-09-24-1 and 2026-09-24-2 (attached), which document the payments already received. Invoice 2026-09-24-2 is the August monthly fee of USD 5,000.00 less USD 1,100.00 set off, as agreed by the Parties, against the unspent balance of funds provided by the Company for business trips to Moscow (RUB 92,734.53 at 84.2820, per the Company's calculation of 27.08.2026):
+Under the Consulting Services Agreement dated 27 July 2026 between YARD TECH S.A.S. and me as Consultant, the Company has made to me the following payments of Fees in USDT (ERC-20) to the Designated Wallet under Clause 4.8, 0xB7867007bDfe0e6c9Ff718489BD52604218fA3b7. No invoices were issued before these payments; today I have issued invoices 2026-09-24-1 and 2026-09-24-2 (attached), which document the payments already received. By agreement of the Parties the monthly fee of USD 5,000.00 (Clause 4.2) is charged from August 2026 and is paid in two halves, the second half of each month together with the first half of the following month paid early. Invoice 2026-09-24-2 includes USD 1,100.00 set off, as agreed by the Parties, against the unspent balance of funds provided by the Company for business trips to Moscow (RUB 92,734.53 at 84.2820 = USD 1,100.29, rounded to USD 1,100.00; the Company's calculation of 27.08.2026):
 
 | Payment | Service period | Amount, USD | Paid on | Transaction hash |
 |---|---|---|---|---|
-| Fees (invoice 2026-09-24-1, issued 24.09.2026) | 27–31 July 2026 | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
-| Fees (invoice 2026-09-24-2, issued 24.09.2026) | August 2026 | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
+| Fees (invoice 2026-09-24-1, issued 24.09.2026) | August 2026 — first half, paid early | 2,500.00 | 28.07.2026 | 0x922d980d75b79691bb0eec654cf26e4e3becaf1ce42360d76a58eeb1cfc3dec8 (100 USDT); 0x0fabbb88c12f906e8fda60afeabfc8fca2d813d796b08cd016fcd6cb2da47abc (2,400 USDT) |
+| Fees (invoice 2026-09-24-2, issued 24.09.2026) | August 2026 — second half; September 2026 — first half (2,500 + 2,500 − 1,100) | 3,900.00 | 27.08.2026 | 0x6ad8d1a8b121f7ef67bdb29576fa8039d70a864d119b181fb457b379bc74cacc |
 
 This confirmation is requested by me, the Consultant, for a compliance check by my wallet service provider, which has paused my withdrawal pending confirmation of the source of these funds under the Agreement. Could you please confirm in writing that the above payments were made by YARD TECH S.A.S. to me under the Agreement as consideration for consulting services, and that the invoices issued today correspond to those payments — stating for each payment the service period, amount due and amount paid (with the set-off for August), payment date, network, the Company's sending address and the recipient address, and the transaction hash, in the form of the calculation statement provided for in Clause 4.5(a)?
 
