@@ -27,7 +27,7 @@ CONSULTANT = {
 }
 COMPANY = {
     "name": "YARD TECH S.A.S.",
-    "address": "Potosi 1615, Montevideo, Oriental Republic of Uruguay",
+    "address": "Avda. Dr. Luis Alberto de Herrera 1248, Montevideo, CP 11300, Oriental Republic of Uruguay (address stated in the Agreement: Potosi 1615, Montevideo)",
     "reg": "RUT No. 219861600014, National Registry of Commerce No. 7718",
     "contact": "legal@qubix.pro",
 }
