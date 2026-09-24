@@ -59,8 +59,8 @@ INVOICES = [
          lines=[("Consulting services under the Agreement — remaining 50% of the monthly fee for September 2026 (Clause 4.2)", 2500.00),
                 ("Consulting services under the Agreement — 50% of the monthly fee for October 2026 (Clause 4.2), paid early by agreement of the Parties", 2500.00),
                 ("Less: set-off, as agreed by the Parties, of the SBC Summit Lisbon conference ticket paid by the Company (the Consultant obtained a complimentary ticket) — EUR 599.00 at 1.137 USD/EUR = USD 681.06, rounded to USD 681.00 by agreement of the Parties (calculation approved on 23.09.2026)", -681.00)],
-         paid="Not yet paid. Payable to the new Designated Wallet (ERC-20, Ethereum mainnet, 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25) once the change notified on 24.09.2026 takes effect under Clause 4.8; test transfer of 50 USDT precedes the first payment.",
-         wallet="USDT (ERC-20, Ethereum mainnet) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25 (new Designated Wallet — notice of 24.09.2026, Clause 4.8)",
+         paid="Not yet paid. Payable to the Designated Wallet 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25 (USDT ERC-20, Ethereum mainnet), effective as the Designated Wallet under Clause 4.8 from 24.09.2026.",
+         wallet="USDT (ERC-20, Ethereum mainnet) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25 (Designated Wallet, Clause 4.8 — effective from 24.09.2026)",
          footer="Amount due: USD 4,319.00.",
          paid_ref="FIN-12 · к оплате · 4 319 USDT (ERC-20, Ethereum mainnet) на 0x0C1E… · аппрув владельца 23.09", note="Как в FIN-12: вторая часть сентября + аванс октября − 681."),
 ]
