@@ -58,7 +58,7 @@ INVOICES = [
          period="September 2026 — second half; October 2026 — first half",
          lines=[("Consulting services under the Agreement — remaining 50% of the monthly fee for September 2026 (Clause 4.2)", 2500.00),
                 ("Consulting services under the Agreement — 50% of the monthly fee for October 2026 (Clause 4.2), paid early by agreement of the Parties", 2500.00),
-                ("Less: set-off as agreed by the Parties (EUR 599 at 1.14, rounded)", -681.00)],
+                ("Less: set-off, as agreed by the Parties, of the SBC Summit Lisbon conference ticket paid by the Company (the Consultant obtained a complimentary ticket) — EUR 599.00 at 1.137 USD/EUR = USD 681.06, rounded to USD 681.00 by agreement of the Parties (calculation approved on 23.09.2026)", -681.00)],
          paid="Not yet paid. Payable to the new Designated Wallet (ERC-20 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25) once the change notified on 24.09.2026 takes effect under Clause 4.8; test transfer of 50 USDT precedes the first payment.",
          wallet="USDT (ERC-20) 0x0C1E7bb8A96C3AA21F073A84EFa9af561C4b3c25 (new Designated Wallet — notice of 24.09.2026, Clause 4.8)",
          footer="Amount due: USD 4,319.00.",
