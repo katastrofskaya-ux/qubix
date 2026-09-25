@@ -21,7 +21,7 @@ case "${1:-}" in
     id="${2:?укажи id задачи, например MARKETING-83}"
     api "$BASE/api/issues/$id?fields=$ISSUE_FIELDS"; echo
     echo '--- комментарии ---'
-    api "$BASE/api/issues/$id/comments?fields=$COMMENT_FIELDS"; echo
+    api "$BASE/api/issues/$id/comments?fields=$COMMENT_FIELDS&\$top=5000"; echo
     ;;
   list)
     proj="${2:?укажи проект, например CONTENT}"; top="${3:-30}"

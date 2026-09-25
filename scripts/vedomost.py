@@ -47,6 +47,8 @@ def yt(path, **params):
     if not token:
         return None
     url = f"{BASE}/api/{path}"
+    if path.endswith("/comments") and "$top" not in params:
+        params["$top"] = 5000  # YouTrack по умолчанию отдаёт 42 записи
     if params:
         url += "?" + urllib.parse.urlencode(params)
     r = subprocess.run(["curl", "-sS", "--max-time", "40",

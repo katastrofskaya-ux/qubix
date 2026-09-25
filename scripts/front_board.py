@@ -133,7 +133,7 @@ def sales_items():
         """Дата последнего человеческого коммента в карточке (не бот) —
         чтобы доска не предлагала писать тому, кого уже касались."""
         iid = card_url.rsplit("/", 1)[-1]
-        cs = front.yt(f"/issues/{iid}/comments?fields=created,author(fullName)") or []
+        cs = front.yt(f"/issues/{iid}/comments?fields=created,author(fullName)&$top=5000") or []
         human = [c["created"] for c in cs
                  if (c.get("author") or {}).get("fullName", "") not in ("Qubix Support", "")]
         if not human:
