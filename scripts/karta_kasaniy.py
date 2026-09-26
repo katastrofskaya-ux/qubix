@@ -24,8 +24,8 @@ PLATFORM = {"ADHUNT": "Adhunt", "ADHUNT1": "Adhunt", "AFF_INSIDE": "Aff Inside",
             "IGAMINGNEWS": "iGaming News", "IGAMING_NEWS": "iGaming News", "FLOWBRO": "FLOW", "FLOW": "FLOW",
             "PARTNERKIN_SITE": "Partnerkin", "PARTNEROFF_SITE": "Partneroff", "CPARIP": "CPA.RIP",
             "SYSBITRAZH": "Сысоев", "TIKTOKILLER": "TikTokiller", "VTRAFF": "V Traff", "APTEKA": "Аптека",
-            "TGQUBIX": "наш канал", "ZOMBIE": "Zombie Traff", "PACAN": "Пацан", "KHOMENOK": "Хоменюк"}
-SKIP = {206: "Женя (наш подрядчик)", 233: "Хоменюк (блогер, наш)", 204: "АффБудда (партнёр)",
+            "TGQUBIX": "наш канал", "ZOMBIE": "Zombie Traff", "PACAN": "Пацан", "KHOMENOK": "Хоменок"}
+SKIP = {206: "Женя (наш подрядчик)", 233: "Хоменок (блогер, наш)", 204: "АффБудда (партнёр)",
         241: "Partnerkin — площадка под своим кодом", 244: "Partneroff — площадка под своим кодом",
         212: "OneMedia, Дима — разговор уже идёт отдельно"}
 CHECK = {55: "protectedpool11 — проверить, не наша ли запись", 93: "protectedpool1 — проверить, не наша ли запись"}

@@ -1276,7 +1276,7 @@ _Partnerkin — площадка под своим кодом_
 
 ### #233 · khomenok@x6agency.com · до 09.10 · код KHOMENOK
 [SALES-191](https://team.qubix.capital/issue/SALES-191) · [админка](https://admin.qubix.pro/customers/e9b8c6ef-4264-4e72-b26f-7ddcd50511fc) · [Telegram](tg://user?id=92648682) · посл. коммент support 16.09
-_Хоменюк (блогер, наш)_
+_Хоменок (блогер, наш)_
 
 ### #212 · cto@onemedia.ltd · до 01.10
 [SALES-160](https://team.qubix.capital/issue/SALES-160) · [админка](https://admin.qubix.pro/customers/2be99c58-d95e-42ba-95c3-737b68e89f1e) · [Telegram](tg://user?id=8960715138) · посл. коммент Anastasia 03.09

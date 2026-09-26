@@ -19,7 +19,7 @@
 
 1. Посевы: iGaming News 31.08 (CONTENT-23), CPAGRAM 31.08 (CONTENT-24),
    .Aff Inside 01.09 (CONTENT-34), adhunt 02.09 (CONTENT-37).
-2. Подкаст Хоменюка от 06.09 — в MARKETING-83.
+2. Подкаст Хоменока от 06.09 — в MARKETING-83.
 3. Всё по интеграции Будды, что уже вышло, — в MARKETING-85/MARKETING-77.
 4. Опубликованные листинги — в свои задачи CONTENT-26…38 по мере выхода.
 
