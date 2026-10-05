@@ -74,8 +74,13 @@ def load_clients(cookie, use_cache):
         rows += page["rows"]
     full = []
     for i, r in enumerate(rows, 1):
-        card = curl(f"{API}/customers/{r['id']}", cookie)
+        card = None
+        for _ in range(3):  # карточка иногда не отвечает — без повтора человек молча выпадает из замера
+            card = curl(f"{API}/customers/{r['id']}", cookie)
+            if card:
+                break
         if not card:
+            print(f"  ⚠️ карточка №{r['number']} не загрузилась — в замере её нет", file=sys.stderr)
             continue
         lic = card.get("licenses") or []
         full.append({
@@ -83,6 +88,7 @@ def load_clients(cookie, use_cache):
             "email": r.get("email") or "",
             "code": (r.get("referred_by_code") or "").upper(),
             "created": r.get("created_at"),
+            "internal": bool(r.get("is_internal")),
             "lic": len(lic),
             "heartbeat": any(l.get("last_seen") for l in lic),
             "pays": [
@@ -103,7 +109,7 @@ def live_only(full):
 
     def mine(x):
         e = x["email"].lower()
-        return (x["num"] in ours or e in own_mails
+        return (x.get("internal") or x["num"] in ours or e in own_mails
                 or any(e.endswith("@" + d) for d in td)
                 or any(n in e for n in tn))
 
