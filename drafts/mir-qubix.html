@@ -1,0 +1,441 @@
+<title>Мир Qubix</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#F4F6FC; --surface-2:#E9EBF6;
+    --line:#BAC0CA; --line-soft:#DDE1EC; --line-strong:#5E6267;
+    --ink:#020404; --ink-2:#4A5262; --ink-3:#6E7687;
+    --accent:#1E5BD1; --accent-deep:#16419A; --accent-ink:#16419A;
+    --glow:rgba(30,91,209,.12);
+    --open:#9A6212; --open-bg:rgba(217,144,58,.13); --open-line:rgba(154,98,18,.35);
+    --step:52px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#020404; --surface:#0A1018; --surface-2:#0E1724;
+      --line:#1D2836; --line-soft:#141D29; --line-strong:#5E6267;
+      --ink:#E9EBF6; --ink-2:#BAC0CA; --ink-3:#8A93A3;
+      --accent:#84AEF3; --accent-deep:#16419A; --accent-ink:#84AEF3;
+      --glow:rgba(132,174,243,.14);
+      --open:#E0A75A; --open-bg:rgba(224,167,90,.12); --open-line:rgba(224,167,90,.38);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#020404; --surface:#0A1018; --surface-2:#0E1724;
+    --line:#1D2836; --line-soft:#141D29; --line-strong:#5E6267;
+    --ink:#E9EBF6; --ink-2:#BAC0CA; --ink-3:#8A93A3;
+    --accent:#84AEF3; --accent-deep:#16419A; --accent-ink:#84AEF3;
+    --glow:rgba(132,174,243,.14);
+    --open:#E0A75A; --open-bg:rgba(224,167,90,.12); --open-line:rgba(224,167,90,.38);
+  }
+
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:15px; line-height:1.62; margin:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding-inline:20px; padding-block:40px 72px;}
+  h1,h2,h3{font-family:"Unbounded",-apple-system,sans-serif; text-wrap:balance; margin:0;}
+  h1{font-size:clamp(28px,5.2vw,44px); font-weight:600; line-height:1.12; letter-spacing:-.02em;}
+  h2{font-size:clamp(19px,2.7vw,24px); font-weight:600; letter-spacing:-.01em;}
+  h3{font-size:15px; font-weight:600; letter-spacing:-.005em;}
+  p{margin:0; max-width:64ch;}
+  a{color:var(--accent-ink); text-decoration-thickness:1px; text-underline-offset:2px;}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px;}
+
+  .eyebrow{
+    font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11px;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  }
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+
+  header.top{display:flex; flex-direction:column; gap:18px; padding-bottom:34px; border-bottom:1px solid var(--line);}
+  .formula{
+    font-family:"Unbounded",sans-serif; font-weight:400;
+    font-size:clamp(17px,2.6vw,22px); line-height:1.45;
+    padding:20px 22px; border-radius:2px;
+    border-left:3px solid var(--accent);
+    background:linear-gradient(90deg,var(--glow),transparent 70%);
+  }
+  .formula b{font-weight:600;}
+  .lede{color:var(--ink-2); font-size:16px;}
+
+  section{padding-block:38px; border-bottom:1px solid var(--line-soft);}
+  section:last-of-type{border-bottom:0;}
+  .head{display:flex; flex-direction:column; gap:8px; margin-bottom:22px;}
+
+  .chip{
+    display:inline-flex; align-items:center; gap:6px; flex:none;
+    font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.07em;
+    text-transform:uppercase; padding:3px 8px; border-radius:2px; white-space:nowrap;
+  }
+  .chip.fixed{background:var(--accent-deep); color:#fff;}
+  .chip.open{background:var(--open-bg); color:var(--open); border:1px solid var(--open-line);}
+
+  .swatches{display:grid; grid-template-columns:repeat(auto-fit,minmax(122px,1fr)); gap:12px;}
+  .sw{border:1px solid var(--line); border-radius:2px; overflow:hidden; background:var(--surface);}
+  .sw .fill{height:56px; border-bottom:1px solid var(--line);}
+  .sw .meta{padding:8px 10px; display:flex; flex-direction:column; gap:1px;}
+  .sw .name{font-size:12px; color:var(--ink-2);}
+  .sw .hex{font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:600;}
+
+  .scales{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+  .scale{display:flex; flex-direction:column; gap:10px;}
+  .frame{
+    border:1px solid var(--line); border-radius:2px; background:var(--surface);
+    aspect-ratio:4/3; max-width:100%; display:block; width:100%;
+  }
+  .scale .num{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--accent-ink); letter-spacing:.1em;}
+  .scale p{font-size:13.5px; color:var(--ink-2);}
+
+  .tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:2px;}
+  table{border-collapse:collapse; width:100%; min-width:620px; font-size:13.5px;}
+  th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top;}
+  thead th{
+    background:var(--surface-2); font-family:"JetBrains Mono",monospace;
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); font-weight:600;
+  }
+  tbody tr:last-child td{border-bottom:0;}
+  td strong{font-weight:600;}
+  td.dim{color:var(--ink-2);}
+
+  .shots{display:flex; flex-direction:column; gap:2px;}
+  .shot{display:grid; grid-template-columns:var(--step) 128px 1fr; gap:16px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line-soft);}
+  .shot:last-child{border-bottom:0;}
+  .shot .n{
+    font-family:"Unbounded",sans-serif; font-size:22px; font-weight:600;
+    color:var(--accent-ink); line-height:1;
+  }
+  .shot svg{border:1px solid var(--line); background:var(--surface); display:block; width:128px; height:80px; border-radius:2px;}
+  .shot .txt{display:flex; flex-direction:column; gap:3px;}
+  .shot .txt b{font-size:14px;}
+  .shot .txt span{font-size:13px; color:var(--ink-2);}
+  @media (max-width:560px){
+    .shot{grid-template-columns:36px 1fr; row-gap:10px;}
+    .shot svg{grid-column:2; width:100%; height:auto; aspect-ratio:8/5;}
+    .shot .txt{grid-column:2;}
+  }
+
+  ul.plain{margin:0; padding-left:1.15em; display:flex; flex-direction:column; gap:7px;}
+  ul.plain li{padding-left:2px;}
+  ul.plain li::marker{color:var(--ink-3);}
+
+  .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:26px;}
+  .stop{display:flex; flex-direction:column; gap:10px;}
+  .stop .item{display:flex; gap:10px; align-items:flex-start; font-size:14px;}
+  .stop .bar{width:3px; align-self:stretch; background:var(--line-strong); flex:none; border-radius:2px;}
+
+  .refs{display:flex; flex-direction:column; gap:10px;}
+  .ref{display:flex; gap:12px; align-items:baseline; padding:11px 14px; background:var(--surface); border:1px solid var(--line); border-radius:2px; font-size:13.5px; flex-wrap:wrap;}
+  .ref .who{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); flex:none;}
+
+  .measure{
+    display:flex; gap:14px; align-items:baseline; flex-wrap:wrap;
+    padding:16px 18px; border:1px solid var(--accent-deep); border-radius:2px;
+    background:linear-gradient(90deg,var(--glow),transparent);
+  }
+  .measure .big{font-family:"Unbounded",sans-serif; font-size:clamp(20px,3vw,26px); font-weight:600;}
+
+  .note{font-size:13px; color:var(--ink-3); max-width:66ch;}
+
+  /* ——— раскадровка ролика ——— */
+  .timeline{display:flex; border:1px solid var(--line); border-radius:2px; overflow:hidden; margin-bottom:22px;}
+  .seg{padding:9px 10px; display:flex; flex-direction:column; gap:2px; border-right:1px solid var(--line); min-width:0;}
+  .seg:last-child{border-right:0;}
+  .seg .t{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--accent-ink); letter-spacing:.04em;}
+  .seg .l{font-size:11.5px; color:var(--ink-2); line-height:1.3; overflow-wrap:anywhere;}
+  .seg.a{flex:3; background:var(--surface);}
+  .seg.b{flex:3; background:var(--surface-2);}
+  .seg.c{flex:8; background:var(--surface);}
+  .seg.d{flex:4; background:var(--surface-2);}
+  @media (max-width:560px){ .timeline{flex-wrap:wrap;} .seg{flex:1 1 46%; border-bottom:1px solid var(--line);} }
+
+  .board{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px;}
+  .cell{display:flex; flex-direction:column; gap:7px; min-width:0;}
+  .cell svg{width:100%; height:auto; aspect-ratio:1/1; display:block; border:1px solid var(--line); border-radius:2px;}
+  .cell .cap{display:flex; flex-direction:column; gap:2px;}
+  .cell .tc{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--accent-ink); letter-spacing:.04em;}
+  .cell .nm{font-size:12.5px; font-weight:600; line-height:1.3;}
+  .cell .ds{font-size:11.5px; color:var(--ink-2); line-height:1.4;}
+  @media (prefers-reduced-motion:no-preference){
+    .pulse{animation:blink 3.4s ease-in-out infinite;}
+    @keyframes blink{0%,100%{opacity:.9}50%{opacity:.35}}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">Визуальная рамка · для исполнителя · 16.09.2026</div>
+    <h1>Мир Qubix</h1>
+    <div class="formula">
+      <b>Свой сервер — своя ракета! 🚀</b><br>
+      <b>Тянет от залива до офисного пакета.</b>
+    </div>
+    <p class="lede">Qubix ставится на собственный сервер клиента. Рынок привык думать, что своё железо — это возня. Весь мир существует ради одного переворота: <b>свой сервер — это мощь</b>. Быстро, потому что своё. Защищено, потому что своё.</p>
+    <p class="note">Формула — решение владельца от 10.09.2026, подтверждено 15.09 после отдельного разбора. Ни одно слово в ней не меняется. Там, где знакомим холодную аудиторию, первой строкой встаёт «Qubix:».</p>
+  </header>
+
+  <section>
+    <div class="head">
+      <h2>Палитра</h2>
+      <p class="note">Это единственные допустимые значения. Акцент — градиент: на светлом фоне <span class="mono">1E5BD1→16419A</span>, на тёмном <span class="mono">84AEF3→16419A</span>. Тизер идёт в космосе, то есть работает тёмная пара.</p>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="fill" style="background:#FFFFFF"></div><div class="meta"><span class="name">Фон светлый</span><span class="hex">FFFFFF</span></div></div>
+      <div class="sw"><div class="fill" style="background:#020404"></div><div class="meta"><span class="name">Фон тёмный</span><span class="hex">020404</span></div></div>
+      <div class="sw"><div class="fill" style="background:#E9EBF6"></div><div class="meta"><span class="name">Подложка</span><span class="hex">E9EBF6</span></div></div>
+      <div class="sw"><div class="fill" style="background:#BAC0CA"></div><div class="meta"><span class="name">Серый</span><span class="hex">BAC0CA</span></div></div>
+      <div class="sw"><div class="fill" style="background:linear-gradient(135deg,#1E5BD1,#16419A)"></div><div class="meta"><span class="name">Акцент, светлый</span><span class="hex">1E5BD1→16419A</span></div></div>
+      <div class="sw"><div class="fill" style="background:linear-gradient(135deg,#84AEF3,#16419A)"></div><div class="meta"><span class="name">Акцент, тёмный</span><span class="hex">84AEF3→16419A</span></div></div>
+      <div class="sw"><div class="fill" style="background:#5E6267"></div><div class="meta"><span class="name">Линии</span><span class="hex">5E6267</span></div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">Элементы пака: куб-герой, паттерн кубов, градиентное свечение, «поток вверх».</p>
+  </section>
+
+
+  <section>
+    <div class="head">
+      <h2>Тизер, 15 секунд</h2>
+      <p class="note">Ракета уходит с Земли и на орбите раскрывается в станцию. Экранов продукта в тизере нет — поэтому он заказывается сегодня, не дожидаясь съёмки интерфейса. Полная версия на 18 секунд собирается позже из этой же сцены: внутрь добавляется рубка с мониторами. Кадры в квадрате 1:1 — это основная сборка, ролик идёт постами в каналы. Пунктир показывает поле, за которое титр не заходит.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="seg a"><span class="t">0:00–0:03</span><span class="l">Старт с Земли</span></div>
+      <div class="seg b"><span class="t">0:03–0:06</span><span class="l">Раскрытие в станцию</span></div>
+      <div class="seg c"><span class="t">0:06–0:10</span><span class="l">Облёт корпуса</span></div>
+      <div class="seg d"><span class="t">0:10–0:15</span><span class="l">Отъезд и формула</span></div>
+    </div>
+
+    <div class="board">
+
+      <div class="cell">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Кадр 1: ночная Земля внизу кадра, ракета уходит вверх со шлейфом">
+          <defs>
+            <radialGradient id="t1bg" cx="50%" cy="88%" r="72%"><stop offset="0" stop-color="#0E2145"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <linearGradient id="t1e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+            <linearGradient id="t1tr" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#84AEF3" stop-opacity="0"/><stop offset="1" stop-color="#84AEF3" stop-opacity=".85"/></linearGradient>
+            <filter id="t1b" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="2.6"/></filter>
+          </defs>
+          <rect width="120" height="120" fill="url(#t1bg)"/>
+          <g fill="#E9EBF6"><circle cx="20" cy="20" r=".7" opacity=".7"/><circle cx="98" cy="30" r=".6" opacity=".6"/><circle cx="80" cy="14" r=".5" opacity=".5"/><circle cx="34" cy="40" r=".55" opacity=".55"/></g>
+          <ellipse cx="60" cy="168" rx="104" ry="72" fill="#84AEF3" opacity=".35" filter="url(#t1b)"/>
+          <ellipse cx="60" cy="172" rx="98" ry="68" fill="url(#t1e)"/>
+          <ellipse cx="60" cy="172" rx="98" ry="68" fill="#020404" opacity=".45"/>
+          <rect x="58" y="62" width="4" height="40" fill="url(#t1tr)" filter="url(#t1b)"/>
+          <g>
+            <path d="M60 36 C63.6 40.4 64.8 46.8 64.8 53 L64.8 60 C64.8 62.2 63.1 63.6 60 63.6 C56.9 63.6 55.2 62.2 55.2 60 L55.2 53 C55.2 46.8 56.4 40.4 60 36 Z" fill="#E9EBF6"/>
+            <path d="M60 36 C62.1 38.6 63.3 41.8 64.1 45.2 L55.9 45.2 C56.7 41.8 57.9 38.6 60 36 Z" fill="#84AEF3"/>
+            <ellipse cx="60" cy="64.4" rx="4.8" ry="2.7" fill="#84AEF3"/>
+          </g>
+        </svg>
+        <div class="cap"><span class="tc">1 · 0:00–0:03</span><span class="nm">Старт</span><span class="ds">Ночная Земля дугой внизу, ракета уходит вверх. Камера идёт следом. Титра нет.</span></div>
+      </div>
+
+      <div class="cell">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Кадр 2: ракета раскрывается в станцию-куб, титр Qubix — Affiliate SuperApp">
+          <defs>
+            <radialGradient id="t2bg" cx="50%" cy="36%" r="64%"><stop offset="0" stop-color="#10274F"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <radialGradient id="t2g" cx="50%" cy="34%" r="30%"><stop offset="0" stop-color="#84AEF3" stop-opacity=".5"/><stop offset="1" stop-color="#84AEF3" stop-opacity="0"/></radialGradient>
+            <linearGradient id="t2t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBD3FA"/><stop offset="1" stop-color="#84AEF3"/></linearGradient>
+            <linearGradient id="t2l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+          </defs>
+          <rect width="120" height="120" fill="url(#t2bg)"/>
+          <rect width="120" height="120" fill="url(#t2g)"/>
+          <rect x="7" y="7" width="106" height="106" rx="4" fill="none" stroke="#5E6267" stroke-width=".5" stroke-dasharray="3 3"/>
+          <g stroke="#84AEF3" stroke-width="1" stroke-linecap="round" opacity=".7">
+            <line x1="44" y1="30" x2="34" y2="24"/><line x1="76" y1="30" x2="86" y2="24"/>
+            <line x1="44" y1="56" x2="34" y2="62"/><line x1="76" y1="56" x2="86" y2="62"/>
+          </g>
+          <g fill="#0E1724" stroke="#84AEF3" stroke-width=".8">
+            <rect x="22" y="18" width="13" height="7" rx="2.5"/><rect x="85" y="18" width="13" height="7" rx="2.5"/>
+            <rect x="22" y="61" width="13" height="7" rx="2.5"/><rect x="85" y="61" width="13" height="7" rx="2.5"/>
+          </g>
+          <g stroke-linejoin="round">
+            <polygon points="60,26 76,34 60,42 44,34" fill="url(#t2t)"/>
+            <polygon points="44,34 60,42 60,60 44,52" fill="url(#t2l)"/>
+            <polygon points="76,34 60,42 60,60 76,52" fill="#16419A"/>
+          </g>
+          <text x="60" y="88" text-anchor="middle" fill="#E9EBF6" font-size="7.6" font-family="Golos Text, sans-serif" font-weight="600">Qubix — Affiliate</text>
+          <text x="60" y="99" text-anchor="middle" fill="#E9EBF6" font-size="7.6" font-family="Golos Text, sans-serif" font-weight="600">SuperApp</text>
+        </svg>
+        <div class="cap"><span class="tc">2 · 0:03–0:06</span><span class="nm">Раскрытие</span><span class="ds">Куб — центральная часть, от него разворачиваются панели и платформы.</span></div>
+      </div>
+
+      <div class="cell">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Кадр 3: облёт вдоль корпуса, светящаяся полоса окон рубки">
+          <defs>
+            <radialGradient id="t3bg" cx="50%" cy="45%" r="66%"><stop offset="0" stop-color="#0C1E3D"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <linearGradient id="t3t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBD3FA"/><stop offset="1" stop-color="#84AEF3"/></linearGradient>
+            <linearGradient id="t3l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+            <filter id="t3b" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="1.8"/></filter>
+          </defs>
+          <rect width="120" height="120" fill="url(#t3bg)"/>
+          <g stroke-linejoin="round">
+            <polygon points="60,20 94,39 60,58 26,39" fill="url(#t3t)"/>
+            <polygon points="26,39 60,58 60,100 26,81" fill="url(#t3l)"/>
+            <polygon points="94,39 60,58 60,100 94,81" fill="#16419A"/>
+          </g>
+          <rect x="32" y="62" width="22" height="5" rx="2.5" fill="#E9EBF6" opacity=".95" filter="url(#t3b)"/>
+          <rect x="32" y="62" width="22" height="3.6" rx="1.8" fill="#FFFFFF"/>
+          <g fill="#84AEF3"><circle cx="68" cy="68" r="1.3"/><circle cx="76" cy="73" r="1.3"/><circle cx="84" cy="78" r="1.3"/></g>
+          <g fill="#0E1724" stroke="#84AEF3" stroke-width=".7">
+            <rect x="6" y="44" width="15" height="8" rx="3"/><rect x="99" y="49" width="15" height="8" rx="3"/>
+          </g>
+          <text x="60" y="112" text-anchor="middle" fill="#6E7687" font-size="5.4" font-family="JetBrains Mono, monospace">окна рубки</text>
+        </svg>
+        <div class="cap"><span class="tc">3 · 0:06–0:08</span><span class="nm">Облёт</span><span class="ds">Камера идёт вдоль корпуса. Полоса окон светится, огни по обшивке.</span></div>
+      </div>
+
+      <div class="cell">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Кадр 4: сквозь прозрачное ядро видно свет и силуэты внутри">
+          <defs>
+            <radialGradient id="t4bg" cx="50%" cy="45%" r="66%"><stop offset="0" stop-color="#0C1E3D"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <linearGradient id="t4gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84AEF3" stop-opacity=".38"/><stop offset="1" stop-color="#16419A" stop-opacity=".55"/></linearGradient>
+            <filter id="t4b" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="2.4"/></filter>
+          </defs>
+          <rect width="120" height="120" fill="url(#t4bg)"/>
+          <ellipse cx="60" cy="58" rx="38" ry="36" fill="#84AEF3" opacity=".26" filter="url(#t4b)"/>
+          <g stroke-linejoin="round" stroke="#84AEF3" stroke-width="1.2">
+            <polygon points="60,20 90,37 60,54 30,37" fill="url(#t4gl)"/>
+            <polygon points="30,37 60,54 60,96 30,79" fill="url(#t4gl)"/>
+            <polygon points="90,37 60,54 60,96 90,79" fill="url(#t4gl)"/>
+          </g>
+          <g fill="#E9EBF6" opacity=".9">
+            <rect x="38" y="56" width="13" height="3.4" rx="1.7"/><rect x="38" y="65" width="9" height="3.4" rx="1.7"/>
+            <rect x="70" y="60" width="14" height="3.4" rx="1.7"/><rect x="70" y="69" width="10" height="3.4" rx="1.7"/>
+          </g>
+          <g fill="#BAC0CA" opacity=".8"><circle cx="45" cy="76" r="2.3"/><circle cx="76" cy="80" r="2.3"/></g>
+          <text x="60" y="112" text-anchor="middle" fill="#6E7687" font-size="5.4" font-family="JetBrains Mono, monospace">внутри горит свет</text>
+        </svg>
+        <div class="cap"><span class="tc">4 · 0:08–0:10</span><span class="nm">Прозрачное ядро</span><span class="ds">Сквозь стекло видно жизнь внутри — силуэтами, без деталей.</span></div>
+      </div>
+
+      <div class="cell">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Кадр 5: финал, станция уходит вглубь, формула бренда и промокод">
+          <defs>
+            <radialGradient id="t5bg" cx="50%" cy="24%" r="64%"><stop offset="0" stop-color="#0C1B33"/><stop offset="1" stop-color="#020404"/></radialGradient>
+            <radialGradient id="t5g" cx="50%" cy="24%" r="24%"><stop offset="0" stop-color="#84AEF3" stop-opacity=".5"/><stop offset="1" stop-color="#84AEF3" stop-opacity="0"/></radialGradient>
+            <linearGradient id="t5t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBD3FA"/><stop offset="1" stop-color="#84AEF3"/></linearGradient>
+            <linearGradient id="t5l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5BD1"/><stop offset="1" stop-color="#16419A"/></linearGradient>
+            <filter id="t5b" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2"/></filter>
+          </defs>
+          <rect width="120" height="120" fill="url(#t5bg)"/>
+          <rect width="120" height="120" fill="url(#t5g)"/>
+          <rect x="7" y="7" width="106" height="106" rx="4" fill="none" stroke="#5E6267" stroke-width=".5" stroke-dasharray="3 3"/>
+          <g fill="#E9EBF6"><circle cx="22" cy="20" r=".7" opacity=".8"/><circle cx="98" cy="16" r=".6" opacity=".7"/><circle cx="90" cy="34" r=".5" opacity=".6"/><circle cx="28" cy="38" r=".6" opacity=".7"/></g>
+          <ellipse cx="60" cy="42" rx="14" ry="5" fill="#84AEF3" opacity=".4" filter="url(#t5b)"/>
+          <g stroke-linejoin="round">
+            <polygon points="60,18 72,25 60,32 48,25" fill="url(#t5t)"/>
+            <polygon points="48,25 60,32 60,46 48,39" fill="url(#t5l)"/>
+            <polygon points="72,25 60,32 60,46 72,39" fill="#16419A"/>
+          </g>
+          <g fill="#0E1724" stroke="#84AEF3" stroke-width=".6"><rect x="37" y="28" width="9" height="5" rx="2"/><rect x="74" y="28" width="9" height="5" rx="2"/></g>
+          <text x="60" y="64" text-anchor="middle" fill="#E9EBF6" font-size="7.4" font-family="Golos Text, sans-serif" font-weight="600">Qubix:</text>
+          <text x="60" y="75" text-anchor="middle" fill="#E9EBF6" font-size="7.4" font-family="Golos Text, sans-serif" font-weight="600">Свой сервер — своя ракета! 🚀</text>
+          <text x="60" y="86" text-anchor="middle" fill="#E9EBF6" font-size="7.4" font-family="Golos Text, sans-serif" font-weight="600">Тянет от залива</text>
+          <text x="60" y="97" text-anchor="middle" fill="#E9EBF6" font-size="7.4" font-family="Golos Text, sans-serif" font-weight="600">до офисного пакета.</text>
+          <text x="60" y="110" text-anchor="middle" fill="#84AEF3" font-size="5.8" font-family="JetBrains Mono, monospace">промокод канала</text>
+        </svg>
+        <div class="cap"><span class="tc">5 · 0:10–0:15</span><span class="nm">Финал</span><span class="ds">Единственный кадр, который пересобирается под каждый канал — меняется строка промокода.</span></div>
+      </div>
+
+    </div>
+
+    <div class="cols" style="margin-top:26px;">
+      <div class="stop">
+        <h3 style="margin-bottom:4px;">Полная версия, 18 секунд — позже</h3>
+        <div class="item"><span class="bar"></span><span>Та же сцена. Между облётом и финалом камера входит через полосу окон рубки: три монитора с настоящими записями продукта — трекер, витрина PWA, документы команды, по две секунды на каждый.</span></div>
+        <div class="item"><span class="bar"></span><span>Титр на весь блок: «Весь офис арбитражной команды на вашем сервере». Заказывается, когда появятся записи интерфейса; цену второго монтажа фиксируем в договоре сразу.</span></div>
+      </div>
+      <div class="stop">
+        <h3 style="margin-bottom:4px;">Чего не делаем</h3>
+        <div class="item"><span class="bar"></span><span>Мир целиком не строим: планет, дронов, портов и патрулей здесь нет — только ракета, станция и свет.</span></div>
+        <div class="item"><span class="bar"></span><span>Космос нейтральный: без исторических отсылок, без советской и американской эстетики, без ретро-плакатов.</span></div>
+        <div class="item"><span class="bar"></span><span>Без крипто-эстетики: ни «туземуна», ни «иксов», ни парабол роста. Наша ракета про мощность и владение, а не про лёгкие деньги.</span></div>
+        <div class="item"><span class="bar"></span><span>Чужие товарные знаки в кадре не пишем.</span></div>
+        <div class="item"><span class="bar"></span><span>Людей от бренда в кадре нет: экипаж — это команда клиента. Слова вроде «станция» и «дроны» работают картинкой, в титрах только формула.</span></div>
+        <div class="item"><span class="bar"></span><span>В полной версии интерфейс не перекрашиваем и фальшивых экранов не рисуем: перекрашенный интерфейс перестаёт быть доказательством.</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:26px;">
+      <h3 style="margin-bottom:10px;">Как это выглядит: объём, а не плоскость</h3>
+      <p class="note" style="margin-bottom:14px;">Кадры выше — схема движения, не стиль. Ролик собирается в 3D. Ниже то, что задаёт «красиво и обтекаемо» словами, которые исполнитель может выполнить.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Слой</th><th>Как делаем</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Форма</strong></td><td class="dim">Скруглённые рёбра и мягкая фаска, острых углов нет. Обтекаемость живёт в радиусах и в том, как по ним скользит свет.</td></tr>
+            <tr><td><strong>Станция</strong></td><td class="dim">Куб — центральная часть, от него ответвления: панели, платформы, ангары. Бóльшая часть ядра прозрачная: сквозь стекло видна жизнь внутри.</td></tr>
+            <tr><td><strong>Материал</strong></td><td class="dim">Матовое стекло с внутренним свечением. Хром и зеркало не берём: читаются дёшево и ловят чужое окружение.</td></tr>
+            <tr><td><strong>Свет</strong></td><td class="dim">Мягкий студийный: ключевой сверху-сбоку, холодный заполняющий, контровой по кромкам. В финале ключевой уходит за станцию — остаётся свечение по рёбрам.</td></tr>
+            <tr><td><strong>Камера</strong></td><td class="dim">Медленные проезды и лёгкий наезд, малая глубина резкости, боке на дальних точках. Тон «уверенный хозяин» живёт в скорости камеры.</td></tr>
+            <tr><td><strong>Цвет</strong></td><td class="dim">Утверждённые значения и только они: космос на 020404, акцент градиентом 1E5BD1→16419A и 84AEF3→16419A — по кромкам, в соплах и в свечении. Линии 5E6267.</td></tr>
+            <tr><td><strong>Титры</strong></td><td class="dim">Набираются в пространстве вместе с кадром, сами остаются плоскими и контрастными: читаемость важнее эффекта.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:14px;">Исходники проекта передаются заказчику: станция, материалы и свет отсюда уходят дальше в сборку мира и экономят её.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Формат под Telegram</h2>
+      <p class="note">Ролик идёт постами в каналы, а не в сторис. От этого зависит кадрирование, поэтому композицию строим сразу под квадрат.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Сборка</th><th>Размер</th><th>Куда</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Основная</strong></td><td class="mono">1080 × 1080, 1:1</td><td class="dim">посты в каналах — это вся закупка</td></tr>
+          <tr><td><strong>Запасная</strong></td><td class="mono">1080 × 1350, 4:5</td><td class="dim">если площадка просит выше; на мобильном занимает больше экрана</td></tr>
+          <tr><td>Вертикаль</td><td class="mono">1080 × 1920, 9:16</td><td class="dim">только под сторис площадок. В посты не идёт: съедает пол-экрана прокрутки и на десктопе висит узкой полосой</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cols" style="margin-top:22px;">
+      <div class="stop">
+        <h3 style="margin-bottom:4px;">Техническое</h3>
+        <div class="item"><span class="bar"></span><span>MP4, H.264, звук AAC, 30 кадров в секунду.</span></div>
+        <div class="item"><span class="bar"></span><span>Файл держим лёгким, ориентир до 15 МБ: тяжёлый ролик в ленте подгружается с задержкой, и человек прокручивает мимо.</span></div>
+        <div class="item"><span class="bar"></span><span>Композиция строится в квадрате. Кадрирование из вертикали обрезкой не годится: в него верстался титр.</span></div>
+      </div>
+      <div class="stop">
+        <h3 style="margin-bottom:4px;">Обложка — отдельным файлом</h3>
+        <div class="item"><span class="bar"></span><span>До запуска в ленте виден один неподвижный кадр. Первый кадр тизера — тёмный космос с ракетой: как обложка он читается пустым.</span></div>
+        <div class="item"><span class="bar"></span><span>Поэтому нужен <b>отдельный кадр-обложка</b>, JPEG 1080 × 1080: станция и название. Он должен работать сам по себе, даже если ролик никто не запустит.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Референсы, которые есть</h2>
+      <p class="note">Мудборда и стиль-кадров пока нет — существует ровно это. Первым этапом ждём от вас стиль-кадр на утверждение.</p>
+    </div>
+    <div class="refs">
+      <div class="ref"><span class="who">фактура</span><a href="https://assetstore.unity.com/packages/3d/vehicles/space/military-station-outpost-ms4-127417">Станция-аванпост MS4</a><span style="color:var(--ink-3)">— фактура станции</span></div>
+      <div class="ref"><span class="who">фактура</span><a href="https://assetstore.unity.com/packages/vfx/shaders/shapes-fx-pack-156638">Shapes FX Pack</a><span style="color:var(--ink-3)">— шейдеры и эффекты</span></div>
+      <div class="ref"><span class="who">фактура</span><a href="https://assetstore.unity.com/packages/3d/environments/sci-fi/space-cruiser-defender-urp-252757">Space Cruiser Defender</a><span style="color:var(--ink-3)">— корабли</span></div>
+      <div class="ref"><span class="who">бренд</span><a href="https://drive.google.com/drive/folders/1MG6bDxYIbSKNNN42xXVoLWFy8IXIjWKh">Логотипы</a><span style="color:var(--ink-3)">— исходники знака</span></div>
+    </div>
+    <p class="note" style="margin-top:14px;">Записей интерфейса пока нет — они нужны только для полной версии, тизер от них не зависит.</p>
+  </section>
+
+  <section>
+    <div class="head"><h2>Что нужно в ответ</h2></div>
+    <ul class="plain">
+      <li><b>Смета на тизер 15 секунд</b> — квадрат 1:1 как основная сборка, 4:5 запасной, пять сборок финального кадра под разные промокоды.</li>
+      <li><b>Кадр-обложка</b> 1080 × 1080 отдельным файлом.</li>
+      <li><b>Цена второго монтажа</b> — полной версии на 18 секунд из той же сцены. Фиксируется в договоре сразу.</li>
+      <li>Срок и сколько правок входит в цену.</li>
+      <li>Примеры работ.</li>
+      <li>Условие: <b>исходники проекта передаются заказчику</b>.</li>
+      <li>Первым этапом — стиль-кадр на утверждение, до сборки анимации.</li>
+    </ul>
+  </section>
+
+</div>

@@ -1,0 +1,147 @@
+Куда: внутренний список Анастасии (карточки SALES без её комментария), в трекер не идёт
+
+Замер 05.10, YouTrack SALES: 170 карточек; её комментарий есть в 34 (последний — 25.09); без него 136. Поиск — по автору комментария Anastasia во всех комментариях каждой карточки.
+
+## Поставили сервер или оплатили — 13
+- [SALES-201](https://team.qubix.capital/issue/SALES-201) · 17.09 · Запрос на размещение — CPA.LIVE (медиа об аффилейт-маркетинге) · шаги: — · Won
+- [SALES-194](https://team.qubix.capital/issue/SALES-194) · 10.09 · Лид #235 — (почта) · шаги: demo,registered,installed · New
+- [SALES-191](https://team.qubix.capital/issue/SALES-191) · 09.09 · Лид #233 — Anton (@ник) · шаги: demo,registered,installed · New
+- [SALES-164](https://team.qubix.capital/issue/SALES-164) · 01.09 · Лид #206 — (почта) · шаги: demo,registered · Won
+- [SALES-159](https://team.qubix.capital/issue/SALES-159) · 28.08 · Лид #204 — Nikita (@ник) · шаги: registered,installed · New
+- [SALES-140](https://team.qubix.capital/issue/SALES-140) · 03.08 · Лид #197 — Anastasia (@ник) · шаги: demo,registered,installed · New
+- [SALES-116](https://team.qubix.capital/issue/SALES-116) · 14.07 · Лид tg6822339090 — Ars (@ник) · шаги: demo,registered,installed · New
+- [SALES-100](https://team.qubix.capital/issue/SALES-100) · 11.07 · Лид tg6471648282 —  · шаги: demo,registered,installed · New
+- [SALES-101](https://team.qubix.capital/issue/SALES-101) · 11.07 · Лид tg6909734544 —  · шаги: registered,installed · New
+- [SALES-90](https://team.qubix.capital/issue/SALES-90) · 09.07 · Лид #112 — (почта) · шаги: demo,registered,installed · New
+- [SALES-53](https://team.qubix.capital/issue/SALES-53) · 04.07 · Лид tg8337610351 —  · шаги: registered,paid · New
+- [SALES-49](https://team.qubix.capital/issue/SALES-49) · 02.07 · Лид tg7178520067 —  · шаги: demo,registered,paid · New
+- [SALES-48](https://team.qubix.capital/issue/SALES-48) · 25.06 · Лид tg8571529440 — Qizenberg (@ник) · шаги: demo,registered,installed · New
+
+## Зарегистрировались, сервер не поставили — 42
+- [SALES-245](https://team.qubix.capital/issue/SALES-245) · 05.10 · Лид #266 — IHAR (@ник) · шаги: registered · New
+- [SALES-241](https://team.qubix.capital/issue/SALES-241) · 02.10 · Лид #260 — (почта) · шаги: registered · New
+- [SALES-240](https://team.qubix.capital/issue/SALES-240) · 02.10 · Лид #259 — (почта) · шаги: demo,registered · New
+- [SALES-238](https://team.qubix.capital/issue/SALES-238) · 02.10 · Лид #257 — (почта) · шаги: demo,registered · New
+- [SALES-237](https://team.qubix.capital/issue/SALES-237) · 29.09 · Лид #253 — (почта) · шаги: registered · New
+- [SALES-236](https://team.qubix.capital/issue/SALES-236) · 29.09 · Лид #252 — (почта) · шаги: registered · New
+- [SALES-207](https://team.qubix.capital/issue/SALES-207) · 23.09 · Лид #251 — (почта) · шаги: registered · New
+- [SALES-206](https://team.qubix.capital/issue/SALES-206) · 22.09 · Лид #249 — (почта) · шаги: registered · New
+- [SALES-205](https://team.qubix.capital/issue/SALES-205) · 22.09 · Лид #247 — (почта) · шаги: demo,registered · New
+- [SALES-204](https://team.qubix.capital/issue/SALES-204) · 17.09 · Лид #244 — (почта) · шаги: registered · New
+- [SALES-203](https://team.qubix.capital/issue/SALES-203) · 17.09 · Лид #241 — (почта) · шаги: registered · New
+- [SALES-202](https://team.qubix.capital/issue/SALES-202) · 17.09 · Лид #242 — (почта) · шаги: demo,registered · New
+- [SALES-199](https://team.qubix.capital/issue/SALES-199) · 17.09 · Лид #240 — (почта) · шаги: registered · New
+- [SALES-197](https://team.qubix.capital/issue/SALES-197) · 12.09 · Лид #237 — (почта) · шаги: registered · New
+- [SALES-192](https://team.qubix.capital/issue/SALES-192) · 10.09 · Лид #232 — (почта) · шаги: demo,registered · New
+- [SALES-190](https://team.qubix.capital/issue/SALES-190) · 08.09 · Лид #231 — (почта) · шаги: registered · New
+- [SALES-187](https://team.qubix.capital/issue/SALES-187) · 07.09 · Лид #228 — (почта) · шаги: demo,registered · New
+- [SALES-180](https://team.qubix.capital/issue/SALES-180) · 04.09 · Лид #225 — (почта) · шаги: registered · New
+- [SALES-179](https://team.qubix.capital/issue/SALES-179) · 04.09 · Лид #224 — (почта) · шаги: demo,registered · New
+- [SALES-178](https://team.qubix.capital/issue/SALES-178) · 04.09 · Лид #223 — (почта) · шаги: registered · New
+- [SALES-171](https://team.qubix.capital/issue/SALES-171) · 02.09 · Лид #218 — (почта) · шаги: registered · New
+- [SALES-169](https://team.qubix.capital/issue/SALES-169) · 02.09 · Лид #211 — (почта) · шаги: registered · New
+- [SALES-161](https://team.qubix.capital/issue/SALES-161) · 29.08 · Лид #23 — ₿ладимир (@ник) · шаги: registered · New
+- [SALES-158](https://team.qubix.capital/issue/SALES-158) · 28.08 · Лид #203 — (почта) · шаги: registered · New
+- [SALES-156](https://team.qubix.capital/issue/SALES-156) · 26.08 · Лид #202 — (почта) · шаги: registered · New
+- [SALES-152](https://team.qubix.capital/issue/SALES-152) · 20.08 · Лид #201 — (почта) · шаги: registered · New
+- [SALES-145](https://team.qubix.capital/issue/SALES-145) · 12.08 · Лид #32 — Common😎 (@ник) · шаги: demo,registered · New
+- [SALES-137](https://team.qubix.capital/issue/SALES-137) · 24.07 · Лид #190 — Marta (@ник) · шаги: registered · New
+- [SALES-132](https://team.qubix.capital/issue/SALES-132) · 19.07 · Лид #121 — (почта) · шаги: registered · New
+- [SALES-131](https://team.qubix.capital/issue/SALES-131) · 18.07 · Лид #118 — (почта) · шаги: registered · New
+- [SALES-115](https://team.qubix.capital/issue/SALES-115) · 14.07 · Лид tg124019037 — MTGuru (@ник) · шаги: demo,registered · New
+- [SALES-108](https://team.qubix.capital/issue/SALES-108) · 11.07 · Лид tg7828401945 —  · шаги: registered · New
+- [SALES-104](https://team.qubix.capital/issue/SALES-104) · 11.07 · Лид tg7825867146 —  · шаги: demo,registered · New
+- [SALES-99](https://team.qubix.capital/issue/SALES-99) · 11.07 · Лид tg1504890356 —  · шаги: registered · New
+- [SALES-96](https://team.qubix.capital/issue/SALES-96) · 10.07 · Лид tg240102632 —  · шаги: registered · New
+- [SALES-95](https://team.qubix.capital/issue/SALES-95) · 10.07 · Лид tg305672401 —  · шаги: registered · New
+- [SALES-87](https://team.qubix.capital/issue/SALES-87) · 09.07 · Лид tg7696011478 —  · шаги: registered · New
+- [SALES-85](https://team.qubix.capital/issue/SALES-85) · 09.07 · Лид tg5345089368 —  · шаги: registered · New
+- [SALES-80](https://team.qubix.capital/issue/SALES-80) · 09.07 · Лид tg5440149362 — Lemocolo (@ник) · шаги: registered · New
+- [SALES-79](https://team.qubix.capital/issue/SALES-79) · 09.07 · Лид tg962203108 —  · шаги: registered · New
+- [SALES-77](https://team.qubix.capital/issue/SALES-77) · 09.07 · Лид tg8229808105 —  · шаги: demo,registered · New
+- [SALES-72](https://team.qubix.capital/issue/SALES-72) · 07.07 · Лид tg7680778671 — Diamond (@ник) · шаги: registered · New
+
+## Только демо или без шага — с именем/почтой — 43
+- [SALES-195](https://team.qubix.capital/issue/SALES-195) · 11.09 · Лид — Nastia (@ник) · шаги: — · New
+- [SALES-183](https://team.qubix.capital/issue/SALES-183) · 04.09 · Лид — Evgenia (@ник) · шаги: — · New
+- [SALES-153](https://team.qubix.capital/issue/SALES-153) · 23.08 · Проба укладки вложений в карточку (feat/lead-card-attachments-sanitize · шаги: — · Lost
+- [SALES-151](https://team.qubix.capital/issue/SALES-151) · 20.08 · Лид — Roman (@ник) · шаги: demo · New
+- [SALES-139](https://team.qubix.capital/issue/SALES-139) · 28.07 · Лид — Анастасия (@ник) · шаги: demo · New
+- [SALES-129](https://team.qubix.capital/issue/SALES-129) · 16.07 · Лид — Vladimir (@ник) · шаги: — · New
+- [SALES-127](https://team.qubix.capital/issue/SALES-127) · 15.07 · Лид — (почта) · шаги: — · New
+- [SALES-126](https://team.qubix.capital/issue/SALES-126) · 15.07 · Лид — (почта) · шаги: — · New
+- [SALES-119](https://team.qubix.capital/issue/SALES-119) · 14.07 · Лид email:(почта) — (почта) · шаги: — · New
+- [SALES-118](https://team.qubix.capital/issue/SALES-118) · 14.07 · Лид tg8797675048 — Daniil CG (@ник) · шаги: — · New
+- [SALES-114](https://team.qubix.capital/issue/SALES-114) · 13.07 · Лид tg8646352824 — Victoria (@ник) · шаги: — · New
+- [SALES-113](https://team.qubix.capital/issue/SALES-113) · 13.07 · Лид tg5263954298 — ' '\̵͇ \з= (▀ ͜͞ʖ▀) =ε/̵͇ /' ' (GMT +4, ПН-ПТ, 12:0 · шаги: demo · New
+- [SALES-109](https://team.qubix.capital/issue/SALES-109) · 12.07 · Лид tg270847196 —  · шаги: demo · New
+- [SALES-107](https://team.qubix.capital/issue/SALES-107) · 11.07 · Лид tg68546476 —  · шаги: demo · New
+- [SALES-106](https://team.qubix.capital/issue/SALES-106) · 11.07 · Лид tg364459341 —  · шаги: demo · New
+- [SALES-105](https://team.qubix.capital/issue/SALES-105) · 11.07 · Лид tg7572885949 —  · шаги: demo · New
+- [SALES-103](https://team.qubix.capital/issue/SALES-103) · 11.07 · Лид tg358019560 —  · шаги: demo · New
+- [SALES-94](https://team.qubix.capital/issue/SALES-94) · 10.07 · Лид email:(почта) — (почта) · шаги: — · New
+- [SALES-92](https://team.qubix.capital/issue/SALES-92) · 09.07 · Лид email:(почта) — (почта) · шаги: — · New
+- [SALES-89](https://team.qubix.capital/issue/SALES-89) · 09.07 · Лид tg301586363 —  · шаги: demo · New
+- [SALES-88](https://team.qubix.capital/issue/SALES-88) · 09.07 · Лид email:(почта) — (почта) · шаги: — · New
+- [SALES-86](https://team.qubix.capital/issue/SALES-86) · 09.07 · Лид tg7591823618 —  · шаги: demo · New
+- [SALES-84](https://team.qubix.capital/issue/SALES-84) · 09.07 · Лид tg223445759 —  · шаги: demo · New
+- [SALES-83](https://team.qubix.capital/issue/SALES-83) · 09.07 · Лид tg337609332 —  · шаги: demo · New
+- [SALES-82](https://team.qubix.capital/issue/SALES-82) · 09.07 · Лид tg6722516498 —  · шаги: demo · New
+- [SALES-81](https://team.qubix.capital/issue/SALES-81) · 09.07 · Лид tg590352128 —  · шаги: demo · New
+- [SALES-75](https://team.qubix.capital/issue/SALES-75) · 08.07 · Лид tg1437695973 —  · шаги: demo · New
+- [SALES-74](https://team.qubix.capital/issue/SALES-74) · 08.07 · Лид tg6121302265 —  · шаги: demo · New
+- [SALES-71](https://team.qubix.capital/issue/SALES-71) · 07.07 · Лид tg70587652 — Igor (@ник) · шаги: demo · New
+- [SALES-70](https://team.qubix.capital/issue/SALES-70) · 07.07 · Лид tg819210606 — Vadim (@ник) · шаги: — · New
+- [SALES-69](https://team.qubix.capital/issue/SALES-69) · 06.07 · Лид email:(почта) — (почта) · шаги: — · New
+- [SALES-68](https://team.qubix.capital/issue/SALES-68) · 06.07 · Лид tg7420790845 — Вадим (@ник) · шаги: — · New
+- [SALES-67](https://team.qubix.capital/issue/SALES-67) · 06.07 · Лид tg7211572256 — Роман (@ник) · шаги: — · New
+- [SALES-65](https://team.qubix.capital/issue/SALES-65) · 06.07 · Лид tg5087845814 —  · шаги: demo · New
+- [SALES-64](https://team.qubix.capital/issue/SALES-64) · 06.07 · Лид tg351136870 —  · шаги: demo · New
+- [SALES-66](https://team.qubix.capital/issue/SALES-66) · 06.07 · Лид tg240460868 —  · шаги: demo · New
+- [SALES-61](https://team.qubix.capital/issue/SALES-61) · 05.07 · Лид tg8167953415 —  · шаги: demo · New
+- [SALES-56](https://team.qubix.capital/issue/SALES-56) · 05.07 · Лид tg5870987250 —  · шаги: demo · New
+- [SALES-58](https://team.qubix.capital/issue/SALES-58) · 05.07 · Лид tg8956299138 —  · шаги: demo · New
+- [SALES-57](https://team.qubix.capital/issue/SALES-57) · 05.07 · Лид tg8989403207 —  · шаги: demo · New
+- [SALES-60](https://team.qubix.capital/issue/SALES-60) · 05.07 · Лид tg285028547 —  · шаги: demo · New
+- [SALES-55](https://team.qubix.capital/issue/SALES-55) · 04.07 · Лид email:(почта) — (почта) · шаги: — · New
+- [SALES-52](https://team.qubix.capital/issue/SALES-52) · 03.07 · Лид tg307810797 — Дональд (@ник) · шаги: — · New
+
+## Только демо — без имени (tg:…) — 38
+- [SALES-244](https://team.qubix.capital/issue/SALES-244) · 05.10 · Лид — tg:6369652365 · шаги: demo · New
+- [SALES-243](https://team.qubix.capital/issue/SALES-243) · 03.10 · Лид — tg:472945387 · шаги: demo · New
+- [SALES-242](https://team.qubix.capital/issue/SALES-242) · 02.10 · Лид — tg:1425754891 · шаги: demo · New
+- [SALES-239](https://team.qubix.capital/issue/SALES-239) · 02.10 · Лид — tg:474707234 · шаги: demo · New
+- [SALES-235](https://team.qubix.capital/issue/SALES-235) · 29.09 · Лид — tg:8890993366 · шаги: demo · New
+- [SALES-234](https://team.qubix.capital/issue/SALES-234) · 29.09 · Лид — tg:7611859252 · шаги: demo · New
+- [SALES-233](https://team.qubix.capital/issue/SALES-233) · 27.09 · Лид — tg:251574977 · шаги: demo · New
+- [SALES-232](https://team.qubix.capital/issue/SALES-232) · 25.09 · Лид — tg:7851429212 · шаги: demo · New
+- [SALES-198](https://team.qubix.capital/issue/SALES-198) · 13.09 · Лид — tg:847653800 · шаги: demo · New
+- [SALES-196](https://team.qubix.capital/issue/SALES-196) · 11.09 · Лид — tg:443737446 · шаги: demo · New
+- [SALES-193](https://team.qubix.capital/issue/SALES-193) · 10.09 · Лид — tg:8761265068 · шаги: demo · New
+- [SALES-189](https://team.qubix.capital/issue/SALES-189) · 08.09 · Лид — tg:90206238 · шаги: demo · New
+- [SALES-186](https://team.qubix.capital/issue/SALES-186) · 07.09 · Лид — tg:7556781962 · шаги: demo · New
+- [SALES-185](https://team.qubix.capital/issue/SALES-185) · 06.09 · Лид — tg:918653813 · шаги: demo · New
+- [SALES-184](https://team.qubix.capital/issue/SALES-184) · 05.09 · Лид — tg:5749208279 · шаги: demo · New
+- [SALES-181](https://team.qubix.capital/issue/SALES-181) · 04.09 · Лид — tg:781872265 · шаги: demo · New
+- [SALES-176](https://team.qubix.capital/issue/SALES-176) · 04.09 · Лид — tg:6988628115 · шаги: demo · New
+- [SALES-177](https://team.qubix.capital/issue/SALES-177) · 04.09 · Лид — tg:5904218593 · шаги: demo · New
+- [SALES-175](https://team.qubix.capital/issue/SALES-175) · 03.09 · Лид — tg:767990227 · шаги: demo · New
+- [SALES-174](https://team.qubix.capital/issue/SALES-174) · 03.09 · Лид — tg:6421493260 · шаги: demo · New
+- [SALES-173](https://team.qubix.capital/issue/SALES-173) · 02.09 · Лид — tg:447271108 · шаги: demo · New
+- [SALES-168](https://team.qubix.capital/issue/SALES-168) · 01.09 · Лид — tg:39735405 · шаги: demo · New
+- [SALES-167](https://team.qubix.capital/issue/SALES-167) · 01.09 · Лид — tg:690215632 · шаги: demo · New
+- [SALES-163](https://team.qubix.capital/issue/SALES-163) · 01.09 · Лид — tg:951265889 · шаги: demo · New
+- [SALES-162](https://team.qubix.capital/issue/SALES-162) · 29.08 · Лид — tg:151541306 · шаги: demo · New
+- [SALES-157](https://team.qubix.capital/issue/SALES-157) · 28.08 · Лид — tg:5503458216 · шаги: demo · New
+- [SALES-155](https://team.qubix.capital/issue/SALES-155) · 23.08 · Лид — tg:754136526 · шаги: demo · New
+- [SALES-154](https://team.qubix.capital/issue/SALES-154) · 23.08 · Лид — tg:995693170 · шаги: demo · New
+- [SALES-149](https://team.qubix.capital/issue/SALES-149) · 18.08 · Лид — tg:8466172543 · шаги: demo · New
+- [SALES-142](https://team.qubix.capital/issue/SALES-142) · 06.08 · Лид — tg:282796300 · шаги: demo · New
+- [SALES-136](https://team.qubix.capital/issue/SALES-136) · 23.07 · Лид — tg:946205515 · шаги: demo · New
+- [SALES-135](https://team.qubix.capital/issue/SALES-135) · 22.07 · Лид — tg:301583037 · шаги: demo · New
+- [SALES-134](https://team.qubix.capital/issue/SALES-134) · 20.07 · Лид — tg:398547089 · шаги: demo · New
+- [SALES-130](https://team.qubix.capital/issue/SALES-130) · 17.07 · Лид — tg:8845469957 · шаги: demo · New
+- [SALES-128](https://team.qubix.capital/issue/SALES-128) · 16.07 · Лид — tg:25017841 · шаги: demo · New
+- [SALES-123](https://team.qubix.capital/issue/SALES-123) · 15.07 · Лид — tg:7577948350 · шаги: demo · New
+- [SALES-124](https://team.qubix.capital/issue/SALES-124) · 15.07 · Лид — tg:7211132219 · шаги: demo · New
+- [SALES-122](https://team.qubix.capital/issue/SALES-122) · 15.07 · Лид — tg:949542715 · шаги: demo · New
