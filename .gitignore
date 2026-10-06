@@ -6,3 +6,4 @@ data/zamer-clients.json
 drafts/invoices/.consultant-address
 drafts/invoices/*.html
 drafts/invoices/*.pdf
+data/klienty-*.xlsx
