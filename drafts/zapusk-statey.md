@@ -1,4 +1,4 @@
-Куда: CONTENT-3 (текст Жене), MARKETING-54 (текст Жене); план — внутренний
+Куда: — (заменён drafts/plan-statei-i-listingov.md 06.10). Было: CONTENT-3, MARKETING-54
 
 # Запуск статей — план и задание
 
