@@ -3,8 +3,9 @@
 
 Автоматические колонки — из админки (ступень, канал, подарок до, сервер на
 связи) и из карточек SALES (последнее сообщение клиента боту, последнее
-сообщение бота). Ручные колонки — пустые: писала лично, где, что ответил,
-следующий шаг и дата.
+сообщение бота, отметки людей в карточке, отправки через бота по @support).
+Ручные колонки — пустые: писала лично, где, что ответил, следующий шаг и дата.
+Второй лист — карточки SALES без регистрации (демо и бот).
 
     python3 scripts/klienty.py                 # → data/klienty-YYYY-MM-DD.xlsx
 
@@ -50,6 +51,34 @@ def yt(path, **params):
     return json.loads(r.stdout)
 
 
+def history(card):
+    """Из карточки SALES: последний ответ клиента боту, последнее сообщение бота, отметки людей, @support."""
+    h = {"client": None, "bot": None, "operator": None, "notes": [], "others": []}
+    for m in yt(f"/issues/{card}/comments", **{"$top": "5000", "fields": "created,text,author(fullName)"}):
+        t = datetime.datetime.fromtimestamp(m["created"] / 1000, datetime.timezone.utc)
+        txt = (m.get("text") or "").strip()
+        who = (m.get("author") or {}).get("fullName") or ""
+        if who == "Qubix Support":
+            if txt.startswith("👤"):
+                h["client"] = t
+            elif txt.startswith("🤖"):
+                h["bot"] = t
+            elif txt.startswith("⏰") and "(operator)" in txt:
+                h["operator"] = t
+        elif txt:
+            line = f"{t:%d.%m} " + " ".join(txt.split())[:200]
+            (h["notes"] if who == "Anastasia" else h["others"]).append(line if who == "Anastasia" else f"{line[:6]}{who}: {line[6:]}")
+    return h
+
+
+def notes_cell(h):
+    return "\n".join(h["notes"][-2:])
+
+
+def others_cell(h):
+    return h["others"][-1] if h["others"] else ""
+
+
 def d(value):
     return touch.dt(value) if value else None
 
@@ -64,6 +93,7 @@ def main():
     blobs = [(i["idReadable"], (i["summary"] or "") + " " + (i["description"] or "")) for i in cards]
 
     rows = []
+    matched = set()
     for c in customers:
         full = touch.get(f"/customers/{c['id']}")
         lic = full.get("licenses") or []
@@ -83,15 +113,9 @@ def main():
         n, email, tg = c["number"], (c.get("email") or "").lower(), str(c.get("telegram_chat_id") or "")
         card = next((i for i, b in blobs if re.search(rf"#{n}\b", b) or (email and email in b.lower())
                      or (tg and tg in b)), None)
-        client_said = bot_said = None
+        h = history(card) if card else {"client": None, "bot": None, "operator": None, "notes": [], "others": []}
         if card:
-            for m in yt(f"/issues/{card}/comments", **{"$top": "5000", "fields": "created,text"}):
-                t = datetime.datetime.fromtimestamp(m["created"] / 1000, datetime.timezone.utc)
-                txt = m.get("text") or ""
-                if txt.startswith("👤"):
-                    client_said = t
-                elif txt.startswith("🤖"):
-                    bot_said = t
+            matched.add(card)
 
         code = c["_code"] if c["_code"] != "—" else ""
         rows.append({
@@ -101,7 +125,8 @@ def main():
                 CHANNEL.get(code, f"код {code}" if code else "без кода"),
                 f"tg://user?id={tg}" if tg else "нет, только почта", c.get("email") or "",
                 ("кончился " if gift and gift < NOW else "") + fmt(gift) if gift else "",
-                fmt(seen), fmt(client_said), fmt(bot_said),
+                fmt(seen), fmt(h["client"]), fmt(h["bot"]),
+                notes_cell(h), others_cell(h), fmt(h["operator"]),
                 f"{YT}/issue/{card}" if card else "нет карточки", ADMIN_CARD + c["id"],
             ],
         })
@@ -114,7 +139,8 @@ def main():
                              -(r["seen"].timestamp() if r["seen"] else 0)))
 
     head = ["№", "Ступень", "Пришёл", "Канал", "Telegram", "Почта", "Подарок до", "Сервер на связи",
-            "Сам писал в бота", "Бот писал", "Карточка SALES", "Админка"] + MANUAL
+            "Сам писал в бота", "Бот писал", "Ваши отметки в SALES (последние 2)", "Другие люди в карточке (последняя)",
+            "Через бота по @support", "Карточка SALES", "Админка"] + MANUAL
     wb = Workbook()
     ws = wb.active
     ws.title = "Клиенты"
@@ -131,9 +157,33 @@ def main():
                 ws.cell(row=row, column=i).fill = manual_fill
         ws.column_dimensions[get_column_letter(i)].width = {"Почта": 26, "Что ответил": 40, "Следующий шаг": 30,
                                                              "Карточка SALES": 14, "Админка": 14,
+                                                             "Ваши отметки в SALES (последние 2)": 50, "Другие люди в карточке (последняя)": 40,
                                                              "Telegram": 14}.get(h, 12)
     ws.freeze_panes = "C2"
     ws.auto_filter.ref = ws.dimensions
+
+    leads = wb.create_sheet("Без регистрации")
+    lhead = ["Карточка SALES", "Название", "Сам писал в бота", "Бот писал", "Ваши отметки в SALES (последние 2)",
+             "Другие люди в карточке (последняя)", "Через бота по @support"] + MANUAL
+    leads.append(lhead)
+    lrows = []
+    for i in cards:
+        if i["idReadable"] in matched:
+            continue
+        h = history(i["idReadable"])
+        lrows.append((h["client"] or h["bot"] or NOW.replace(year=2000), [
+            f"{YT}/issue/{i['idReadable']}", i["summary"], fmt(h["client"]), fmt(h["bot"]),
+            notes_cell(h), others_cell(h), fmt(h["operator"])]))
+    for _, cells in sorted(lrows, key=lambda x: x[0], reverse=True):
+        leads.append(cells + [""] * len(MANUAL))
+    for i, h in enumerate(lhead, 1):
+        leads.cell(row=1, column=i).font = bold
+        leads.column_dimensions[get_column_letter(i)].width = {"Название": 40, "Карточка SALES": 14,
+                                                                "Ваши отметки в SALES (последние 2)": 50, "Другие люди в карточке (последняя)": 40}.get(h, 14)
+        if h in MANUAL:
+            for row in range(1, len(lrows) + 2):
+                leads.cell(row=row, column=i).fill = manual_fill
+    leads.freeze_panes = "B2"
 
     note = wb.create_sheet("Как читать")
     for line in [
@@ -143,6 +193,13 @@ def main():
         "хоть раз отчитался; Лицензия без сервера — подарок взят, сервер не отчитывался; Только регистрация.",
         "Подарок до — дата окончания лицензии. Сервер на связи — когда сервер последний раз отчитался.",
         "Сам писал в бота / Бот писал — последняя дата в карточке SALES.",
+        "Ваши отметки в SALES — ваши комментарии в карточке, последние два; другие люди — Владимир, admin, Kit. "
+        "Через бота по @support — последнее сообщение, отправленное клиенту ботом по просьбе человека.",
+        "Личная переписка в Telegram и почте сюда не попадает: Telegram агенту не виден, почтовый сервер "
+        "mail.qubix.pro на 06.10 не принимает подключения.",
+        "Все клиенты: в админке 193 записи; 89 служебных (is_internal: pentest, e2e, smoke, staff, demo), "
+        "15 тестовых почт, 8 своих и партнёров, 1 — ваш аккаунт; живых 80. Лист «Без регистрации» — "
+        "карточки SALES, не совпавшие ни с одним живым клиентом (демо, бот, свои/тестовые аккаунты).",
         "Жёлтые колонки — ручные: личная переписка в Telegram и почте в трекер не попадает.",
     ]:
         note.append([line])
@@ -152,7 +209,8 @@ def main():
     out.parent.mkdir(exist_ok=True)
     wb.save(out)
     counts = {s: sum(r["stage"] == s for r in rows) for s in STAGES}
-    print(f"{out} — {len(rows)} клиентов: " + ", ".join(f"{s} {n}" for s, n in counts.items()))
+    print(f"{out} — {len(rows)} клиентов: " + ", ".join(f"{s} {n}" for s, n in counts.items())
+          + f"; без регистрации в SALES — {len(lrows)}")
 
 
 if __name__ == "__main__":
