@@ -530,6 +530,33 @@ playbook.md` и `docs/user-journey-map.md`.
   (`docs/head-of-growth-hire.md` описывает её же позицию, а не параллельный
   найм). Конфликта периметра нет.
 
+## Навыки ECC (установлены 06.10.2026 по просьбе Анастасии)
+
+Из сборки ECC (github.com/affaan-m/ECC, MIT, коммит ef648e0 от 01.10.2026) взяты 37 навыков в
+`.claude/skills/` и 3 агента в `.claude/agents/` (`ecc-marketing-agent`, `ecc-chief-of-staff`,
+`ecc-seo-specialist`). Правила для программистов (`rules/common`, `rules/typescript`) не ставились —
+они про код и ссылаются на агентов плагина ECC, которых здесь нет. `deep-research` переименован в
+`ecc-deep-research`, чтобы не путать со встроенным навыком.
+
+- **Конкуренты и рынок:** market-research, competitive-platform-analysis → benchmark-methodology →
+  competitive-report-structure, ecc-deep-research, research-ops, exa-search.
+- **Лиды и продажи:** lead-intelligence, email-ops, messages-ops, customer-billing-ops,
+  finance-billing-ops; на потом (X и LinkedIn) — connections-optimizer, social-graph-ranker.
+- **Бренд и контент:** marketing-campaign, brand-voice, brand-discovery, content-engine,
+  article-writing, seo, frontend-slides, investor-materials, investor-outreach; на потом —
+  crosspost, social-publisher, x-api.
+- **Процесс и решения:** operator-approval-loop, counterparty-channel-discipline, growth-log,
+  council, santa-method, product-lens, knowledge-ops, living-docs-governance, google-workspace-ops,
+  master-agreement-generator, data-scraper-agent.
+
+⛔ **Старшинство:** при любом расхождении действуют этот файл, своды BRAND-17 и конституция BRAND
+(«ноль фантазии», подпись источника, запрет называть конкурентов, стоп-листы, показ текста и «да»
+перед любой отправкой). Навыки ECC — способ работы, не источник фактов и не разрешение что-либо
+публиковать или отправлять. Навыки, которые опираются на неподключённые инструменты (Exa,
+Firecrawl, SocialClaw, X API, LinkedIn, Stripe, Linear), — только как порядок работы; про то, чего
+нет в сессии, — «не подключено», а не выдумка. Тексты для клиентов ведёт отдельный агент (периметр
+24.09); маркетинговые навыки ECC здесь — для стратегии, разборов и черновиков на ворота.
+
 ## Интеграции (MCP) — что подключать дальше
 
 Сейчас весь контекст в этом репозитории — статический (снимок на 28.07.2026).
