@@ -1,0 +1,221 @@
+<title>Карта направления Qubix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: шапка с целью → хребет воронки → карта зон (сетка карточек), фильтр по статусу сверху. Палитра — бренд-пак Qubix. */
+:root{
+  --bg:#F3F5FA; --surface:#FFFFFF; --ink:#0D1117; --muted:#5E6267; --line:#D6DAE2; --accent:#1E5BD1; --accent-2:#16419A;
+  --ok:#1E8E5A; --ok-bg:#E5F4EC; --can:#A86A12; --can-bg:#FBF0DC; --person:#C2412D; --person-bg:#FBE6E1;
+  --dev:#0E7C86; --dev-bg:#DDF2F3; --owner:#16419A; --owner-bg:#E3EAF8;
+  --display:"Unbounded",system-ui,sans-serif; --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#020404; --surface:#0C1117; --ink:#E9EBF6; --muted:#9AA1AB; --line:#232A33; --accent:#84AEF3; --accent-2:#5B8BE0;
+  --ok:#4CC38A; --ok-bg:#10261B; --can:#E3B34F; --can-bg:#2A2110; --person:#F07A63; --person-bg:#2E1611;
+  --dev:#4FC1CB; --dev-bg:#0F2628; --owner:#84AEF3; --owner-bg:#121D33; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#020404; --surface:#0C1117; --ink:#E9EBF6; --muted:#9AA1AB; --line:#232A33; --accent:#84AEF3; --accent-2:#5B8BE0;
+  --ok:#4CC38A; --ok-bg:#10261B; --can:#E3B34F; --can-bg:#2A2110; --person:#F07A63; --person-bg:#2E1611;
+  --dev:#4FC1CB; --dev-bg:#0F2628; --owner:#84AEF3; --owner-bg:#121D33; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:28px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:28px}
+header{display:grid;gap:10px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,4vw,38px);line-height:1.1;margin:0;text-wrap:balance}
+.lead{max-width:68ch;color:var(--muted);margin:0}
+.lead b{color:var(--ink);font-weight:600}
+h2{font-family:var(--display);font-weight:500;font-size:16px;margin:0;letter-spacing:.01em}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.f{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 14px 7px 10px;font:500 14px var(--body);cursor:pointer}
+.f:hover{border-color:var(--muted)}
+.f:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.f[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.f .n{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--muted);flex:none}
+.s-ok .dot,.dot.s-ok{background:var(--ok)} .s-can .dot,.dot.s-can{background:var(--can)} .s-person .dot,.dot.s-person{background:var(--person)}
+.s-dev .dot,.dot.s-dev{background:var(--dev)} .s-owner .dot,.dot.s-owner{background:var(--owner)}
+
+.spine{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px}
+.spine-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline}
+.spine-head span{font-size:13px;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;overflow-x:auto}
+.step{display:grid;gap:4px;padding:10px 10px 12px;border-radius:10px;background:var(--bg);min-width:96px;position:relative}
+.step .v{font-family:var(--mono);font-size:22px;font-variant-numeric:tabular-nums}
+.step .l{font-size:12.5px;color:var(--muted);line-height:1.3}
+.step.leak{background:var(--person-bg)}
+.step.leak .v{color:var(--person)}
+.step .loss{font-size:12px;color:var(--person);font-weight:600}
+.spine-note{font-size:13px;color:var(--muted);margin:0}
+
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 18px;font-size:13px;color:var(--muted)}
+.legend div{display:flex;gap:8px;align-items:flex-start}
+.legend .dot{margin-top:5px}
+.legend b{color:var(--ink);font-weight:600}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;align-items:start}
+.zone{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;min-width:0}
+.zone-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.zone-head .bar{display:flex;gap:3px}
+.zone-head .bar i{width:8px;height:8px;border-radius:2px;display:block}
+.items{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.item{display:grid;grid-template-columns:4px 1fr;gap:10px;padding:9px 10px 10px 0;border-radius:8px;min-width:0}
+.item .stripe{border-radius:4px;background:var(--muted)}
+.item.s-ok .stripe{background:var(--ok)} .item.s-can .stripe{background:var(--can)} .item.s-person .stripe{background:var(--person)}
+.item.s-dev .stripe{background:var(--dev)} .item.s-owner .stripe{background:var(--owner)}
+.item.s-person{background:var(--person-bg)}
+.item .t{font-weight:600;font-size:14.5px}
+.item .d{font-size:13px;color:var(--muted);margin-top:2px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{font-size:11.5px;font-family:var(--mono);padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.st{border:0;font-family:var(--body);font-weight:600;font-size:12px}
+.tag.st.s-ok{background:var(--ok-bg);color:var(--ok)} .tag.st.s-can{background:var(--can-bg);color:var(--can)}
+.tag.st.s-person{background:var(--person);color:var(--surface)} .tag.st.s-dev{background:var(--dev-bg);color:var(--dev)} .tag.st.s-owner{background:var(--owner-bg);color:var(--owner)}
+.item[hidden]{display:none!important}
+.zone.empty{opacity:.45}
+
+.asks{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:14px}
+.asks ol{margin:0;padding-left:20px;display:grid;gap:10px;max-width:80ch}
+.asks li b{font-weight:600}
+.me{display:grid;gap:6px;border-left:3px solid var(--accent);padding-left:14px}
+.me p{margin:0;max-width:72ch}
+footer{font-size:12.5px;color:var(--muted);max-width:90ch}
+@media (max-width:640px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Коммерческое направление · срез 06.10.2026</div>
+    <h1>Карта направления Qubix</h1>
+    <p class="lead">Цель одна — <b>платящие клиенты</b>. Карта показывает каждую зону: что уже работает, где дыра, которую закрываю сама процессом и автоматикой, и где нужен человек, разработка или решение владельца.</p>
+  </header>
+
+  <div class="filters" role="group" aria-label="Фильтр по статусу" id="filters"></div>
+
+  <section class="spine" aria-label="Воронка">
+    <div class="spine-head"><h2>Хребет: путь клиента до оплаты</h2><span>админка: демо — 05.10, остальное — 06.10; 80 живых клиентов</span></div>
+    <div class="steps">
+      <div class="step"><span class="v">102</span><span class="l">вход в демо</span></div>
+      <div class="step"><span class="v">80</span><span class="l">регистрация</span></div>
+      <div class="step"><span class="v">47</span><span class="l">взяли подарок</span></div>
+      <div class="step leak"><span class="v">19</span><span class="l">сервер работает</span><span class="loss">−28 не поставили</span></div>
+      <div class="step"><span class="v">8</span><span class="l">начали оплату</span></div>
+      <div class="step leak"><span class="v">1</span><span class="l">оплатил (июль)</span><span class="loss">−7 бросили счёт</span></div>
+    </div>
+    <p class="spine-note">Два главных обрыва — установка на свой сервер и оплата. Самый тёплый пул: 18 с работающим сервером без оплаты + 7 бросивших счёт = 25 человек.</p>
+  </section>
+
+  <div class="legend" aria-label="Обозначения">
+    <div><span class="dot s-ok"></span><span><b>Работает</b> — система, бот или человек уже делают</span></div>
+    <div><span class="dot s-can"></span><span><b>Закрываю сама</b> — дыра, закрываю процессом и автоматикой</span></div>
+    <div><span class="dot s-person"></span><span><b>Нужен человек</b> — руками это не масштабируется</span></div>
+    <div><span class="dot s-dev"></span><span><b>Нужна разработка</b> — продукт и система, вне моей зоны</span></div>
+    <div><span class="dot s-owner"></span><span><b>Решение владельца</b> — бюджет, найм, продукт</span></div>
+  </div>
+
+  <section class="grid" id="grid" aria-label="Зоны"></section>
+
+  <section class="asks" aria-label="Моя роль и просьбы">
+    <div class="me">
+      <h2>Моя роль</h2>
+      <p>Собрать машину, которая приводит платящих без моего ручного участия в каждом касании: решения по воронке, маркетингу и бренду, процесс и скрипты, замер и масштабирование того, что даёт оплаты. Ручной труд — касания, установка, учёт — уходит людям и системе.</p>
+    </div>
+    <h2>Что нужно, чтобы машина заработала</h2>
+    <ol>
+      <li><b>Первый менеджер отделов продаж — на тёплую базу и входящие.</b> По схеме 02.10: оклад до $500, остальное — премия с оплат. Процесс, скрипты и замер — мои. Через две недели видно цену касания и оплаты на одного менеджера.</li>
+      <li><b>Техпомощь с установкой</b> — часы разработчика на созвоны с клиентами, пока установку не упростит продукт.</li>
+      <li><b>Три доработки:</b> ступень и даты на карточке SALES, переписка менеджера в карточках, расходы в одном месте (DEV-3539) — тогда отчёт собирается сам.</li>
+      <li><b>KPI письмом, как в договоре:</b> фиксируем число оплат к 26.10.</li>
+    </ol>
+  </section>
+
+  <footer>Источники: админка admin.qubix.pro и трекер на 06.10.2026; решения владельца — по датам в карточках. Пометка «гипотеза» — причина не доказана цифрой.</footer>
+</div>
+
+<script>
+const S={ok:"Работает",can:"Закрываю сама",person:"Нужен человек",dev:"Нужна разработка",owner:"Решение владельца"};
+const ZONES=[
+ {z:"Продажи: от лида до оплаты",items:[
+  ["Кому писать сегодня, ступень каждого клиента","Собирается из админки автоматически","ok","Система"],
+  ["Касания до установки","Плановые сообщения в SALES","ok","Бот"],
+  ["Живое ведение клиентов и входящих","80 зарегистрированных + входящие; сейчас вручную в личном Telegram","person","Менеджер"],
+  ["7 брошенных счетов","Причина по каждому — к 09.10","can","Я"],
+  ["Касания после установки и перед концом подарка","Запланированы, бот их не делает","dev","Разработка"],
+  ["Карточка SALES на каждую регистрацию","13 живых клиентов без карточки","dev","Разработка"],
+  ["Переписка менеджера в карточках","Аккаунт «Менеджер Qubix», запись сама","dev","Разработка"]]},
+ {z:"Установка на свой сервер",items:[
+  ["28 из 47 взяли подарок и не поставили","Помощи с установкой в процессе нет","person","Техпомощь"],
+  ["Готовый сервер вместе с лицензией","Гипотеза: установка — барьер (слова владельца 03.10). Расчёт хостера — к 20.10","can","Я → владелец"],
+  ["Упростить установку в продукте","Реселлинг серверов — сроков нет","owner","Владелец"]]},
+ {z:"Оплата",items:[
+  ["Новые цены и коды 5%","Tracker от $24, PWA от $124 — с 02.10","ok","Владелец"],
+  ["Счета истекают","9 истёкших счетов у 7 человек; оплата только криптой","dev","Разработка"],
+  ["Оплата банком для юрлиц","Один запрос (SUPPORT-26)","owner","Владелец"]]},
+ {z:"Привлечение",items:[
+  ["Google и YouTube","Бюджет владельца, закупают баеры; Google на паузе две недели","ok","Баеры"],
+  ["Путь входящего лида","Сбор → карточка → касание в тот же день → цена шага; готово к перезапуску Google","can","Я"],
+  ["Обратная связь баеров","Прислали 30.09–02.10 — разобрать в темы, преленды, путь","can","Я"],
+  ["Оплачено, не вышло — $13 722","Хоменок $5 900, посевы $3 072, обзоры $4 750; моё решение по строкам — в BRAND-12","owner","Владелец"]]},
+ {z:"Маркетинг и доверие",items:[
+  ["Листинги и обзоры","2 из 8 закрыты; 5 текстов ждут согласования; оффер править на 5%","can","Я + Женя"],
+  ["Свой Telegram-канал","Стратегии нет; 21 подписчик, 6 постов (24.09). Стратегия — к 13.10","can","Я + Женя"],
+  ["Кейсы и отзывы","Ни одного. Первый — из клиентов с работающим сервером","can","Я"],
+  ["Статьи со ссылками на qubix.pro","План с ценой — к 13.10; закупка — бюджет владельца","owner","Я → владелец"],
+  ["Разведка конкурентов и упоминания","47 против 415 у Keitaro (25.09); база Маши не пускает с 03.10","dev","Ключ доступа"]]},
+ {z:"Бренд и мир",items:[
+  ["Позиционирование и формула","Решения 10.09 и 15.09 действуют","ok","Владелец"],
+  ["Сайт","Текст августовский; строки по решениям 10.09 и 02.10 — на аппрув к 13.10","can","Я + верстка"],
+  ["Мир «Планеты» на игровом движке","Решение 11.09; сметы 2–3 исполнителей не собраны — к 20.10","can","Я"],
+  ["Образ «станция»","Аппрув в BRAND-6 не проставлен","owner","Владелец"]]},
+ {z:"Партнёрства",items:[
+  ["Блогеры и амбассадоры","Только по факту оплат, по коду (26.09); отдачи пока нет","can","Я"],
+  ["Контакты SBC","Не оформлены — итог в MARKETING-98 к 13.10","can","Я"],
+  ["Партнёрские сети и реселлеры","Не начато — в модель «за оплату»","can","Я"]]},
+ {z:"Цифры и отчётность",items:[
+  ["Замер по каналам и ступеням","Скрипты: регистрация → подарок → сервер → оплата","ok","Система"],
+  ["Отчёт по понедельникам","Собирается сам из админки и SALES — с 12.10","can","Я"],
+  ["Расходы в одном месте","Сейчас по разным задачам — DEV-3539","dev","Разработка"],
+  ["Отчёт месяца по договору","Отдельной задачей — к 26.10","can","Я"],
+  ["Порядок в трекере","~55 карточек без движения с июля–августа","can","Я"]]},
+ {z:"Команда",items:[
+  ["Тексты, переговоры, бронь","Роли утверждены 04.09","ok","Женя"],
+  ["Стратегия, система, масштабирование","Решения по воронке, маркетингу, бренду; замер","ok","Я"],
+  ["Менеджер на клиентов","Отказ 15.09 «до успешных кейсов»; отделы набираются с 01.10 — первый менеджер на тёплую базу","person","Владелец"],
+  ["KPI к 26.10","По договору фиксируется письмом — письма нет","owner","Владелец"]]}
+];
+const grid=document.getElementById('grid'), filters=document.getElementById('filters');
+const counts={all:0}; Object.keys(S).forEach(k=>counts[k]=0);
+ZONES.forEach(zn=>{
+  const sec=document.createElement('article'); sec.className='zone';
+  const bar=zn.items.map(i=>`<i style="background:var(--${i[2]})"></i>`).join('');
+  sec.innerHTML=`<div class="zone-head"><h2>${zn.z}</h2><div class="bar" aria-hidden="true">${bar}</div></div><ul class="items"></ul>`;
+  const ul=sec.querySelector('ul');
+  zn.items.forEach(([t,d,s,who])=>{
+    counts.all++; counts[s]++;
+    const li=document.createElement('li'); li.className='item s-'+s; li.dataset.s=s;
+    li.innerHTML=`<span class="stripe" aria-hidden="true"></span><div style="min-width:0"><div class="t">${t}</div><div class="d">${d}</div><div class="tags"><span class="tag st s-${s}">${S[s]}</span><span class="tag">${who}</span></div></div>`;
+    ul.appendChild(li);
+  });
+  grid.appendChild(sec);
+});
+let cur='all'; try{cur=localStorage.getItem('karta-f')||'all'}catch(e){}
+const opts=[['all','Все']].concat(Object.entries(S));
+opts.forEach(([k,label])=>{
+  const b=document.createElement('button'); b.type='button'; b.className='f s-'+k; b.id='f-'+k;
+  b.innerHTML=(k==='all'?'':'<span class="dot"></span>')+label+` <span class="n">${counts[k]}</span>`;
+  b.addEventListener('click',()=>apply(k)); filters.appendChild(b);
+});
+function apply(k){
+  cur=k; try{localStorage.setItem('karta-f',k)}catch(e){}
+  filters.querySelectorAll('.f').forEach(b=>b.setAttribute('aria-pressed',String(b.id==='f-'+k)));
+  grid.querySelectorAll('.zone').forEach(z=>{
+    let vis=0; z.querySelectorAll('.item').forEach(i=>{const on=k==='all'||i.dataset.s===k; i.hidden=!on; if(on)vis++;});
+    z.classList.toggle('empty',vis===0);
+  });
+}
+apply(cur in counts?cur:'all');
+</script>
