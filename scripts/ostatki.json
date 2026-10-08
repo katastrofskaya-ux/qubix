@@ -1,0 +1,18 @@
+{
+  "_": "Оплачено, но не вышло — реестр для scripts/fakty.py. Остаток правится руками при выходе размещения (с источником). Сверено по задачам 07.10.2026; итог отправлен владельцем задачей 07.10.",
+  "rows": [
+    {"who": "Хоменок (X6)", "issue": "MARKETING-83", "ostatok": 4900, "osnova": "$8 900 (MARKETING-79) − 4 преролла × $1 000 (admin, MARKETING-83, 25.09)"},
+    {"who": "Роман (команда Будды)", "issue": "MARKETING-77", "ostatok": 2000, "osnova": "фикс Романа $2 000 в пакете $3 500; не вышло ничего, драфт на проверке (Анастасия 07.10)"},
+    {"who": "Будда — амбассадорство", "issue": "MARKETING-77", "ostatok": 1500, "osnova": "фикс Игоря $1 500, пакет до 18–19.10; цены за пост нет; вышло 4 поста из 25 (BRAND-12, 05.10)"},
+    {"who": "Арбитраж трафика — 3 поста", "issue": "CONTENT-61", "ostatok": 750, "osnova": "оплачено 750 usdt 16.09 (Kit)"},
+    {"who": "Аптека арбитражника — 3 рассылки", "issue": "CONTENT-63", "ostatok": 1350, "osnova": "оплачено 1350 usdt 17.09 (Kit)"},
+    {"who": "SYSBITRAZH + ARMBITRAZH — 3 поста", "issue": "CONTENT-64", "ostatok": 300, "osnova": "оплачено 300 usdt 16.09 (Kit)"},
+    {"who": "TikTokiller — 3 поста", "issue": "CONTENT-65", "ostatok": 672, "osnova": "оплачено 672 usdt 17.09 (Kit)"},
+    {"who": "ProTraffic — листинг + обзор", "issue": "CONTENT-29", "ostatok": 950, "osnova": "оплачено 950 02.09 (Evgenia); карточки нет"},
+    {"who": "AffTimes — листинг + обзор", "issue": "CONTENT-30", "ostatok": 950, "osnova": "оплачено 950 15.09 (Evgenia); карточки нет"},
+    {"who": "Pressaff — листинг + обзор", "issue": "CONTENT-31", "ostatok": 2000, "osnova": "оплачено 2000 15.09 (Evgenia); карточки нет"},
+    {"who": "Traffic Cardinal — обзор", "issue": "CONTENT-28", "ostatok": null, "osnova": "$850 за листинг + обзор одной ценой; карточка вышла — в итог не входит"},
+    {"who": "FB-killa — обзор", "issue": "CONTENT-26", "ostatok": null, "osnova": "$1 370 за листинг + обзор; карточка вышла 10.09 — в итог не входит"},
+    {"who": "Partneroff — обзор", "issue": "CONTENT-36", "ostatok": null, "osnova": "$500 за листинг + обзор; карточка вышла — в итог не входит"}
+  ]
+}

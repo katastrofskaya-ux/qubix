@@ -2,7 +2,7 @@
 """Утренняя прогулка Маши по чатам: что говорят про Qubix.
 
 Ходит в Машу (masha.qubix.pro) напрямую по HTTP JSON-RPC — без MCP-обвязки,
-поэтому работает и в сессиях по расписанию. Токен — из MASHA_API_TOKEN.
+поэтому работает и в сессиях по расписанию. Токен — из MASHA_MCP_SECRET (прежнее имя MASHA_API_TOKEN).
 
 Использование:
     scripts/masha-svodka.py             # за последние 24 часа
@@ -25,7 +25,7 @@ import subprocess
 import sys
 
 URL = "https://masha.qubix.pro/"
-TOKEN = os.environ.get("MASHA_API_TOKEN")
+TOKEN = os.environ.get("MASHA_MCP_SECRET") or os.environ.get("MASHA_API_TOKEN")
 
 FUND_MARKERS = ("capital", "капитал", "фонд", "инвест")
 
@@ -64,7 +64,7 @@ def main():
     h = args.hours
 
     if not TOKEN:
-        sys.exit("MASHA_API_TOKEN не задан — проверь env | grep -i masha целиком, прежде чем говорить «доступа нет».")
+        sys.exit("MASHA_MCP_SECRET не задан — проверь env | grep -i masha целиком, прежде чем говорить «доступа нет».")
 
     print(f"Прогулка Маши: окно {h} ч. (сейчас UTC)")
 

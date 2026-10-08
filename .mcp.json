@@ -11,7 +11,7 @@
       "type": "http",
       "url": "https://masha.qubix.pro/",
       "headers": {
-        "Authorization": "Bearer ${MASHA_API_TOKEN}"
+        "Authorization": "Bearer ${MASHA_MCP_SECRET}"
       }
     }
   }

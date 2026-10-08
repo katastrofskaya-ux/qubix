@@ -3,7 +3,7 @@
 """Карта фронта: вся картина одним экраном, светофор по блокам.
 
 Источники: admin.qubix.pro (ADMIN_QUBIX_COOKIE), YouTrack (YOUTRACK_API_TOKEN),
-Masha (MASHA_API_TOKEN), BUDGET.md, FRONT.md. Любой недоступный источник
+Masha (MASHA_MCP_SECRET), BUDGET.md, FRONT.md. Любой недоступный источник
 помечается «нет данных», карта строится из остального.
 """
 import os, re, json, subprocess, datetime, sys, pathlib
@@ -83,8 +83,8 @@ def block_leads():
 
 # ---------- Канал (Masha) ----------
 def block_channel():
-    tok = os.environ.get("MASHA_API_TOKEN")
-    if not tok: return (N, "Наш канал", ["нет данных: MASHA_API_TOKEN не задан"])
+    tok = os.environ.get("MASHA_MCP_SECRET") or os.environ.get("MASHA_API_TOKEN")
+    if not tok: return (N, "Наш канал", ["нет данных: MASHA_MCP_SECRET не задан"])
     body = json.dumps({"jsonrpc": "2.0", "id": 1, "method": "tools/call",
         "params": {"name": "analyst_sql", "arguments": {"sql":
         "SELECT username, last_post, subscribers FROM v_channel_metrics WHERE username = 'qubix_pro'"}}})
