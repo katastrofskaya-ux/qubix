@@ -18,7 +18,7 @@ In short, the Addendum provides that:
 - Clauses 2, 5, 8, 11 and the NDA survive;
 - it may be signed electronically (Clause 10.7).
 
-Could you please review it, sign it for the Company and send it to her for signature? Once both signatures are in place, the September payment can be released.
+Could you please review it, sign it for the Company and send it to her for signature?
 
 Kind regards,
 Anastassiya Voitenko
@@ -41,7 +41,7 @@ Anastassiya Voitenko
 - пп. 2, 5, 8, 11 и NDA продолжают действовать;
 - подписание электронное (п. 10.7).
 
-Проверьте, пожалуйста, подпишите от компании и направьте ей на подпись. Когда будут обе подписи, можно проводить оплату за сентябрь.
+Проверьте, пожалуйста, подпишите от компании и направьте ей на подпись.
 
 С уважением,
 Анастасия Войтенко
